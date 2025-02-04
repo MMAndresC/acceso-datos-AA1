@@ -45,4 +45,8 @@ public class Tournament {
     @OneToMany(mappedBy = "tournament")
     @JsonBackReference(value = "statistics_tournament")
     private List<StatisticsTournamentPlayer> statistics;
+
+    @OneToMany(mappedBy = "tournament")
+    @JsonBackReference(value = "tournament_matches")
+    private List<Match> matches;
 }
