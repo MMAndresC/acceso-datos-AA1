@@ -1,5 +1,6 @@
 package com.svalero.AA1Tournament.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -32,6 +34,7 @@ public class Team {
     @Column(length = 15)
     private String phone;
 
+    @Column
     @ColumnDefault("false")
     private boolean partner;
 
@@ -47,4 +50,8 @@ public class Team {
     @Max(value = 5)
     private int region;
 
+    @OneToMany(mappedBy = "team")
+    //Tiene que coincidir con el valor @JsonManagedReference de la otra tabla relacionada
+    @JsonBackReference(value = "team_players")
+    private List<Player> player;
 }
