@@ -54,4 +54,9 @@ public class Team {
     //Tiene que coincidir con el valor @JsonManagedReference de la otra tabla relacionada
     @JsonBackReference(value = "team_players")
     private List<Player> player;
+
+    @OneToMany(mappedBy = "team")
+    @JsonBackReference(value = "team_details_matches")
+    private List<DetailMatchTeam> detailsMatch;
+
 }

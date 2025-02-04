@@ -46,4 +46,5 @@ public class Caster {
     @OneToMany(mappedBy = "caster")
     @JsonBackReference(value = "caster_matches")
     private List<Match> matches;
+
 }

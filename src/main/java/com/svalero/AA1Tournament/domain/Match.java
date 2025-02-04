@@ -1,5 +1,6 @@
 package com.svalero.AA1Tournament.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -46,4 +48,9 @@ public class Match {
     @JoinColumn(name = "tournament_id")
     @JsonManagedReference(value = "tournament_matches")
     private Tournament tournament;
+
+    @OneToMany(mappedBy = "match")
+    @JsonBackReference(value =  "match_details")
+    private List<DetailMatchTeam> detailMatchTeams;
+
 }
