@@ -12,8 +12,6 @@ public interface TeamRepository extends CrudRepository<Team, Long> {
 
     List<Team> findAll();
 
-    Team findById(long id);
-
     List<Team> findByRegion(int region);
 
     List<Team> findByPartner(boolean partner);
