@@ -6,6 +6,8 @@ import com.svalero.AA1Tournament.domain.dto.team.TeamInDto;
 import com.svalero.AA1Tournament.exception.TeamNotFoundException;
 import com.svalero.AA1Tournament.service.TeamService;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,45 +23,55 @@ import java.util.Map;
 @RequestMapping("/api/v1")
 public class TeamController {
 
+    private final Logger logger = LoggerFactory.getLogger(TeamController.class);
     @Autowired
     private TeamService teamService;
 
     @GetMapping("/teams")
     public ResponseEntity<List<Team>> getAll(){
+        this.logger.info("Listing all teams...");
         List<Team> allTeams = this.teamService.getAll();
+        this.logger.info("End listing all teams");
         return new ResponseEntity<>(allTeams, HttpStatus.OK);
     }
 
     @GetMapping("/teams/{id}")
     public ResponseEntity<Team> getById(@PathVariable long id) throws TeamNotFoundException {
+        this.logger.info("Searching team by Id...");
         Team team = this.teamService.getById(id);
+        this.logger.info("Team found");
         return new ResponseEntity<>(team, HttpStatus.OK);
     }
 
     @PostMapping("/teams")
     public ResponseEntity<Team> add(@Valid @RequestBody TeamInDto teamInDto){
+        this.logger.info("Adding a new team...");
         Team team = this.teamService.add(teamInDto);
+        this.logger.info("Team added");
         return new ResponseEntity<>(team, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/teams/{id}")
-    public ResponseEntity<String> delete(@PathVariable long id) throws TeamNotFoundException {
-        String result = this.teamService.delete(id);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+    public ResponseEntity<Void> delete(@PathVariable long id) throws TeamNotFoundException {
+        this.logger.info("Deleting a team by id...");
+        this.teamService.delete(id);
+        this.logger.info("Team deleted");
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/teams/{id}")
     public ResponseEntity<Team> modify(@PathVariable long id, @Valid @RequestBody TeamInDto teamInDto) throws TeamNotFoundException {
+        this.logger.info("Modifying a team...");
         Team modifiedTeam = this.teamService.modify(id, teamInDto);
+        this.logger.info("Team modified");
         return new ResponseEntity<>(modifiedTeam, HttpStatus.OK);
     }
 
     //Excepciones
-
     @ExceptionHandler(TeamNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleCarNotFoundException(TeamNotFoundException exception) {
         ErrorResponse error = ErrorResponse.generalError(404, exception.getMessage());
-        //logger.error(exception.getMessage(), exception);
+        this.logger.error(exception.getMessage(), exception);
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
@@ -71,15 +83,14 @@ public class TeamController {
             String message = error.getDefaultMessage();
             errors.put(fieldName, message);
         });
-        //logger.error(exception.getMessage(), exception);
-
+        this.logger.error(exception.getMessage(), exception);
         return new ResponseEntity<>(ErrorResponse.validationError(errors), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleException(Exception exception) {
         ErrorResponse error = ErrorResponse.generalError(500, "Internal Server Error");
-        //logger.error(exception.getMessage(), exception);
+        this.logger.error(exception.getMessage(), exception);
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
