@@ -1,14 +1,10 @@
 package com.svalero.AA1Tournament.controller;
 
 import com.svalero.AA1Tournament.domain.Caster;
-import com.svalero.AA1Tournament.domain.Team;
 import com.svalero.AA1Tournament.domain.dto.ErrorResponse;
 import com.svalero.AA1Tournament.domain.dto.caster.CasterInDto;
-import com.svalero.AA1Tournament.domain.dto.team.TeamInDto;
 import com.svalero.AA1Tournament.exception.CasterNotFoundException;
-import com.svalero.AA1Tournament.exception.TeamNotFoundException;
 import com.svalero.AA1Tournament.service.CasterService;
-import com.svalero.AA1Tournament.service.TeamService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
