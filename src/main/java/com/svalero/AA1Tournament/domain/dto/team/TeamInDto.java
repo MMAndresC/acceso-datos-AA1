@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TeamInDto {
+
     @NotNull(message = "Team name is a mandatory field")
     private String name;
 
