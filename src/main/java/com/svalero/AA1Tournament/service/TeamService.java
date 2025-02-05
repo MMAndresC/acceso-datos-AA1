@@ -34,10 +34,9 @@ public class TeamService {
         return this.teamRepository.save(team);
     }
 
-    public String delete(long id) throws TeamNotFoundException {
+    public void delete(long id) throws TeamNotFoundException {
         Team team = this.teamRepository.findById(id).orElseThrow(TeamNotFoundException::new);
         this.teamRepository.delete(team);
-        return "1 row deleted";
     }
 
     public Team modify(long id, TeamInDto teamInDto) throws TeamNotFoundException {
