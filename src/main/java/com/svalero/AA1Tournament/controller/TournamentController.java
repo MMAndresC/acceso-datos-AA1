@@ -68,7 +68,7 @@ public class TournamentController {
 
     //Excepciones
     @ExceptionHandler(TournamentNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleCarNotFoundException(TournamentNotFoundException exception) {
+    public ResponseEntity<ErrorResponse> handleTournamentNotFoundException(TournamentNotFoundException exception) {
         ErrorResponse error = ErrorResponse.generalError(404, exception.getMessage());
         this.logger.error(exception.getMessage(), exception);
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);

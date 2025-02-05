@@ -69,7 +69,7 @@ public class TeamController {
 
     //Excepciones
     @ExceptionHandler(TeamNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleCarNotFoundException(TeamNotFoundException exception) {
+    public ResponseEntity<ErrorResponse> handleTeamNotFoundException(TeamNotFoundException exception) {
         ErrorResponse error = ErrorResponse.generalError(404, exception.getMessage());
         this.logger.error(exception.getMessage(), exception);
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
