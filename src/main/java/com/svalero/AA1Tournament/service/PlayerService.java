@@ -48,8 +48,8 @@ public class PlayerService {
     public Player modify(long id, PlayerModifyDto playerModifyDto) throws PlayerNotFoundException, TeamNotFoundException {
         Player player = this.playerRepository.findById(id).orElseThrow(PlayerNotFoundException::new);
         //if player changes team
-        if(player.getTeam().getId() != playerModifyDto.getIdTeam()){
-            long idTeam = playerModifyDto.getIdTeam();
+        long idTeam = playerModifyDto.getIdTeam();
+        if(player.getTeam().getId() != idTeam){
             Team team = this.teamRepository.findById(idTeam).orElseThrow(TeamNotFoundException::new);
             player.setTeam(team);
         }
