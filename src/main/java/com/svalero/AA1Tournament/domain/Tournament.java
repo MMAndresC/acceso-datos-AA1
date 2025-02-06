@@ -42,11 +42,7 @@ public class Tournament {
     @Column
     private float longitude;
 
-    @OneToMany(mappedBy = "tournament")
-    @JsonBackReference(value = "statistics_tournament")
-    private List<StatisticsTournamentPlayer> statistics;
-
-    @OneToMany(mappedBy = "tournament")
+    @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference(value = "tournament_matches")
     private List<Match> matches;
 }

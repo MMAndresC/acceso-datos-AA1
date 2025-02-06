@@ -49,8 +49,12 @@ public class Match {
     @JsonManagedReference(value = "tournament_matches")
     private Tournament tournament;
 
-    @OneToMany(mappedBy = "match")
+    @OneToMany(mappedBy = "match", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference(value =  "match_details")
-    private List<DetailMatchTeam> detailMatchTeams;
+    private List<DetailsMatch> detailsMatches;
+
+    @OneToMany(mappedBy = "match", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference(value = "statistics_match")
+    private List<Statistic> statistics;
 
 }

@@ -57,6 +57,6 @@ public class Team {
 
     @OneToMany(mappedBy = "team")
     @JsonBackReference(value = "team_details_matches")
-    private List<DetailMatchTeam> detailsMatch;
+    private List<DetailsMatch> detailsMatch;
 
 }
