@@ -13,7 +13,7 @@ import org.hibernate.annotations.ColumnDefault;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "statistics_tournament_player")
-public class StatisticsTournamentPlayer {
+public class Statistic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,10 +22,6 @@ public class StatisticsTournamentPlayer {
     @Column
     @ColumnDefault("false")
     private boolean mvp;
-
-    @Column(name = "map_played", length = 20)
-    @NotNull(message = "Name of map required")
-    private String mapPlayed;
 
     @Column
     @Min(0)
@@ -45,8 +41,8 @@ public class StatisticsTournamentPlayer {
     private Player player;
 
     @ManyToOne
-    @JoinColumn(name = "tournament_id")
-    @JsonManagedReference(value = "statistics_tournament")
-    private Tournament tournament;
+    @JoinColumn(name = "match_id")
+    @JsonManagedReference(value = "statistics_match")
+    private Match match;
 
 }
