@@ -12,7 +12,7 @@ import org.hibernate.annotations.ColumnDefault;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "detail_match_team")
-public class DetailMatchTeam {
+public class DetailsMatch {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

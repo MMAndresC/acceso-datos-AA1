@@ -51,7 +51,7 @@ public class Match {
 
     @OneToMany(mappedBy = "match", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference(value =  "match_details")
-    private List<DetailMatchTeam> detailMatchTeams;
+    private List<DetailsMatch> detailsMatches;
 
     @OneToMany(mappedBy = "match", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference(value = "statistics_match")
