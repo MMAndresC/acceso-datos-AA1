@@ -73,9 +73,9 @@ public class DetailsMatchController {
             @RequestParam(required = false) Integer kills
     ) throws FilterCriteriaNotFoundException{
         this.logger.info("Apply filters to match details...");
-        List<DetailsMatch> casters = this.detailsMatchService.filter(winner, score, kills);
+        List<DetailsMatch> detailsMatches = this.detailsMatchService.filter(winner, score, kills);
         this.logger.info("End filtering match details");
-        return new ResponseEntity<>(casters, HttpStatus.OK);
+        return new ResponseEntity<>(detailsMatches, HttpStatus.OK);
     }
 
     //Excepciones

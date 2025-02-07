@@ -1,11 +1,9 @@
 package com.svalero.AA1Tournament.repository;
 
-import com.svalero.AA1Tournament.domain.Caster;
 import com.svalero.AA1Tournament.domain.DetailsMatch;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public interface DetailsMatchRepository extends CrudRepository<DetailsMatch, Long> {

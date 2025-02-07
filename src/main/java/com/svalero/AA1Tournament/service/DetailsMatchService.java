@@ -1,6 +1,5 @@
 package com.svalero.AA1Tournament.service;
 
-import com.svalero.AA1Tournament.domain.Caster;
 import com.svalero.AA1Tournament.domain.DetailsMatch;
 import com.svalero.AA1Tournament.domain.Match;
 import com.svalero.AA1Tournament.domain.Team;
@@ -13,7 +12,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service

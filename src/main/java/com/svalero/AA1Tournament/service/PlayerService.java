@@ -4,6 +4,7 @@ import com.svalero.AA1Tournament.domain.Player;
 import com.svalero.AA1Tournament.domain.Team;
 import com.svalero.AA1Tournament.domain.dto.player.PlayerInDto;
 import com.svalero.AA1Tournament.domain.dto.player.PlayerModifyDto;
+import com.svalero.AA1Tournament.exception.FilterCriteriaNotFoundException;
 import com.svalero.AA1Tournament.exception.PlayerNotFoundException;
 import com.svalero.AA1Tournament.exception.TeamNotFoundException;
 import com.svalero.AA1Tournament.repository.PlayerRepository;
@@ -12,6 +13,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -60,5 +62,13 @@ public class PlayerService {
         modelMapper.map(playerModifyDto, player);
         this.playerRepository.save(player);
         return player;
+    }
+
+    public List<Player> filter(LocalDate birthDate, Boolean mainRoster, String position) throws FilterCriteriaNotFoundException {
+        if(birthDate == null && mainRoster == null && position == null){
+            throw new FilterCriteriaNotFoundException("No players filters found");
+        }else {
+            return this.playerRepository.filterPlayerByBirthDateMainRosterPosition(birthDate, mainRoster, position);
+        }
     }
 }
