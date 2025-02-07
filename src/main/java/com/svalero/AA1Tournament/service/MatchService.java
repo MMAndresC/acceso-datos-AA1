@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -65,5 +66,13 @@ public class MatchService {
         modelMapper.map(matchInDto, match);
         this.matchRepository.save(match);
         return match;
+    }
+
+    public List<Match> filter(String mapName, Integer duration, LocalTime hour) throws FilterCriteriaNotFoundException {
+        if(mapName == null && duration == null && hour == null){
+            throw new FilterCriteriaNotFoundException("No matches filters found");
+        }else {
+            return this.matchRepository.filterMatchesByMapNameDurationHour(mapName, duration, hour);
+        }
     }
 }

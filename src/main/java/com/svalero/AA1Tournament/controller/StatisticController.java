@@ -66,6 +66,18 @@ public class StatisticController {
         return new ResponseEntity<>(modifiedStatistic, HttpStatus.OK);
     }
 
+    @GetMapping("/statistics/filters")
+    public ResponseEntity<List<Statistic>> filter(
+            @RequestParam(required = false) Boolean mvp,
+            @RequestParam(required = false) Integer kills,
+            @RequestParam(required = false) Long idPlayer
+    ) throws FilterCriteriaNotFoundException{
+        this.logger.info("Apply filters to statistics...");
+        List<Statistic> statistics = this.statisticService.filter(mvp, kills, idPlayer);
+        this.logger.info("End filtering statistics");
+        return new ResponseEntity<>(statistics, HttpStatus.OK);
+    }
+
     //Excepciones
     @ExceptionHandler(StatisticsNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleStatisticNotFoundException(StatisticsNotFoundException exception) {
@@ -85,6 +97,13 @@ public class StatisticController {
         ErrorResponse error = ErrorResponse.generalError(404, exception.getMessage());
         this.logger.error(exception.getMessage(), exception);
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(FilterCriteriaNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleFilterCriteriaNotFoundException(FilterCriteriaNotFoundException exception) {
+        ErrorResponse error = ErrorResponse.generalError(404, exception.getMessage());
+        this.logger.error(exception.getMessage(), exception);
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

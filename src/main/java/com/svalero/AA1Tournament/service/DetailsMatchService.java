@@ -59,4 +59,12 @@ public class DetailsMatchService {
         this.detailsMatchRepository.save(detailsMatch);
         return detailsMatch;
     }
+
+    public List<DetailsMatch> filter(Boolean winner, Integer score, Integer kills) throws FilterCriteriaNotFoundException {
+        if(winner == null && score == null && kills == null){
+            throw new FilterCriteriaNotFoundException("No match details filters found");
+        }else {
+            return this.detailsMatchRepository.filterDetailsByWinnerScoreKills(winner, score, kills);
+        }
+    }
 }

@@ -4,6 +4,7 @@ import com.svalero.AA1Tournament.domain.Player;
 import com.svalero.AA1Tournament.domain.dto.ErrorResponse;
 import com.svalero.AA1Tournament.domain.dto.player.PlayerInDto;
 import com.svalero.AA1Tournament.domain.dto.player.PlayerModifyDto;
+import com.svalero.AA1Tournament.exception.FilterCriteriaNotFoundException;
 import com.svalero.AA1Tournament.exception.PlayerNotFoundException;
 import com.svalero.AA1Tournament.exception.TeamNotFoundException;
 import com.svalero.AA1Tournament.service.PlayerService;
@@ -11,12 +12,14 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,6 +72,18 @@ public class PlayerController {
         return new ResponseEntity<>(modifiedPlayer, HttpStatus.OK);
     }
 
+    @GetMapping("/players/filters")
+    public ResponseEntity<List<Player>> filter(
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate birthDate,
+            @RequestParam(required = false) Boolean mainRoster,
+            @RequestParam(required = false) String position
+    ) throws FilterCriteriaNotFoundException{
+        this.logger.info("Apply filters to players...");
+        List<Player> players = this.playerService.filter(birthDate, mainRoster, position);
+        this.logger.info("End filtering players");
+        return new ResponseEntity<>(players, HttpStatus.OK);
+    }
+
     //Excepciones
     @ExceptionHandler(PlayerNotFoundException.class)
     public ResponseEntity<ErrorResponse> handlePlayerNotFoundException(PlayerNotFoundException exception) {
@@ -82,6 +97,13 @@ public class PlayerController {
         ErrorResponse error = ErrorResponse.generalError(404, exception.getMessage());
         this.logger.error(exception.getMessage(), exception);
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(FilterCriteriaNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleFilterCriteriaNotFoundException(FilterCriteriaNotFoundException exception) {
+        ErrorResponse error = ErrorResponse.generalError(404, exception.getMessage());
+        this.logger.error(exception.getMessage(), exception);
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

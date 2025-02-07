@@ -1,20 +1,24 @@
 package com.svalero.AA1Tournament.controller;
 
+import com.svalero.AA1Tournament.domain.Caster;
 import com.svalero.AA1Tournament.domain.Team;
 import com.svalero.AA1Tournament.domain.dto.ErrorResponse;
 import com.svalero.AA1Tournament.domain.dto.team.TeamInDto;
+import com.svalero.AA1Tournament.exception.FilterCriteriaNotFoundException;
 import com.svalero.AA1Tournament.exception.TeamNotFoundException;
 import com.svalero.AA1Tournament.service.TeamService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,12 +71,31 @@ public class TeamController {
         return new ResponseEntity<>(modifiedTeam, HttpStatus.OK);
     }
 
+    @GetMapping("/teams/filters")
+    public ResponseEntity<List<Team>> filter(
+            @RequestParam(required = false) Integer region,
+            @RequestParam(required = false) Boolean partner,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate registrationDate
+    ) throws FilterCriteriaNotFoundException{
+        this.logger.info("Apply filters to teams...");
+        List<Team> teams = this.teamService.filter(region, partner, registrationDate);
+        this.logger.info("End filtering teams");
+        return new ResponseEntity<>(teams, HttpStatus.OK);
+    }
+
     //Excepciones
     @ExceptionHandler(TeamNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleTeamNotFoundException(TeamNotFoundException exception) {
         ErrorResponse error = ErrorResponse.generalError(404, exception.getMessage());
         this.logger.error(exception.getMessage(), exception);
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(FilterCriteriaNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleFilterCriteriaNotFoundException(FilterCriteriaNotFoundException exception) {
+        ErrorResponse error = ErrorResponse.generalError(404, exception.getMessage());
+        this.logger.error(exception.getMessage(), exception);
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
