@@ -1,5 +1,6 @@
 package com.svalero.AA1Tournament.service;
 
+import com.svalero.AA1Tournament.domain.Caster;
 import com.svalero.AA1Tournament.domain.DetailsMatch;
 import com.svalero.AA1Tournament.domain.Match;
 import com.svalero.AA1Tournament.domain.Team;
@@ -12,6 +13,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -58,5 +60,13 @@ public class DetailsMatchService {
         modelMapper.map(detailsMatchInDto, detailsMatch);
         this.detailsMatchRepository.save(detailsMatch);
         return detailsMatch;
+    }
+
+    public List<DetailsMatch> filter(Boolean winner, Integer score, Integer kills) throws FilterCriteriaNotFoundException {
+        if(winner == null && score == null && kills == null){
+            throw new FilterCriteriaNotFoundException("No match details filters found");
+        }else {
+            return this.detailsMatchRepository.filterDetailsByWinnerScoreKills(winner, score, kills);
+        }
     }
 }

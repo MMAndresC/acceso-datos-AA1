@@ -66,6 +66,18 @@ public class DetailsMatchController {
         return new ResponseEntity<>(modifiedDetails, HttpStatus.OK);
     }
 
+    @GetMapping("/details/filters")
+    public ResponseEntity<List<DetailsMatch>> filter(
+            @RequestParam(required = false) Boolean winner,
+            @RequestParam(required = false) Integer score,
+            @RequestParam(required = false) Integer kills
+    ) throws FilterCriteriaNotFoundException{
+        this.logger.info("Apply filters to match details...");
+        List<DetailsMatch> casters = this.detailsMatchService.filter(winner, score, kills);
+        this.logger.info("End filtering match details");
+        return new ResponseEntity<>(casters, HttpStatus.OK);
+    }
+
     //Excepciones
     @ExceptionHandler(DetailsMatchNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleDetailsMatchNotFoundException(DetailsMatchNotFoundException exception) {
@@ -93,6 +105,13 @@ public class DetailsMatchController {
         ErrorResponse error = ErrorResponse.generalError(409, exception.getMessage());
         this.logger.error(exception.getMessage(), exception);
         return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(FilterCriteriaNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleFilterCriteriaNotFoundException(FilterCriteriaNotFoundException exception) {
+        ErrorResponse error = ErrorResponse.generalError(404, exception.getMessage());
+        this.logger.error(exception.getMessage(), exception);
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
