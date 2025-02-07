@@ -2,12 +2,14 @@ package com.svalero.AA1Tournament.service;
 
 import com.svalero.AA1Tournament.domain.Tournament;
 import com.svalero.AA1Tournament.domain.dto.tournament.TournamentInDto;
+import com.svalero.AA1Tournament.exception.FilterCriteriaNotFoundException;
 import com.svalero.AA1Tournament.exception.TournamentNotFoundException;
 import com.svalero.AA1Tournament.repository.TournamentRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 @Service
 public class TournamentService {
@@ -40,5 +42,12 @@ public class TournamentService {
         modelMapper.map(tournamentInDto, tournament);
         this.tournamentRepository.save(tournament);
         return tournament;
+    }
+    public List<Tournament> filter(LocalDate initDate, String manager, Float prize) throws FilterCriteriaNotFoundException {
+        if(initDate == null && manager == null && prize == null){
+            throw new FilterCriteriaNotFoundException("No tournament filters found");
+        }else {
+            return this.tournamentRepository.filterTournamentByRegionManagerPrize(initDate, manager, prize);
+        }
     }
 }

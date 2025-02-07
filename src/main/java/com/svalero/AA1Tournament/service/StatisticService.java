@@ -1,18 +1,11 @@
 package com.svalero.AA1Tournament.service;
 
-import com.svalero.AA1Tournament.domain.Match;
-import com.svalero.AA1Tournament.domain.Player;
-import com.svalero.AA1Tournament.domain.Statistic;
-import com.svalero.AA1Tournament.domain.Tournament;
+import com.svalero.AA1Tournament.domain.*;
 import com.svalero.AA1Tournament.domain.dto.statistics.StatisticsInDto;
-import com.svalero.AA1Tournament.exception.MatchNotFoundException;
-import com.svalero.AA1Tournament.exception.PlayerNotFoundException;
-import com.svalero.AA1Tournament.exception.StatisticsNotFoundException;
-import com.svalero.AA1Tournament.exception.TournamentNotFoundException;
+import com.svalero.AA1Tournament.exception.*;
 import com.svalero.AA1Tournament.repository.MatchRepository;
 import com.svalero.AA1Tournament.repository.PlayerRepository;
 import com.svalero.AA1Tournament.repository.StatisticsRepository;
-import com.svalero.AA1Tournament.repository.TournamentRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,4 +53,13 @@ public class StatisticService {
         this.statisticsRepository.save(statistic);
         return statistic;
     }
+
+    public List<Statistic> filter(Boolean mvp, Integer kills, Long idPlayer) throws FilterCriteriaNotFoundException {
+        if(mvp == null && kills == null && idPlayer == null){
+            throw new FilterCriteriaNotFoundException("No statistics filters found");
+        }else {
+            return this.statisticsRepository.filterStatisticByMvpKillsPlayer(mvp, kills, idPlayer);
+        }
+    }
+
 }
