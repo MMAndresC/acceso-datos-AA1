@@ -3,6 +3,7 @@ package com.svalero.AA1Tournament.controller;
 import com.svalero.AA1Tournament.domain.Statistic;
 import com.svalero.AA1Tournament.domain.dto.ErrorResponse;
 import com.svalero.AA1Tournament.domain.dto.statistics.StatisticsInDto;
+import com.svalero.AA1Tournament.domain.dto.statistics.StatisticsPatchDto;
 import com.svalero.AA1Tournament.exception.*;
 import com.svalero.AA1Tournament.service.StatisticService;
 import jakarta.validation.Valid;
@@ -76,6 +77,14 @@ public class StatisticController {
         List<Statistic> statistics = this.statisticService.filter(mvp, kills, idPlayer);
         this.logger.info("End filtering statistics");
         return new ResponseEntity<>(statistics, HttpStatus.OK);
+    }
+
+    @PatchMapping("/statistics/{id}")
+    public ResponseEntity<Statistic> update(@PathVariable long id, @Valid @RequestBody StatisticsPatchDto statisticsPatchDto) throws StatisticsNotFoundException{
+        this.logger.info("Updating a statistics...");
+        Statistic updatedStatistics = this.statisticService.update(id, statisticsPatchDto);
+        this.logger.info("Statistics updated");
+        return new ResponseEntity<>(updatedStatistics, HttpStatus.OK);
     }
 
     //Excepciones

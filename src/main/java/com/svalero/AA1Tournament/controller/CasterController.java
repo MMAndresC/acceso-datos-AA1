@@ -3,6 +3,7 @@ package com.svalero.AA1Tournament.controller;
 import com.svalero.AA1Tournament.domain.Caster;
 import com.svalero.AA1Tournament.domain.dto.ErrorResponse;
 import com.svalero.AA1Tournament.domain.dto.caster.CasterInDto;
+import com.svalero.AA1Tournament.domain.dto.caster.CasterPatchDto;
 import com.svalero.AA1Tournament.exception.CasterNotFoundException;
 import com.svalero.AA1Tournament.exception.FilterCriteriaNotFoundException;
 import com.svalero.AA1Tournament.service.CasterService;
@@ -79,6 +80,14 @@ public class CasterController {
         List<Caster> casters = this.casterService.filter(region, language, hireDate);
         this.logger.info("End filtering casters");
         return new ResponseEntity<>(casters, HttpStatus.OK);
+    }
+
+    @PatchMapping("/casters/{id}")
+    public ResponseEntity<Caster> update(@PathVariable long id, @Valid @RequestBody CasterPatchDto casterPatchDto) throws CasterNotFoundException{
+        this.logger.info("Updating a caster...");
+        Caster updatedCaster = this.casterService.update(id, casterPatchDto);
+        this.logger.info("Caster updated");
+        return new ResponseEntity<>(updatedCaster, HttpStatus.OK);
     }
 
     //Excepciones

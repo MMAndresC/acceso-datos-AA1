@@ -1,7 +1,9 @@
 package com.svalero.AA1Tournament.service;
 
 import com.svalero.AA1Tournament.domain.*;
+import com.svalero.AA1Tournament.domain.dto.caster.CasterPatchDto;
 import com.svalero.AA1Tournament.domain.dto.match.MatchInDto;
+import com.svalero.AA1Tournament.domain.dto.match.MatchPatchDto;
 import com.svalero.AA1Tournament.exception.*;
 import com.svalero.AA1Tournament.repository.*;
 import org.modelmapper.ModelMapper;
@@ -74,5 +76,14 @@ public class MatchService {
         }else {
             return this.matchRepository.filterMatchesByMapNameDurationHour(mapName, duration, hour);
         }
+    }
+
+    public Match update(long id, MatchPatchDto matchPatchDto) throws  MatchNotFoundException{
+        Match match = this.matchRepository.findById(id).orElseThrow(MatchNotFoundException::new);
+        //if attribute is null, skip it in modelMapper
+        modelMapper.getConfiguration().setSkipNullEnabled(true);
+        modelMapper.map(matchPatchDto, match);
+        this.matchRepository.save(match);
+        return match;
     }
 }

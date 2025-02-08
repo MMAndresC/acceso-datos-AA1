@@ -3,6 +3,7 @@ package com.svalero.AA1Tournament.controller;
 import com.svalero.AA1Tournament.domain.DetailsMatch;
 import com.svalero.AA1Tournament.domain.dto.ErrorResponse;
 import com.svalero.AA1Tournament.domain.dto.detailsMatch.DetailsMatchInDto;
+import com.svalero.AA1Tournament.domain.dto.detailsMatch.DetailsMatchPatchDto;
 import com.svalero.AA1Tournament.exception.*;
 import com.svalero.AA1Tournament.service.DetailsMatchService;
 import jakarta.validation.Valid;
@@ -77,6 +78,15 @@ public class DetailsMatchController {
         this.logger.info("End filtering match details");
         return new ResponseEntity<>(detailsMatches, HttpStatus.OK);
     }
+
+    @PatchMapping("/details-match/{id}")
+    public ResponseEntity<DetailsMatch> update(@PathVariable long id, @Valid @RequestBody DetailsMatchPatchDto detailsMatchPatchDto) throws DetailsMatchNotFoundException{
+        this.logger.info("Updating a detail match...");
+        DetailsMatch updatedDetailsMatch = this.detailsMatchService.update(id, detailsMatchPatchDto);
+        this.logger.info("Detail match updated");
+        return new ResponseEntity<>(updatedDetailsMatch, HttpStatus.OK);
+    }
+
 
     //Excepciones
     @ExceptionHandler(DetailsMatchNotFoundException.class)

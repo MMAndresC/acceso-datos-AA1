@@ -4,6 +4,7 @@ import com.svalero.AA1Tournament.domain.Player;
 import com.svalero.AA1Tournament.domain.Team;
 import com.svalero.AA1Tournament.domain.dto.player.PlayerInDto;
 import com.svalero.AA1Tournament.domain.dto.player.PlayerModifyDto;
+import com.svalero.AA1Tournament.domain.dto.player.PlayerPatchDto;
 import com.svalero.AA1Tournament.exception.FilterCriteriaNotFoundException;
 import com.svalero.AA1Tournament.exception.PlayerNotFoundException;
 import com.svalero.AA1Tournament.exception.TeamNotFoundException;
@@ -70,5 +71,14 @@ public class PlayerService {
         }else {
             return this.playerRepository.filterPlayerByBirthDateMainRosterPosition(birthDate, mainRoster, position);
         }
+    }
+
+    public Player update(long id, PlayerPatchDto playerPatchDto) throws PlayerNotFoundException {
+        Player player = this.playerRepository.findById(id).orElseThrow(PlayerNotFoundException::new);
+        //if attribute is null, skip it in modelMapper
+        modelMapper.getConfiguration().setSkipNullEnabled(true);
+        modelMapper.map(playerPatchDto, player);
+        this.playerRepository.save(player);
+        return player;
     }
 }
