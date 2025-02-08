@@ -2,6 +2,7 @@ package com.svalero.AA1Tournament.service;
 
 import com.svalero.AA1Tournament.domain.Caster;
 import com.svalero.AA1Tournament.domain.dto.caster.CasterInDto;
+import com.svalero.AA1Tournament.domain.dto.caster.CasterPatchDto;
 import com.svalero.AA1Tournament.exception.CasterNotFoundException;
 import com.svalero.AA1Tournament.exception.FilterCriteriaNotFoundException;
 import com.svalero.AA1Tournament.repository.CasterRepository;
@@ -51,5 +52,14 @@ public class CasterService {
         }else {
             return this.casterRepository.filterCastersByRegionLanguageHireDate(region, language, hireDate);
         }
+    }
+
+    public Caster update(long id, CasterPatchDto casterPatchDto) throws  CasterNotFoundException{
+        Caster caster = this.casterRepository.findById(id).orElseThrow(CasterNotFoundException::new);
+        //if attribute is null, skip it in modelMapper
+        modelMapper.getConfiguration().setSkipNullEnabled(true);
+        modelMapper.map(casterPatchDto, caster);
+        this.casterRepository.save(caster);
+        return caster;
     }
 }
