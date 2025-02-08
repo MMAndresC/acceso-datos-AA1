@@ -10,16 +10,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class DetailsMatchPatchDto {
     @Min(0)
-    private int score;
+    private Integer score;
 
-    private boolean winner;
-
-    @Min(0)
-    private int kills;
+    private Boolean winner;
 
     @Min(0)
-    private int deaths;
+    private Integer kills;
 
     @Min(0)
-    private int assists;
+    private Integer deaths;
+
+    @Min(0)
+    private Integer assists;
 }

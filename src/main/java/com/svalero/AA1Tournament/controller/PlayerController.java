@@ -4,6 +4,7 @@ import com.svalero.AA1Tournament.domain.Player;
 import com.svalero.AA1Tournament.domain.dto.ErrorResponse;
 import com.svalero.AA1Tournament.domain.dto.player.PlayerInDto;
 import com.svalero.AA1Tournament.domain.dto.player.PlayerModifyDto;
+import com.svalero.AA1Tournament.domain.dto.player.PlayerPatchDto;
 import com.svalero.AA1Tournament.exception.FilterCriteriaNotFoundException;
 import com.svalero.AA1Tournament.exception.PlayerNotFoundException;
 import com.svalero.AA1Tournament.exception.TeamNotFoundException;
@@ -82,6 +83,14 @@ public class PlayerController {
         List<Player> players = this.playerService.filter(birthDate, mainRoster, position);
         this.logger.info("End filtering players");
         return new ResponseEntity<>(players, HttpStatus.OK);
+    }
+
+    @PatchMapping("/players/{id}")
+    public ResponseEntity<Player> update(@PathVariable long id, @Valid @RequestBody PlayerPatchDto playerPatchDto) throws PlayerNotFoundException {
+        this.logger.info("Updating a player...");
+        Player modifiedPlayer = this.playerService.update(id, playerPatchDto);
+        this.logger.info("Player updated");
+        return new ResponseEntity<>(modifiedPlayer, HttpStatus.OK);
     }
 
     //Excepciones

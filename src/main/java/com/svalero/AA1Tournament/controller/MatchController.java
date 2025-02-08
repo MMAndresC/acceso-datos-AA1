@@ -3,6 +3,7 @@ package com.svalero.AA1Tournament.controller;
 import com.svalero.AA1Tournament.domain.Match;
 import com.svalero.AA1Tournament.domain.dto.ErrorResponse;
 import com.svalero.AA1Tournament.domain.dto.match.MatchInDto;
+import com.svalero.AA1Tournament.domain.dto.match.MatchPatchDto;
 import com.svalero.AA1Tournament.exception.*;
 import com.svalero.AA1Tournament.service.MatchService;
 import jakarta.validation.Valid;
@@ -78,6 +79,14 @@ public class MatchController {
         List<Match> matches = this.matchService.filter(mapName, duration, hour);
         this.logger.info("End filtering matches");
         return new ResponseEntity<>(matches, HttpStatus.OK);
+    }
+
+    @PatchMapping("/matches/{id}")
+    public ResponseEntity<Match> update(@PathVariable long id, @Valid @RequestBody MatchPatchDto matchPatchDto) throws MatchNotFoundException{
+        this.logger.info("Updating a match...");
+        Match modifiedMatch = this.matchService.update(id, matchPatchDto);
+        this.logger.info("Match updated");
+        return new ResponseEntity<>(modifiedMatch, HttpStatus.OK);
     }
 
     //Excepciones
