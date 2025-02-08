@@ -84,9 +84,9 @@ public class MatchController {
     @PatchMapping("/matches/{id}")
     public ResponseEntity<Match> update(@PathVariable long id, @Valid @RequestBody MatchPatchDto matchPatchDto) throws MatchNotFoundException{
         this.logger.info("Updating a match...");
-        Match modifiedMatch = this.matchService.update(id, matchPatchDto);
+        Match updatedMatch = this.matchService.update(id, matchPatchDto);
         this.logger.info("Match updated");
-        return new ResponseEntity<>(modifiedMatch, HttpStatus.OK);
+        return new ResponseEntity<>(updatedMatch, HttpStatus.OK);
     }
 
     //Excepciones

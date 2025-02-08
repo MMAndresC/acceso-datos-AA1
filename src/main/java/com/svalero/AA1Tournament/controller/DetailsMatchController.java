@@ -82,9 +82,9 @@ public class DetailsMatchController {
     @PatchMapping("/details-match/{id}")
     public ResponseEntity<DetailsMatch> update(@PathVariable long id, @Valid @RequestBody DetailsMatchPatchDto detailsMatchPatchDto) throws DetailsMatchNotFoundException{
         this.logger.info("Updating a detail match...");
-        DetailsMatch modifiedDetailsMatch = this.detailsMatchService.update(id, detailsMatchPatchDto);
+        DetailsMatch updatedDetailsMatch = this.detailsMatchService.update(id, detailsMatchPatchDto);
         this.logger.info("Detail match updated");
-        return new ResponseEntity<>(modifiedDetailsMatch, HttpStatus.OK);
+        return new ResponseEntity<>(updatedDetailsMatch, HttpStatus.OK);
     }
 
 

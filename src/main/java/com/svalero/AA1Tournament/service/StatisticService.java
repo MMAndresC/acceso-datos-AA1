@@ -2,6 +2,7 @@ package com.svalero.AA1Tournament.service;
 
 import com.svalero.AA1Tournament.domain.*;
 import com.svalero.AA1Tournament.domain.dto.statistics.StatisticsInDto;
+import com.svalero.AA1Tournament.domain.dto.statistics.StatisticsPatchDto;
 import com.svalero.AA1Tournament.exception.*;
 import com.svalero.AA1Tournament.repository.MatchRepository;
 import com.svalero.AA1Tournament.repository.PlayerRepository;
@@ -62,4 +63,12 @@ public class StatisticService {
         }
     }
 
+    public Statistic update(long id, StatisticsPatchDto statisticsPatchDto) throws  StatisticsNotFoundException{
+        Statistic statistic = this.statisticsRepository.findById(id).orElseThrow(StatisticsNotFoundException::new);
+        //if attribute is null, skip it in modelMapper
+        modelMapper.getConfiguration().setSkipNullEnabled(true);
+        modelMapper.map(statisticsPatchDto, statistic);
+        this.statisticsRepository.save(statistic);
+        return statistic;
+    }
 }

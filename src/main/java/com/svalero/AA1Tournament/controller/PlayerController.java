@@ -88,9 +88,9 @@ public class PlayerController {
     @PatchMapping("/players/{id}")
     public ResponseEntity<Player> update(@PathVariable long id, @Valid @RequestBody PlayerPatchDto playerPatchDto) throws PlayerNotFoundException {
         this.logger.info("Updating a player...");
-        Player modifiedPlayer = this.playerService.update(id, playerPatchDto);
+        Player updatedPlayer = this.playerService.update(id, playerPatchDto);
         this.logger.info("Player updated");
-        return new ResponseEntity<>(modifiedPlayer, HttpStatus.OK);
+        return new ResponseEntity<>(updatedPlayer, HttpStatus.OK);
     }
 
     //Excepciones

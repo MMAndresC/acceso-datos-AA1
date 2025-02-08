@@ -2,6 +2,7 @@ package com.svalero.AA1Tournament.service;
 
 import com.svalero.AA1Tournament.domain.Tournament;
 import com.svalero.AA1Tournament.domain.dto.tournament.TournamentInDto;
+import com.svalero.AA1Tournament.domain.dto.tournament.TournamentPatchDto;
 import com.svalero.AA1Tournament.exception.FilterCriteriaNotFoundException;
 import com.svalero.AA1Tournament.exception.TournamentNotFoundException;
 import com.svalero.AA1Tournament.repository.TournamentRepository;
@@ -49,5 +50,14 @@ public class TournamentService {
         }else {
             return this.tournamentRepository.filterTournamentByRegionManagerPrize(initDate, manager, prize);
         }
+    }
+
+    public Tournament update(long id, TournamentPatchDto tournamentPatchDto) throws TournamentNotFoundException {
+        Tournament tournament = this.tournamentRepository.findById(id).orElseThrow(TournamentNotFoundException::new);
+        //if attribute is null, skip it in modelMapper
+        modelMapper.getConfiguration().setSkipNullEnabled(true);
+        modelMapper.map(tournamentPatchDto, tournament);
+        this.tournamentRepository.save(tournament);
+        return tournament;
     }
 }

@@ -85,9 +85,9 @@ public class CasterController {
     @PatchMapping("/casters/{id}")
     public ResponseEntity<Caster> update(@PathVariable long id, @Valid @RequestBody CasterPatchDto casterPatchDto) throws CasterNotFoundException{
         this.logger.info("Updating a caster...");
-        Caster modifiedCaster = this.casterService.update(id, casterPatchDto);
+        Caster updatedCaster = this.casterService.update(id, casterPatchDto);
         this.logger.info("Caster updated");
-        return new ResponseEntity<>(modifiedCaster, HttpStatus.OK);
+        return new ResponseEntity<>(updatedCaster, HttpStatus.OK);
     }
 
     //Excepciones

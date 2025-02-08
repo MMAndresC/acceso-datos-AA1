@@ -3,6 +3,7 @@ package com.svalero.AA1Tournament.controller;
 import com.svalero.AA1Tournament.domain.Tournament;
 import com.svalero.AA1Tournament.domain.dto.ErrorResponse;
 import com.svalero.AA1Tournament.domain.dto.tournament.TournamentInDto;
+import com.svalero.AA1Tournament.domain.dto.tournament.TournamentPatchDto;
 import com.svalero.AA1Tournament.exception.FilterCriteriaNotFoundException;
 import com.svalero.AA1Tournament.exception.TournamentNotFoundException;
 import com.svalero.AA1Tournament.service.TournamentService;
@@ -79,6 +80,14 @@ public class TournamentController {
         List<Tournament> tournaments = this.tournamentService.filter(initDate, manager, prize);
         this.logger.info("End filtering tournaments");
         return new ResponseEntity<>(tournaments, HttpStatus.OK);
+    }
+
+    @PatchMapping("/tournaments/{id}")
+    public ResponseEntity<Tournament> update(@PathVariable long id, @Valid @RequestBody TournamentPatchDto tournamentPatchDto) throws TournamentNotFoundException {
+        this.logger.info("Updating a tournament...");
+        Tournament updatedTournament = this.tournamentService.update(id, tournamentPatchDto);
+        this.logger.info("Tournament updated");
+        return new ResponseEntity<>(updatedTournament, HttpStatus.OK);
     }
 
     //Excepciones
