@@ -26,7 +26,7 @@ public interface CasterRepository extends CrudRepository<Caster, Long> {
     List<Caster> findByRegionAndLanguagesAndHireDate(int region, String language, LocalDate hireDate);
 
     //Filter JPQL
-    //Table name
+    //entity name, in this case entity name = table name
     //IS NULL to discard when a parameter is null
     @Query( "SELECT c FROM caster c WHERE "
             + "(:region IS NULL OR c.region = :region) AND "

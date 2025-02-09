@@ -20,6 +20,9 @@ public class MatchInDto {
     @NotNull(message = "Match date required")
     private LocalTime hour;
 
+    @NotNull(message = "Match type required")
+    private String type;
+
     private String mapName;
 
     @Min(0)

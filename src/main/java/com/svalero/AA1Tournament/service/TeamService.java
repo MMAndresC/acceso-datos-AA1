@@ -3,8 +3,10 @@ package com.svalero.AA1Tournament.service;
 import com.svalero.AA1Tournament.domain.Caster;
 import com.svalero.AA1Tournament.domain.Team;
 import com.svalero.AA1Tournament.domain.dto.caster.CasterPatchDto;
+import com.svalero.AA1Tournament.domain.dto.team.TeamConsultWinsDto;
 import com.svalero.AA1Tournament.domain.dto.team.TeamInDto;
 import com.svalero.AA1Tournament.domain.dto.team.TeamPatchDto;
+import com.svalero.AA1Tournament.domain.dto.team.TeamRivalDataDto;
 import com.svalero.AA1Tournament.exception.CasterNotFoundException;
 import com.svalero.AA1Tournament.exception.FilterCriteriaNotFoundException;
 import com.svalero.AA1Tournament.exception.TeamNotFoundException;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TeamService {
@@ -66,5 +69,18 @@ public class TeamService {
         modelMapper.map(teamPatchDto, team);
         this.teamRepository.save(team);
         return team;
+    }
+
+    public List<TeamConsultWinsDto> getAllTournamentWins(long id) throws TeamNotFoundException{
+        Team team = this.teamRepository.findById(id).orElseThrow(TeamNotFoundException::new);
+        List<TeamConsultWinsDto> listWins = this.teamRepository.getAllTournamentWins(id);
+       for(TeamConsultWinsDto win : listWins){
+           Optional<TeamRivalDataDto> rivalData = this.teamRepository.getFinalRival(win.getIdMatch());
+           String name = rivalData.map(TeamRivalDataDto::getRivalName).orElse(" ");
+           int score = rivalData.map(TeamRivalDataDto::getRivalScore).orElse(0);
+           win.setRivalName(name);
+           win.setRivalScore(score);
+       }
+       return listWins;
     }
 }

@@ -25,7 +25,7 @@ public interface MatchRepository extends CrudRepository<Match, Long> {
     List<Match> findByMapNameAndDurationAndHour(String mapName, int duration, LocalTime hour);
 
     //JPQL to filter matches
-    //table name & class attributes names
+    //entity name & class attributes names
     @Query( "SELECT m FROM match m WHERE "
             + "(:mapName IS NULL OR m.mapName = :mapName) AND "
             + "(:duration IS NULL OR m.duration >= :duration) AND "

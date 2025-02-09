@@ -20,6 +20,9 @@ public class Tournament {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(nullable = false, length = 30)
+    private String name;
+
     @Column(name = "init_date",nullable = false)
     private LocalDate initDate;
 

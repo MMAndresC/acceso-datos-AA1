@@ -16,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "match")
+@Table(name = "match_t")
 public class Match {
 
     @Id
@@ -27,6 +28,9 @@ public class Match {
 
     @Column(nullable = false)
     private LocalTime hour;
+
+    @Column(nullable = false, length = 15)
+    private String type;
 
     @Column(name = "map_name")
     private String mapName;
