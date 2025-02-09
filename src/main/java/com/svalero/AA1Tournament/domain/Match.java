@@ -16,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "match")
+@Table(name = "match_t")
 public class Match {
 
     @Id

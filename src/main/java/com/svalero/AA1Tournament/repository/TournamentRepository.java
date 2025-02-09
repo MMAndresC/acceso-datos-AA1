@@ -1,6 +1,7 @@
 package com.svalero.AA1Tournament.repository;
 
 import com.svalero.AA1Tournament.domain.Tournament;
+import com.svalero.AA1Tournament.domain.dto.tournament.TournamentOutDto;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -32,5 +33,14 @@ public interface TournamentRepository extends CrudRepository<Tournament, Long> {
             + "(:prize IS NULL OR tr.prize >= :prize)")
     List<Tournament> filterTournamentByRegionManagerPrize(LocalDate initDate, String manager, Float prize);
 
+    //SQL
+    @Query(
+            value = "SELECT t.id, m.date, m.day, tm.name FROM tournament t "
+                    + "INNER JOIN match_t m ON t.id = m.tournament_id "
+                    + "INNER JOIN detail_match_team dm ON m.id = dm.match_id "
+                    + "INNER JOIN team tm ON tm.id = dm.team_id "
+                    + "WHERE dm.winner = true AND t.id = :idTournament",
+            nativeQuery = true)
+    List<TournamentOutDto> getAllTeamsWinnersMatches(long idTournament);
 
 }
