@@ -4,6 +4,7 @@ import com.svalero.AA1Tournament.domain.Caster;
 import com.svalero.AA1Tournament.domain.Team;
 import com.svalero.AA1Tournament.domain.dto.ErrorResponse;
 import com.svalero.AA1Tournament.domain.dto.caster.CasterPatchDto;
+import com.svalero.AA1Tournament.domain.dto.team.TeamConsultWinsDto;
 import com.svalero.AA1Tournament.domain.dto.team.TeamInDto;
 import com.svalero.AA1Tournament.domain.dto.team.TeamPatchDto;
 import com.svalero.AA1Tournament.exception.CasterNotFoundException;
@@ -92,6 +93,14 @@ public class TeamController {
         Team updatedTeam = this.teamService.update(id, teamPatchDto);
         this.logger.info("Team updated");
         return new ResponseEntity<>(updatedTeam, HttpStatus.OK);
+    }
+
+    @GetMapping("/teams/{id}/wins")
+    public ResponseEntity<List<TeamConsultWinsDto>> getAllTournamentWins(@PathVariable long id) throws TeamNotFoundException {
+        this.logger.info("Getting all tournament wins for team...");
+        List<TeamConsultWinsDto> allWins = this.teamService.getAllTournamentWins(id);
+        this.logger.info("All tournament wins for team done");
+        return new ResponseEntity<>(allWins, HttpStatus.OK);
     }
 
     //Excepciones
