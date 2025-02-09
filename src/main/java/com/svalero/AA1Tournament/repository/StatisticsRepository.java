@@ -24,6 +24,8 @@ public interface StatisticsRepository extends CrudRepository<Statistic, Long> {
 
     List<Statistic> findByMvpAndKillsAndDeaths(boolean mvp, int kills, int deaths);
 
+    List<Statistic> findByPlayerId(long idPlayer);
+
     //JPQL
     @Query( "SELECT s FROM statistics_tournament_player s WHERE "
             + "(:mvp IS NULL OR s.mvp = :mvp) AND "

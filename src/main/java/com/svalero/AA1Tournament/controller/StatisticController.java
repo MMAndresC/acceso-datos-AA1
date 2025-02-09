@@ -6,16 +6,25 @@ import com.svalero.AA1Tournament.domain.dto.statistics.StatisticsInDto;
 import com.svalero.AA1Tournament.domain.dto.statistics.StatisticsPatchDto;
 import com.svalero.AA1Tournament.exception.*;
 import com.svalero.AA1Tournament.service.StatisticService;
+import com.svalero.AA1Tournament.utils.CreateCsv;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -87,6 +96,23 @@ public class StatisticController {
         return new ResponseEntity<>(updatedStatistics, HttpStatus.OK);
     }
 
+    @GetMapping("/statistics/{idPlayer}/download")
+    public ResponseEntity<Resource> download(@PathVariable long idPlayer) throws PlayerNotFoundException, IOException{
+        this.logger.info("Getting statistics...");
+        List<Statistic> statistics = this.statisticService.download(idPlayer);
+        this.logger.info("Collecting statistics end");
+        this.logger.info("Generating statistics csv...");
+        String filePath = "statistics-" + idPlayer + ".csv";
+        File csvFile = CreateCsv.exportStatisticsToCsv(statistics, filePath);
+        InputStreamResource body = new InputStreamResource(new FileInputStream(csvFile));
+        this.logger.info("Statistics csv generated");
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=statistics-" + idPlayer + ".csv" )
+                .contentType(MediaType.parseMediaType("text/csv"))
+                .contentLength(csvFile.length())
+                .body(body);
+    }
+
     //Excepciones
     @ExceptionHandler(StatisticsNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleStatisticNotFoundException(StatisticsNotFoundException exception) {
@@ -125,6 +151,13 @@ public class StatisticController {
         });
         this.logger.error(exception.getMessage(), exception);
         return new ResponseEntity<>(ErrorResponse.validationError(errors), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(IOException.class)
+    public ResponseEntity<ErrorResponse> handleException(IOException exception) {
+        ErrorResponse error = ErrorResponse.generalError(500, "Error generating csv file");
+        this.logger.error(exception.getMessage(), exception);
+        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(Exception.class)

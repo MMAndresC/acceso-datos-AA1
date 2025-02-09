@@ -71,4 +71,9 @@ public class StatisticService {
         this.statisticsRepository.save(statistic);
         return statistic;
     }
+
+    public List<Statistic> download(long idPlayer) throws PlayerNotFoundException {
+        Player player = this.playerRepository.findById(idPlayer).orElseThrow(PlayerNotFoundException::new);
+        return this.statisticsRepository.findByPlayerId(idPlayer);
+    }
 }
