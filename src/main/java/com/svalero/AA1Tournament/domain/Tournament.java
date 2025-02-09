@@ -15,11 +15,13 @@ import java.util.List;
 @AllArgsConstructor
 @Entity(name = "tournament")
 public class Tournament {
-//TODO añadir name en tournament
-    //TODO añadir a match detail un campo para registrar tipo de partida
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(nullable = false, length = 30)
+    private String name;
 
     @Column(name = "init_date",nullable = false)
     private LocalDate initDate;

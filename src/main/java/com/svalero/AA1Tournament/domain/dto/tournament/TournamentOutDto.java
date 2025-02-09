@@ -12,14 +12,17 @@ public class TournamentOutDto {
 
     long idTournament;
 
+    String nameTournament;
+
     LocalDate date;
 
     int day;
 
     String nameTeam;
 
-    public TournamentOutDto(long id, Date date, int day, String nameTeam){
+    public TournamentOutDto(long id, String nameTournament, Date date, int day, String nameTeam){
         this.idTournament = id;
+        this.nameTournament = nameTournament;
         this.date = date.toLocalDate();
         this.day = day;
         this.nameTeam = nameTeam;

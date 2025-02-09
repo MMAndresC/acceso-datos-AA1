@@ -93,9 +93,9 @@ public class TournamentController {
 
     @GetMapping("/tournaments/{id}/match-winners")
     public ResponseEntity<List<TournamentOutDto>> getAllTeamsWinnersMatches(@PathVariable long id) throws TournamentNotFoundException{
-        this.logger.info("Updating a tournament...");
+        this.logger.info("Getting match winners consult...");
         List<TournamentOutDto> listMatchWinners = this.tournamentService.getAllTeamsWinnersMatches(id);
-        this.logger.info("Tournament updated");
+        this.logger.info("Match winners consult done");
         return new ResponseEntity<>(listMatchWinners, HttpStatus.OK);
     }
 

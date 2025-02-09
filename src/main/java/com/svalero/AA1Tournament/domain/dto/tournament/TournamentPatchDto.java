@@ -12,6 +12,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class TournamentPatchDto {
 
+    private String name;
+
     private LocalDate initDate;
 
     private LocalDate endDate;

@@ -35,7 +35,7 @@ public interface TournamentRepository extends CrudRepository<Tournament, Long> {
 
     //SQL
     @Query(
-            value = "SELECT t.id, m.date, m.day, tm.name FROM tournament t "
+            value = "SELECT t.id, t.name, m.date, m.day, tm.name FROM tournament t "
                     + "INNER JOIN match_t m ON t.id = m.tournament_id "
                     + "INNER JOIN detail_match_team dm ON m.id = dm.match_id "
                     + "INNER JOIN team tm ON tm.id = dm.team_id "
