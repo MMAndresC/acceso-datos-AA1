@@ -11,4 +11,10 @@ public class Constants {
             4, "Asia",
             5, "Oceania"
     );
+
+    public enum Role{
+        USER, ADMIN
+    }
 }
+
+
