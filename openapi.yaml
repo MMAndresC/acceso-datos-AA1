@@ -1,0 +1,495 @@
+openapi: 3.0.1
+info:
+  title: Tournaments API
+  version: 1.0.0
+  description: >-
+    Una API con la información de los torneos que se organizan fuera de la liga
+    regular de un eSport
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Servidor local
+paths:
+  /register:
+    summary: Registro de un usuario
+    description: >-
+      Solo es necesario registrarse para poder realizar operaciones de borrado
+      en las tablas
+    post:
+      summary: Registrar nuevo usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLoginDto'
+            examples:
+              example1:
+                summary: Registro de usuario válido
+                value:
+                  username: visitor
+                  pasword: 1234
+              example2:
+                summary: Registro de usuario no válido
+                value:
+                  username: visitor
+      responses:
+        '201':
+          description: Exito al registrar al usuario
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                example1:
+                  summary: Usuario creado
+                  value: visitor created
+        '400':
+          description: Los datos de registro están incompletos o no son correctos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                example2:
+                  summary: Datos incompletos/no válidos
+                  value:
+                    status: 400
+                    message: Bad request
+                    errorMessages:
+                      password: Password required
+        '409':
+          description: El usuario ya existe
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                example2:
+                  summary: Usuario ya existe
+                  value:
+                    status: 409
+                    message: User already exist
+                    errorMessages: null
+      tags:
+        - Auth
+  /login:
+    summary: >-
+      Iniciar sesion con uusario y contraseña y obtener el token de
+      autenticación
+    description: El token solo es necesario para las operaciones de borrado
+    post:
+      summary: Identificarse con usuario y contraseña
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLoginDto'
+            examples:
+              example1:
+                summary: Login de usuario válido
+                value:
+                  username: visitor
+                  pasword: 1234
+              example2:
+                summary: Login con password incorrecto
+                value:
+                  username: visitor
+                  password: 3897
+      responses:
+        '200':
+          description: Exito al iniciar sesión, devuelve el token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthTokenDto'
+              examples:
+                example1:
+                  summary: Token generado
+                  value:
+                    token: eyJhbGciOiJIUzI1NiJ9..
+        '401':
+          description: Contraseña incorrecta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                example2:
+                  summary: Contraseña incorrecta
+                  value:
+                    code: 401
+                    message: Invalid credentials
+                    errorMessage: null
+        '404':
+          description: Usuario no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                example3:
+                  summary: Usuario no encontrado
+                  value:
+                    code: 404
+                    message: User not found
+                    errorMessage: null
+      tags:
+        - Auth
+  /casters:
+    summary: Datos de los comentaristas de las partidas
+    get:
+      summary: Obtener todos los comentaristas o filtrados por los parámetros
+      parameters:
+        - name: languages
+          in: query
+          description: Filtra por los idiomas que habla el comentarista
+          required: false
+          schema:
+            type: string
+          example: english
+        - name: region
+          in: query
+          description: Filtra por la región del comentarista
+          required: false
+          schema:
+            type: integer
+          example: 3
+        - name: hireDate
+          in: query
+          description: Filtra por la fecha de contratación del comentarista
+          required: false
+          schema:
+            type: string
+            format: date
+          example: '2023-05-15'
+      responses:
+        '200':
+          description: Exito al obtener la lista de comentaristas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Caster'
+              examples:
+                example1:
+                  summary: Listado comentaristas
+                  value:
+                    - id: 1
+                      name: Scott Kennedy
+                      alias: Custa
+                      languages: english, french
+                      phone: '688794512'
+                      region: 3
+                      hireDate: '2023-01-01'
+      tags:
+        - Caster
+    post:
+      summary: Crear un nuevo comentarista
+      tags:
+        - Caster
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasterInDto"
+            examples:
+              exmaple1:
+                summary: Nuevo comentarista
+                value:
+                  name: Scott Kennedy
+                  alias: Custa
+                  languages: english, french
+                  phone: '688794512'
+                  region: 3
+                  hireDate: '2023-01-01' 
+      responses:
+        "201":
+          description: Exito al crear un nuevo registro de comentarista
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Caster"
+              examples:
+                example1:
+                  summary: Nuevo comentarista añadido
+                  value:
+                    id: 1
+                    name: Scott Kennedy
+                    alias: Custa
+                    languages: english, french
+                    phone: '688794512'
+                    region: 3
+                    hireDate: '2023-01-01'
+
+  /casters/{id}:
+    get:
+      summary: Obtener un comentatista por ID
+      tags:
+        - Caster
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          example: 1
+      responses:
+        "200":
+          description: Comentarista encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Caster"
+              examples:
+                example1:
+                  summary: Comentarista con ese id
+                  value:
+                    id: 1
+                    name: Scott Kennedy
+                    alias: Custa
+                    languages: english, french
+                    phone: '688794512'
+                    region: 3
+                    hireDate: '2023-01-01'
+        "404":
+          description: Comentarista no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples: 
+                example1:
+                  summary: Comentarista no encontrado
+                  value:
+                    code: 404
+                    message: "Caster not found"
+                    errorMessages: null
+
+    delete:
+      summary: Eliminar un comentarista por ID
+      tags:
+        - Caster
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          example: 1
+      responses:
+        "204":
+          description: Exito borrando comentarista
+        "404":
+          description: Comentarista no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Comentarista no encontrado
+                  value:
+                    code: 404
+                    message: "Caster not found"
+                    errorMessages: null
+
+    put:
+      summary: Modificar un registro completo de un comentarista
+      tags:
+        - Caster
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasterInDto"
+            examples:
+              example1:
+                summary: Datos modificados
+                value:
+                  name: Scott Kennedy
+                  alias: Custa
+                  languages: english, spanish
+                  phone: '699999999'
+                  region: 3
+                  hireDate: '2023-01-01'
+      responses:
+        "200":
+          description: Comentarista modificado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Caster"
+              examples:
+                example1:
+                  summary: Comentarista con ese id
+                  value:
+                    id: 1
+                    name: Scott Kennedy
+                    alias: Custa
+                    languages: english, spanish
+                    phone: '699999999'
+                    region: 3
+                    hireDate: '2023-01-01'
+        "404":
+          description: Comentarista no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Comentarista no encontrado
+                  value:
+                    code: 404
+                    message: "Caster not found"
+                    errorMessages: null
+
+    patch:
+      summary: Actualizar parcialmente un comentarista
+      tags:
+        - Caster
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasterPatchDto"
+            examples:
+              example1:
+                summary: Actualizar comentarista
+                value:
+                    alias: Custa
+                    languages: english
+                    phone: '688794512'
+                    region: 2
+      responses:
+        "200":
+          description: Comentarista actualizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Caster"
+              examples:
+                example1:
+                  summary: Comentarista actualizado
+                  value:
+                    id: 1
+                    name: Scott Kennedy
+                    alias: Custa
+                    languages: english
+                    phone: '688794512'
+                    region: 2
+                    hireDate: '2023-01-01'
+        "404":
+          description: Comentarista no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                example1:
+                  summary: Comentarista no encontrado
+                  value:
+                    code: 404
+                    message: "Caster not found"
+                    errorMessages: null
+components:
+  schemas:
+    UserLoginDto:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+          format: password
+          
+    AuthTokenDto:
+      type: object
+      properties:
+        token:
+          type: string
+          
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+        errors:
+          type: object
+          additionalProperties:
+            type: string
+          
+    Caster:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        alias:
+          type: string
+        phone:
+          type: string
+        languages:
+          type: string
+        region:
+          type: integer
+        hireDate:
+          type: string
+          format: date
+
+    CasterInDto:
+      type: object
+      properties:
+        name:
+          type: string
+        alias:
+          type: string
+        phone:
+          type: string
+        languages:
+          type: string
+        region:
+          type: integer
+        hireDate:
+          type: string
+          format: date
+
+    CasterPatchDto:
+      type: object
+      properties:
+        alias:
+          type: string
+        phone:
+          type: string
+        languages:
+          type: string
+        region:
+          type: integer
+
+tags:
+  - name: Auth
+    description: Operaciones relacionadas con el registro e inicio de sesión de usuarios
+  - name: Caster
+    description: Operaciones con los datos de los comentaristas

@@ -7,6 +7,7 @@ import com.svalero.AA1Tournament.exception.PasswordIncorrectException;
 import com.svalero.AA1Tournament.exception.UserAlreadyExistException;
 import com.svalero.AA1Tournament.exception.UserNotFoundException;
 import com.svalero.AA1Tournament.service.AuthService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,13 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody UserLoginDto userLoginDto) throws UserAlreadyExistException {
+    public ResponseEntity<String> register(@Valid @RequestBody UserLoginDto userLoginDto) throws UserAlreadyExistException {
         this.authService.register(userLoginDto.getUsername(), userLoginDto.getPassword());
         return new ResponseEntity<>(userLoginDto.getUsername() + " created", HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthTokenDto> login(@RequestBody UserLoginDto userLogin) throws UserNotFoundException, PasswordIncorrectException {
+    public ResponseEntity<AuthTokenDto> login(@Valid @RequestBody UserLoginDto userLogin) throws UserNotFoundException, PasswordIncorrectException {
         String token = this.authService.login(userLogin.getUsername(), userLogin.getPassword());
         AuthTokenDto authTokenDto = new AuthTokenDto(token);
         return new ResponseEntity<>(authTokenDto, HttpStatus.OK);
