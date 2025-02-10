@@ -1,14 +1,10 @@
 package com.svalero.AA1Tournament.controller;
 
-import com.svalero.AA1Tournament.domain.Caster;
 import com.svalero.AA1Tournament.domain.Team;
 import com.svalero.AA1Tournament.domain.dto.ErrorResponse;
-import com.svalero.AA1Tournament.domain.dto.caster.CasterPatchDto;
 import com.svalero.AA1Tournament.domain.dto.team.TeamConsultWinsDto;
 import com.svalero.AA1Tournament.domain.dto.team.TeamInDto;
 import com.svalero.AA1Tournament.domain.dto.team.TeamPatchDto;
-import com.svalero.AA1Tournament.exception.CasterNotFoundException;
-import com.svalero.AA1Tournament.exception.FilterCriteriaNotFoundException;
 import com.svalero.AA1Tournament.exception.TeamNotFoundException;
 import com.svalero.AA1Tournament.service.TeamService;
 import jakarta.validation.Valid;
@@ -36,10 +32,14 @@ public class TeamController {
     private TeamService teamService;
 
     @GetMapping("/teams")
-    public ResponseEntity<List<Team>> getAll(){
-        this.logger.info("Listing all teams...");
-        List<Team> allTeams = this.teamService.getAll();
-        this.logger.info("End listing all teams");
+    public ResponseEntity<List<Team>> getAll(
+            @RequestParam(required = false) Integer region,
+            @RequestParam(required = false) Boolean partner,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate registrationDate
+    ){
+        this.logger.info("Listing teams...");
+        List<Team> allTeams = this.teamService.getAll(region, partner, registrationDate);
+        this.logger.info("End listing teams");
         return new ResponseEntity<>(allTeams, HttpStatus.OK);
     }
 
@@ -75,18 +75,6 @@ public class TeamController {
         return new ResponseEntity<>(modifiedTeam, HttpStatus.OK);
     }
 
-    @GetMapping("/teams/filters")
-    public ResponseEntity<List<Team>> filter(
-            @RequestParam(required = false) Integer region,
-            @RequestParam(required = false) Boolean partner,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate registrationDate
-    ) throws FilterCriteriaNotFoundException{
-        this.logger.info("Apply filters to teams...");
-        List<Team> teams = this.teamService.filter(region, partner, registrationDate);
-        this.logger.info("End filtering teams");
-        return new ResponseEntity<>(teams, HttpStatus.OK);
-    }
-
     @PatchMapping("/teams/{id}")
     public ResponseEntity<Team> update(@PathVariable long id, @Valid @RequestBody TeamPatchDto teamPatchDto) throws TeamNotFoundException {
         this.logger.info("Updating a team...");
@@ -109,13 +97,6 @@ public class TeamController {
         ErrorResponse error = ErrorResponse.generalError(404, exception.getMessage());
         this.logger.error(exception.getMessage(), exception);
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(FilterCriteriaNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleFilterCriteriaNotFoundException(FilterCriteriaNotFoundException exception) {
-        ErrorResponse error = ErrorResponse.generalError(404, exception.getMessage());
-        this.logger.error(exception.getMessage(), exception);
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

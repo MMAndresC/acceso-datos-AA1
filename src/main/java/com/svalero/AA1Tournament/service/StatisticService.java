@@ -26,8 +26,12 @@ public class StatisticService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public List<Statistic> getAll(){
-        return this.statisticsRepository.findAll();
+    public List<Statistic> getAll(Boolean mvp, Integer kills, Long idPlayer){
+        if(mvp == null && kills == null && idPlayer == null){
+            return this.statisticsRepository.findAll();
+        }else {
+            return this.statisticsRepository.filterStatisticByMvpKillsPlayer(mvp, kills, idPlayer);
+        }
     }
 
     public Statistic getById(long id) throws StatisticsNotFoundException {
@@ -53,14 +57,6 @@ public class StatisticService {
         modelMapper.map(statisticsInDto, statistic);
         this.statisticsRepository.save(statistic);
         return statistic;
-    }
-
-    public List<Statistic> filter(Boolean mvp, Integer kills, Long idPlayer) throws FilterCriteriaNotFoundException {
-        if(mvp == null && kills == null && idPlayer == null){
-            throw new FilterCriteriaNotFoundException("No statistics filters found");
-        }else {
-            return this.statisticsRepository.filterStatisticByMvpKillsPlayer(mvp, kills, idPlayer);
-        }
     }
 
     public Statistic update(long id, StatisticsPatchDto statisticsPatchDto) throws  StatisticsNotFoundException{

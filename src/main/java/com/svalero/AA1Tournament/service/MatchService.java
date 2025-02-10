@@ -1,11 +1,16 @@
 package com.svalero.AA1Tournament.service;
 
-import com.svalero.AA1Tournament.domain.*;
-import com.svalero.AA1Tournament.domain.dto.caster.CasterPatchDto;
+import com.svalero.AA1Tournament.domain.Caster;
+import com.svalero.AA1Tournament.domain.Match;
+import com.svalero.AA1Tournament.domain.Tournament;
 import com.svalero.AA1Tournament.domain.dto.match.MatchInDto;
 import com.svalero.AA1Tournament.domain.dto.match.MatchPatchDto;
-import com.svalero.AA1Tournament.exception.*;
-import com.svalero.AA1Tournament.repository.*;
+import com.svalero.AA1Tournament.exception.CasterNotFoundException;
+import com.svalero.AA1Tournament.exception.MatchNotFoundException;
+import com.svalero.AA1Tournament.exception.TournamentNotFoundException;
+import com.svalero.AA1Tournament.repository.CasterRepository;
+import com.svalero.AA1Tournament.repository.MatchRepository;
+import com.svalero.AA1Tournament.repository.TournamentRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,8 +32,12 @@ public class MatchService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public List<Match> getAll(){
-        return this.matchRepository.findAll();
+    public List<Match> getAll(String mapName, Integer duration, LocalTime hour){
+        if(mapName == null && duration == null && hour == null){
+            return this.matchRepository.findAll();
+        }else {
+            return this.matchRepository.filterMatchesByMapNameDurationHour(mapName, duration, hour);
+        }
     }
 
     public Match getById(long id) throws MatchNotFoundException {
@@ -68,14 +77,6 @@ public class MatchService {
         modelMapper.map(matchInDto, match);
         this.matchRepository.save(match);
         return match;
-    }
-
-    public List<Match> filter(String mapName, Integer duration, LocalTime hour) throws FilterCriteriaNotFoundException {
-        if(mapName == null && duration == null && hour == null){
-            throw new FilterCriteriaNotFoundException("No matches filters found");
-        }else {
-            return this.matchRepository.filterMatchesByMapNameDurationHour(mapName, duration, hour);
-        }
     }
 
     public Match update(long id, MatchPatchDto matchPatchDto) throws  MatchNotFoundException{

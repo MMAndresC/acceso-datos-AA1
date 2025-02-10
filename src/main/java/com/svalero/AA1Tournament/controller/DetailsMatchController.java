@@ -28,10 +28,14 @@ public class DetailsMatchController {
     private DetailsMatchService detailsMatchService;
 
     @GetMapping("/details-match")
-    public ResponseEntity<List<DetailsMatch>> getAll(){
-        this.logger.info("Listing all details match...");
-        List<DetailsMatch> allDetailsMatch = this.detailsMatchService.getAll();
-        this.logger.info("End listing all details match");
+    public ResponseEntity<List<DetailsMatch>> getAll(
+            @RequestParam(required = false) Boolean winner,
+            @RequestParam(required = false) Integer score,
+            @RequestParam(required = false) Integer kills
+    ){
+        this.logger.info("Listing details match...");
+        List<DetailsMatch> allDetailsMatch = this.detailsMatchService.getAll(winner, score, kills);
+        this.logger.info("End listing details match");
         return new ResponseEntity<>(allDetailsMatch, HttpStatus.OK);
     }
 
@@ -65,18 +69,6 @@ public class DetailsMatchController {
         DetailsMatch modifiedDetails = this.detailsMatchService.modify(id, detailsMatchInDto);
         this.logger.info("Details match modified");
         return new ResponseEntity<>(modifiedDetails, HttpStatus.OK);
-    }
-
-    @GetMapping("/details/filters")
-    public ResponseEntity<List<DetailsMatch>> filter(
-            @RequestParam(required = false) Boolean winner,
-            @RequestParam(required = false) Integer score,
-            @RequestParam(required = false) Integer kills
-    ) throws FilterCriteriaNotFoundException{
-        this.logger.info("Apply filters to match details...");
-        List<DetailsMatch> detailsMatches = this.detailsMatchService.filter(winner, score, kills);
-        this.logger.info("End filtering match details");
-        return new ResponseEntity<>(detailsMatches, HttpStatus.OK);
     }
 
     @PatchMapping("/details-match/{id}")
@@ -115,13 +107,6 @@ public class DetailsMatchController {
         ErrorResponse error = ErrorResponse.generalError(409, exception.getMessage());
         this.logger.error(exception.getMessage(), exception);
         return new ResponseEntity<>(error, HttpStatus.CONFLICT);
-    }
-
-    @ExceptionHandler(FilterCriteriaNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleFilterCriteriaNotFoundException(FilterCriteriaNotFoundException exception) {
-        ErrorResponse error = ErrorResponse.generalError(404, exception.getMessage());
-        this.logger.error(exception.getMessage(), exception);
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

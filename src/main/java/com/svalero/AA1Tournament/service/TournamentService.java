@@ -4,7 +4,6 @@ import com.svalero.AA1Tournament.domain.Tournament;
 import com.svalero.AA1Tournament.domain.dto.tournament.TournamentInDto;
 import com.svalero.AA1Tournament.domain.dto.tournament.TournamentOutDto;
 import com.svalero.AA1Tournament.domain.dto.tournament.TournamentPatchDto;
-import com.svalero.AA1Tournament.exception.FilterCriteriaNotFoundException;
 import com.svalero.AA1Tournament.exception.TournamentNotFoundException;
 import com.svalero.AA1Tournament.repository.TournamentRepository;
 import org.modelmapper.ModelMapper;
@@ -21,8 +20,12 @@ public class TournamentService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public List<Tournament> getAll(){
-        return this.tournamentRepository.findAll();
+    public List<Tournament> getAll(LocalDate initDate, String manager, Float prize){
+        if(initDate == null && manager == null && prize == null){
+            return this.tournamentRepository.findAll();
+        }else {
+            return this.tournamentRepository.filterTournamentByRegionManagerPrize(initDate, manager, prize);
+        }
     }
 
     public Tournament getById(long id) throws TournamentNotFoundException {
@@ -44,13 +47,6 @@ public class TournamentService {
         modelMapper.map(tournamentInDto, tournament);
         this.tournamentRepository.save(tournament);
         return tournament;
-    }
-    public List<Tournament> filter(LocalDate initDate, String manager, Float prize) throws FilterCriteriaNotFoundException {
-        if(initDate == null && manager == null && prize == null){
-            throw new FilterCriteriaNotFoundException("No tournament filters found");
-        }else {
-            return this.tournamentRepository.filterTournamentByRegionManagerPrize(initDate, manager, prize);
-        }
     }
 
     public Tournament update(long id, TournamentPatchDto tournamentPatchDto) throws TournamentNotFoundException {
