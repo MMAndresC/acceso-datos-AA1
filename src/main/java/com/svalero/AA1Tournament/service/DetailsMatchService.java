@@ -29,8 +29,12 @@ public class DetailsMatchService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public List<DetailsMatch> getAll(){
-        return this.detailsMatchRepository.findAll();
+    public List<DetailsMatch> getAll(Boolean winner, Integer score, Integer kills){
+        if(winner == null && score == null && kills == null){
+            return this.detailsMatchRepository.findAll();
+        }else {
+            return this.detailsMatchRepository.filterDetailsByWinnerScoreKills(winner, score, kills);
+        }
     }
 
     public DetailsMatch getById(long id) throws DetailsMatchNotFoundException {
@@ -59,14 +63,6 @@ public class DetailsMatchService {
         modelMapper.map(detailsMatchInDto, detailsMatch);
         this.detailsMatchRepository.save(detailsMatch);
         return detailsMatch;
-    }
-
-    public List<DetailsMatch> filter(Boolean winner, Integer score, Integer kills) throws FilterCriteriaNotFoundException {
-        if(winner == null && score == null && kills == null){
-            throw new FilterCriteriaNotFoundException("No match details filters found");
-        }else {
-            return this.detailsMatchRepository.filterDetailsByWinnerScoreKills(winner, score, kills);
-        }
     }
 
     public DetailsMatch update(long id, DetailsMatchPatchDto detailsMatchPatchDto) throws  DetailsMatchNotFoundException{

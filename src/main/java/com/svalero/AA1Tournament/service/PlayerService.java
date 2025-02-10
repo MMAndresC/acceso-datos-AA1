@@ -6,7 +6,6 @@ import com.svalero.AA1Tournament.domain.dto.player.PlayerInDto;
 import com.svalero.AA1Tournament.domain.dto.player.PlayerModifyDto;
 import com.svalero.AA1Tournament.domain.dto.player.PlayerPatchDto;
 import com.svalero.AA1Tournament.domain.dto.player.PlayerStatisticsDto;
-import com.svalero.AA1Tournament.exception.FilterCriteriaNotFoundException;
 import com.svalero.AA1Tournament.exception.PlayerNotFoundException;
 import com.svalero.AA1Tournament.exception.TeamNotFoundException;
 import com.svalero.AA1Tournament.repository.PlayerRepository;
@@ -29,8 +28,12 @@ public class PlayerService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public List<Player> getAll(){
-        return this.playerRepository.findAll();
+    public List<Player> getAll(LocalDate birthDate, Boolean mainRoster, String position){
+        if(birthDate == null && mainRoster == null && position == null){
+            return this.playerRepository.findAll();
+        }else {
+            return this.playerRepository.filterPlayerByBirthDateMainRosterPosition(birthDate, mainRoster, position);
+        }
     }
 
     public Player getById(long id) throws PlayerNotFoundException {
@@ -64,14 +67,6 @@ public class PlayerService {
         modelMapper.map(playerModifyDto, player);
         this.playerRepository.save(player);
         return player;
-    }
-
-    public List<Player> filter(LocalDate birthDate, Boolean mainRoster, String position) throws FilterCriteriaNotFoundException {
-        if(birthDate == null && mainRoster == null && position == null){
-            throw new FilterCriteriaNotFoundException("No players filters found");
-        }else {
-            return this.playerRepository.filterPlayerByBirthDateMainRosterPosition(birthDate, mainRoster, position);
-        }
     }
 
     public Player update(long id, PlayerPatchDto playerPatchDto) throws PlayerNotFoundException {

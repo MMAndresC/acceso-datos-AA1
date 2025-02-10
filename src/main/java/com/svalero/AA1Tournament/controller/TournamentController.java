@@ -5,7 +5,6 @@ import com.svalero.AA1Tournament.domain.dto.ErrorResponse;
 import com.svalero.AA1Tournament.domain.dto.tournament.TournamentInDto;
 import com.svalero.AA1Tournament.domain.dto.tournament.TournamentOutDto;
 import com.svalero.AA1Tournament.domain.dto.tournament.TournamentPatchDto;
-import com.svalero.AA1Tournament.exception.FilterCriteriaNotFoundException;
 import com.svalero.AA1Tournament.exception.TournamentNotFoundException;
 import com.svalero.AA1Tournament.service.TournamentService;
 import jakarta.validation.Valid;
@@ -32,10 +31,14 @@ public class TournamentController {
     private TournamentService tournamentService;
 
     @GetMapping("/tournaments")
-    public ResponseEntity<List<Tournament>> getAll(){
-        this.logger.info("Listing all tournaments...");
-        List<Tournament> allTournaments = this.tournamentService.getAll();
-        this.logger.info("End listing all tournaments");
+    public ResponseEntity<List<Tournament>> getAll(
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate initDate,
+            @RequestParam(required = false) String manager,
+            @RequestParam(required = false) Float prize
+    ){
+        this.logger.info("Listing tournaments...");
+        List<Tournament> allTournaments = this.tournamentService.getAll(initDate, manager, prize);
+        this.logger.info("End listing tournaments");
         return new ResponseEntity<>(allTournaments, HttpStatus.OK);
     }
 
@@ -71,18 +74,6 @@ public class TournamentController {
         return new ResponseEntity<>(modifiedTournament, HttpStatus.OK);
     }
 
-    @GetMapping("/tournaments/filters")
-    public ResponseEntity<List<Tournament>> filter(
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate initDate,
-            @RequestParam(required = false) String manager,
-            @RequestParam(required = false) Float prize
-    ) throws FilterCriteriaNotFoundException{
-        this.logger.info("Apply filters to tournaments...");
-        List<Tournament> tournaments = this.tournamentService.filter(initDate, manager, prize);
-        this.logger.info("End filtering tournaments");
-        return new ResponseEntity<>(tournaments, HttpStatus.OK);
-    }
-
     @PatchMapping("/tournaments/{id}")
     public ResponseEntity<Tournament> update(@PathVariable long id, @Valid @RequestBody TournamentPatchDto tournamentPatchDto) throws TournamentNotFoundException {
         this.logger.info("Updating a tournament...");
@@ -105,13 +96,6 @@ public class TournamentController {
         ErrorResponse error = ErrorResponse.generalError(404, exception.getMessage());
         this.logger.error(exception.getMessage(), exception);
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(FilterCriteriaNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleFilterCriteriaNotFoundException(FilterCriteriaNotFoundException exception) {
-        ErrorResponse error = ErrorResponse.generalError(404, exception.getMessage());
-        this.logger.error(exception.getMessage(), exception);
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

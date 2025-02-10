@@ -5,7 +5,6 @@ import com.svalero.AA1Tournament.domain.dto.ErrorResponse;
 import com.svalero.AA1Tournament.domain.dto.caster.CasterInDto;
 import com.svalero.AA1Tournament.domain.dto.caster.CasterPatchDto;
 import com.svalero.AA1Tournament.exception.CasterNotFoundException;
-import com.svalero.AA1Tournament.exception.FilterCriteriaNotFoundException;
 import com.svalero.AA1Tournament.service.CasterService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -31,10 +30,14 @@ public class CasterController {
     private CasterService casterService;
 
     @GetMapping("/casters")
-    public ResponseEntity<List<Caster>> getAll(){
-        this.logger.info("Listing all casters...");
-        List<Caster> allCasters = this.casterService.getAll();
-        this.logger.info("End listing all casters");
+    public ResponseEntity<List<Caster>> getAll(
+            @RequestParam(required = false) String language,
+            @RequestParam(required = false) Integer region,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate hireDate
+    ){
+        this.logger.info("Listing casters...");
+        List<Caster> allCasters = this.casterService.getAll(language, region, hireDate);
+        this.logger.info("End listing casters");
         return new ResponseEntity<>(allCasters, HttpStatus.OK);
     }
 
@@ -70,18 +73,6 @@ public class CasterController {
         return new ResponseEntity<>(modifiedCaster, HttpStatus.OK);
     }
 
-    @GetMapping("/casters/filters")
-    public ResponseEntity<List<Caster>> filter(
-            @RequestParam(required = false) Integer region,
-            @RequestParam(required = false) String language,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate hireDate
-    ) throws FilterCriteriaNotFoundException{
-        this.logger.info("Apply filters to casters...");
-        List<Caster> casters = this.casterService.filter(region, language, hireDate);
-        this.logger.info("End filtering casters");
-        return new ResponseEntity<>(casters, HttpStatus.OK);
-    }
-
     @PatchMapping("/casters/{id}")
     public ResponseEntity<Caster> update(@PathVariable long id, @Valid @RequestBody CasterPatchDto casterPatchDto) throws CasterNotFoundException{
         this.logger.info("Updating a caster...");
@@ -96,13 +87,6 @@ public class CasterController {
         ErrorResponse error = ErrorResponse.generalError(404, exception.getMessage());
         this.logger.error(exception.getMessage(), exception);
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(FilterCriteriaNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleFilterCriteriaNotFoundException(FilterCriteriaNotFoundException exception) {
-        ErrorResponse error = ErrorResponse.generalError(404, exception.getMessage());
-        this.logger.error(exception.getMessage(), exception);
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

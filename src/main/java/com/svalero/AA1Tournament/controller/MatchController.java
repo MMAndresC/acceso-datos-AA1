@@ -30,9 +30,13 @@ public class MatchController {
     private MatchService matchService;
 
     @GetMapping("/matches")
-    public ResponseEntity<List<Match>> getAll(){
+    public ResponseEntity<List<Match>> getAll(
+            @RequestParam(required = false) String mapName,
+            @RequestParam(required = false) Integer duration,
+            @RequestParam(required = false) LocalTime hour
+    ){
         this.logger.info("Listing all matches...");
-        List<Match> allMatches = this.matchService.getAll();
+        List<Match> allMatches = this.matchService.getAll(mapName, duration, hour);
         this.logger.info("End listing all matches");
         return new ResponseEntity<>(allMatches, HttpStatus.OK);
     }
@@ -69,18 +73,6 @@ public class MatchController {
         return new ResponseEntity<>(modifiedMatch, HttpStatus.OK);
     }
 
-    @GetMapping("/matches/filters")
-    public ResponseEntity<List<Match>> filter(
-            @RequestParam(required = false) String mapName,
-            @RequestParam(required = false) Integer duration,
-            @RequestParam(required = false) LocalTime hour
-    ) throws FilterCriteriaNotFoundException{
-        this.logger.info("Apply filters to matches...");
-        List<Match> matches = this.matchService.filter(mapName, duration, hour);
-        this.logger.info("End filtering matches");
-        return new ResponseEntity<>(matches, HttpStatus.OK);
-    }
-
     @PatchMapping("/matches/{id}")
     public ResponseEntity<Match> update(@PathVariable long id, @Valid @RequestBody MatchPatchDto matchPatchDto) throws MatchNotFoundException{
         this.logger.info("Updating a match...");
@@ -109,13 +101,6 @@ public class MatchController {
         ErrorResponse error = ErrorResponse.generalError(404, exception.getMessage());
         this.logger.error(exception.getMessage(), exception);
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(FilterCriteriaNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleFilterCriteriaNotFoundException(FilterCriteriaNotFoundException exception) {
-        ErrorResponse error = ErrorResponse.generalError(404, exception.getMessage());
-        this.logger.error(exception.getMessage(), exception);
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

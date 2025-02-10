@@ -4,7 +4,6 @@ import com.svalero.AA1Tournament.domain.Caster;
 import com.svalero.AA1Tournament.domain.dto.caster.CasterInDto;
 import com.svalero.AA1Tournament.domain.dto.caster.CasterPatchDto;
 import com.svalero.AA1Tournament.exception.CasterNotFoundException;
-import com.svalero.AA1Tournament.exception.FilterCriteriaNotFoundException;
 import com.svalero.AA1Tournament.repository.CasterRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +20,12 @@ public class CasterService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public List<Caster> getAll(){
-        return this.casterRepository.findAll();
+    public List<Caster> getAll(String language, Integer region, LocalDate hireDate){
+        if(language == null && region == null && hireDate == null){
+            return this.casterRepository.findAll();
+        }else {
+            return this.casterRepository.filterCastersByRegionLanguageHireDate(region, language, hireDate);
+        }
     }
 
     public Caster getById(long id) throws CasterNotFoundException {
@@ -44,14 +47,6 @@ public class CasterService {
         modelMapper.map(casterInDto, caster);
         this.casterRepository.save(caster);
         return caster;
-    }
-
-    public List<Caster> filter(Integer region, String language, LocalDate hireDate) throws FilterCriteriaNotFoundException {
-        if(language == null && region == null && hireDate == null){
-            throw new FilterCriteriaNotFoundException("No caster filters found");
-        }else {
-            return this.casterRepository.filterCastersByRegionLanguageHireDate(region, language, hireDate);
-        }
     }
 
     public Caster update(long id, CasterPatchDto casterPatchDto) throws  CasterNotFoundException{

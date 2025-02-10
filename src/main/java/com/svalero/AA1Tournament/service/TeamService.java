@@ -1,14 +1,10 @@
 package com.svalero.AA1Tournament.service;
 
-import com.svalero.AA1Tournament.domain.Caster;
 import com.svalero.AA1Tournament.domain.Team;
-import com.svalero.AA1Tournament.domain.dto.caster.CasterPatchDto;
 import com.svalero.AA1Tournament.domain.dto.team.TeamConsultWinsDto;
 import com.svalero.AA1Tournament.domain.dto.team.TeamInDto;
 import com.svalero.AA1Tournament.domain.dto.team.TeamPatchDto;
 import com.svalero.AA1Tournament.domain.dto.team.TeamRivalDataDto;
-import com.svalero.AA1Tournament.exception.CasterNotFoundException;
-import com.svalero.AA1Tournament.exception.FilterCriteriaNotFoundException;
 import com.svalero.AA1Tournament.exception.TeamNotFoundException;
 import com.svalero.AA1Tournament.repository.TeamRepository;
 import org.modelmapper.ModelMapper;
@@ -28,8 +24,12 @@ public class TeamService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public List<Team> getAll(){
-        return this.teamRepository.findAll();
+    public List<Team> getAll(Integer region, Boolean partner, LocalDate registrationDate){
+        if(region == null && partner == null && registrationDate == null) {
+            return this.teamRepository.findAll();
+        }else{
+            return this.teamRepository.filterTeamByRegionPartnerRegistrationDate(region, partner, registrationDate);
+        }
     }
 
     public Team getById(long id) throws TeamNotFoundException {
@@ -52,14 +52,6 @@ public class TeamService {
         modelMapper.map(teamInDto, team);
         this.teamRepository.save(team);
         return team;
-    }
-
-    public List<Team> filter(Integer region, Boolean partner, LocalDate registrationDate) throws FilterCriteriaNotFoundException {
-        if(region == null && partner == null && registrationDate == null){
-            throw new FilterCriteriaNotFoundException("No team filters found");
-        }else {
-            return this.teamRepository.filterTeamByRegionPartnerRegistrationDate(region, partner, registrationDate);
-        }
     }
 
     public Team update(long id, TeamPatchDto teamPatchDto) throws TeamNotFoundException {
