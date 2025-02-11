@@ -49,27 +49,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                example2:
-                  summary: Datos incompletos/no válidos
-                  value:
-                    status: 400
-                    message: Bad request
-                    errorMessages:
-                      password: Password required
+              example:
+                status: 400
+                message: Bad request
+                errorMessages:
+                password: Password required
         '409':
           description: El usuario ya existe
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                example2:
-                  summary: Usuario ya existe
-                  value:
-                    status: 409
-                    message: User already exist
-                    errorMessages: null
+              example:
+                status: 409
+                message: User already exist
+                errorMessages: null
       tags:
         - Auth
   /login:
@@ -103,37 +97,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthTokenDto'
-              examples:
-                example1:
-                  summary: Token generado
-                  value:
-                    token: eyJhbGciOiJIUzI1NiJ9..
+              example:
+                token: eyJhbGciOiJIUzI1NiJ9..
         '401':
           description: Contraseña incorrecta
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                example2:
-                  summary: Contraseña incorrecta
-                  value:
-                    code: 401
-                    message: Invalid credentials
-                    errorMessage: null
+              example:
+                code: 401
+                message: Invalid credentials
+                errorMessage: null
         '404':
           description: Usuario no encontrado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                example3:
-                  summary: Usuario no encontrado
-                  value:
-                    code: 404
-                    message: User not found
-                    errorMessage: null
+              example:
+                code: 404
+                message: User not found
+                errorMessage: null
       tags:
         - Auth
   /casters:
@@ -172,17 +157,14 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Caster'
-              examples:
-                example1:
-                  summary: Listado comentaristas
-                  value:
-                    - id: 1
-                      name: Scott Kennedy
-                      alias: Custa
-                      languages: english, french
-                      phone: '688794512'
-                      region: 3
-                      hireDate: '2023-01-01'
+              example:
+                - id: 1
+                  name: Scott Kennedy
+                  alias: Custa
+                  languages: english, french
+                  phone: '688794512'
+                  region: 3
+                  hireDate: '2023-01-01'
       tags:
         - Caster
     post:
@@ -195,16 +177,13 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/CasterInDto"
-            examples:
-              exmaple1:
-                summary: Nuevo comentarista
-                value:
-                  name: Scott Kennedy
-                  alias: Custa
-                  languages: english, french
-                  phone: '688794512'
-                  region: 3
-                  hireDate: '2023-01-01' 
+            example:
+              name: Scott Kennedy
+              alias: Custa
+              languages: english, french
+              phone: '688794512'
+              region: 3
+              hireDate: '2023-01-01' 
       responses:
         "201":
           description: Exito al crear un nuevo registro de comentarista
@@ -212,17 +191,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Caster"
-              examples:
-                example1:
-                  summary: Nuevo comentarista añadido
-                  value:
-                    id: 1
-                    name: Scott Kennedy
-                    alias: Custa
-                    languages: english, french
-                    phone: '688794512'
-                    region: 3
-                    hireDate: '2023-01-01'
+              example:
+                id: 1
+                name: Scott Kennedy
+                alias: Custa
+                languages: english, french
+                phone: '688794512'
+                region: 3
+                hireDate: '2023-01-01'
 
   /casters/{id}:
     get:
@@ -243,30 +219,24 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Caster"
-              examples:
-                example1:
-                  summary: Comentarista con ese id
-                  value:
-                    id: 1
-                    name: Scott Kennedy
-                    alias: Custa
-                    languages: english, french
-                    phone: '688794512'
-                    region: 3
-                    hireDate: '2023-01-01'
+              example:
+                id: 1
+                name: Scott Kennedy
+                alias: Custa
+                languages: english, french
+                phone: '688794512'
+                region: 3
+                hireDate: '2023-01-01'
         "404":
           description: Comentarista no encontrado
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-              examples: 
-                example1:
-                  summary: Comentarista no encontrado
-                  value:
-                    code: 404
-                    message: "Caster not found"
-                    errorMessages: null
+              example: 
+                code: 404
+                message: "Caster not found"
+                errorMessages: null
 
     delete:
       summary: Eliminar un comentarista por ID
@@ -288,13 +258,10 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-              examples:
-                example1:
-                  summary: Comentarista no encontrado
-                  value:
-                    code: 404
-                    message: "Caster not found"
-                    errorMessages: null
+              example:
+                code: 404
+                message: "Caster not found"
+                errorMessages: null
 
     put:
       summary: Modificar un registro completo de un comentarista
@@ -313,16 +280,13 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/CasterInDto"
-            examples:
-              example1:
-                summary: Datos modificados
-                value:
-                  name: Scott Kennedy
-                  alias: Custa
-                  languages: english, spanish
-                  phone: '699999999'
-                  region: 3
-                  hireDate: '2023-01-01'
+            example:
+              name: Scott Kennedy
+              alias: Custa
+              languages: english, spanish
+              phone: '699999999'
+              region: 3
+              hireDate: '2023-01-01'
       responses:
         "200":
           description: Comentarista modificado
@@ -330,30 +294,24 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Caster"
-              examples:
-                example1:
-                  summary: Comentarista con ese id
-                  value:
-                    id: 1
-                    name: Scott Kennedy
-                    alias: Custa
-                    languages: english, spanish
-                    phone: '699999999'
-                    region: 3
-                    hireDate: '2023-01-01'
+              example:
+                id: 1
+                name: Scott Kennedy
+                alias: Custa
+                languages: english, spanish
+                phone: '699999999'
+                region: 3
+                hireDate: '2023-01-01'
         "404":
           description: Comentarista no encontrado
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-              examples:
-                example1:
-                  summary: Comentarista no encontrado
-                  value:
-                    code: 404
-                    message: "Caster not found"
-                    errorMessages: null
+              example:
+                code: 404
+                message: "Caster not found"
+                errorMessages: null
 
     patch:
       summary: Actualizar parcialmente un comentarista
@@ -372,14 +330,11 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/CasterPatchDto"
-            examples:
-              example1:
-                summary: Actualizar comentarista
-                value:
-                    alias: Custa
-                    languages: english
-                    phone: '688794512'
-                    region: 2
+            example:
+              alias: Custa
+              languages: english
+              phone: '688794512'
+              region: 2
       responses:
         "200":
           description: Comentarista actualizado
@@ -387,30 +342,575 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Caster"
-              examples:
-                example1:
-                  summary: Comentarista actualizado
-                  value:
-                    id: 1
-                    name: Scott Kennedy
-                    alias: Custa
-                    languages: english
-                    phone: '688794512'
-                    region: 2
-                    hireDate: '2023-01-01'
+              example:
+                id: 1
+                name: Scott Kennedy
+                alias: Custa
+                languages: english
+                phone: '688794512'
+                region: 2
+                hireDate: '2023-01-01'
         "404":
           description: Comentarista no encontrado
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
-              examples:
-                example1:
-                  summary: Comentarista no encontrado
-                  value:
-                    code: 404
-                    message: "Caster not found"
-                    errorMessages: null
+              example:
+                code: 404
+                message: "Caster not found"
+                errorMessages: null
+                    
+  /details-match:
+    get:
+      summary: Obtiene todos los detalles de las partidas
+      tags:
+        - Details-Match
+      parameters:
+        - name: winner
+          in: query
+          description: Filtra segun gano o perdio la partida
+          required: false
+          schema:
+            type: boolean
+          example: true
+        - name: score
+          in: query
+          description: Filtra por puntuación mayor o igual
+          required: false
+          schema:
+            type: integer
+          example: 3
+        - name: kills
+          in: query
+          description: Filtra por nº de eliminaciones mayor o igual
+          required: false
+          schema:
+            type: integer
+          example: 15
+      responses:
+        "200":
+          description: Lista de detalles de la partida
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DetailsMatch"
+              example:
+                - id: 1
+                  winner: true
+                  score: 15
+                  kills: 5
+                  deaths: 5
+                  assists: 5
+
+  /details-match/{id}:
+    get:
+      summary: Obtiene los datos de partida por ID
+      tags:
+        - Details-Match
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the details match
+          schema:
+            type: integer
+          example: 1
+      responses:
+        "200":
+          description: Detalles de la partida encontrados
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DetailsMatch"
+              example:
+                id: 1
+                winner: true
+                score: 15
+                kills: 5
+                deaths: 5
+                assists: 5
+              
+        "404":
+          description: No se han encontrado los datos de la partida
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Details match not found"
+                errorMessages: null
+
+    delete:
+      summary: Borrar un detalle de una partida por ID
+      tags:
+        - Details-Match
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del detalle de la partida a borrar
+          schema:
+            type: integer
+          example: 1
+      responses:
+        "204":
+          description: Exito al borrar el detalle de la partida
+        "404":
+          description: Detalles de partida no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Details match not found"
+                errorMessages: null
+
+    put:
+      summary: Modificar un registro completo de un detalle de partida
+      tags:
+        - Details-Match
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the details match to modify
+          schema:
+            type: integer
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DetailsMatchInDto"
+            example:
+              winner: true
+              score: 6
+              kills: 15
+              deaths: 5
+              assists: 7
+      responses:
+        "200":
+          description: Detalle de partida modificada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DetailsMatch"
+              example:
+                id: 1
+                winner: true
+                score: 6
+                kills: 15
+                deaths: 5
+                assists: 7
+              
+        "404":
+          description: Detalles de partida no encontrada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Details match not found"
+                errorMessages: null
+
+    patch:
+      summary: Actualiza un detalle de partida
+      tags:
+        - Details-Match
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del detalle de partida a actualizar
+          schema:
+            type: integer
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DetailsMatchPatchDto"
+            example:
+              winner: true
+              score: 6
+              kills: 15
+              deaths: 5
+              assists: 7
+      responses:
+        "200":
+          description: Detalle de partida actualizada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DetailsMatch"
+              example:
+                winner: true
+                score: 6
+                kills: 15
+                deaths: 5
+                assists: 7
+               
+        "404":
+          description: Detalles de partida no encontrados
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Details match not found"
+                errorMessages: null
+
+  /match/{idMatch}/team/{idTeam}/details:
+    post:
+      summary: Añade un nuevo detalle de partida
+      tags:
+        - Details-Match
+      parameters:
+        - name: idMatch
+          in: path
+          required: true
+          description: ID de partida
+          schema:
+            type: integer
+          example: 1
+        - name: idTeam
+          in: path
+          required: true
+          description: ID de equipo
+          schema:
+            type: integer
+          example: 2
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DetailsMatchInDto"
+            example:
+              winner: true
+              score: 6
+              kills: 15
+              deaths: 5
+              assists: 7
+      responses:
+        "201":
+          description: Detalle de partida añadida
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DetailsMatch"
+              example:
+                winner: true
+                score: 6
+                kills: 15
+                deaths: 5
+                assists: 7
+               
+        "404":
+          description: Partida o equipo no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Match or Team not found"
+                errorMessages: null
+        "409":
+          description: Detalle de partida ya existe
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 409
+                message: "Details match already exists"
+                errorMessages: null
+                    
+  /matches:
+    get:
+      summary: Lista todas las partidas
+      tags:
+        - Match
+      parameters:
+        - name: mapName
+          in: query
+          description: Filtra por nombre del mapa
+          required: false
+          schema:
+            type: string
+          example: Dorado
+        - name: duration
+          in: query
+          description: Filtra por duración (en minutos) de la partida, mayor o igual
+          required: false
+          schema:
+            type: integer
+          example: 20
+        - name: hour
+          in: query
+          description: Filtra por la hora de la partida, mayor o igual
+          required: false
+          schema:
+            type: string
+            format: time
+          example: 18:00
+      responses:
+        "200":
+          description: Lista las partidas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Match"
+              example:
+                - id: 1
+                  date: "2025-06-12"
+                  hour: "18:00"
+                  mapName: "Ruta 66"
+                  type: "quarter-finals"
+                  duration: 20,
+                  day: 3
+                  idCaster: 1
+
+  /matches/{id}:
+    get:
+      summary: Obtiene una partida por ID
+      tags:
+        - Match
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de la parrtida
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Partida encontrada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Match"
+              example:
+                  id: 2
+                  date: "2025-06-12"
+                  hour: "19:00"
+                  mapName: "Dorado"
+                  type: "quarter-finals"
+                  duration: 25,
+                  day: 3
+                  idCaster: 2
+                
+        "404":
+          description: Partida no encontrada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Match not found"
+                errorMessages: null
+
+    delete:
+      summary: Borra una partida
+      tags:
+        - Match
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the match to delete
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      responses:
+        "204":
+          description: Exito al borrar la partida
+        "404":
+          description: Partida no encontrada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Match not found"
+                errorMessages: null
+
+    put:
+      summary: Modifica una partida
+      tags:
+        - Match
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the match to modify
+          schema:
+            type: integer
+            format: int64
+          example: 2
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MatchInDto"
+            example:
+              date: "2025-06-12"
+              hour: "20:00"
+              mapName: "Dorado"
+              type: "quarter-finals"
+              duration: 25,
+              day: 3
+              idCaster: 2
+      responses:
+        "200":
+          description: Exito al modficar la partida
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Match"
+              example:
+                id: 2
+                date: "2025-06-12"
+                hour: "20:00"
+                mapName: "Dorado"
+                type: "quarter-finals"
+                duration: 25,
+                day: 3
+                idCaster: 2
+        "404":
+          description: Partida no encontrada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example: 
+                code: 404
+                message: "Match not found"
+                errorMessages: null
+
+    patch:
+      summary: Actualiza una partida
+      tags:
+        - Match
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the match to update
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MatchPatchDto"
+            example:
+              date: "2025-06-12"
+              hour: "20:00"
+              mapName: "Dorado"
+              duration: 15
+              day: 3
+      responses:
+        "200":
+          description: Exito al actualizar la partida
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Match"
+              example:
+                id: 1
+                date: "2025-06-12"
+                hour: "20:00"
+                mapName: "Dorado"
+                type: "quarter-finals"
+                duration: 15
+                day: 3
+            
+        "404":
+          description: Partida no encontrada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Match not found"
+                errorMessages: null
+
+  /tournaments/{idTournament}/matches:
+    post:
+      summary: Añade una nueva partida
+      tags:
+        - Match
+      parameters:
+        - name: idTournament
+          in: path
+          required: true
+          description: Torneo ID
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MatchInDto"
+            example:
+              date: "2025-01-18"
+              hour: "16:00"
+              mapName: "Oasis"
+              type: "group stage"
+              duration: 25,
+              day: 1
+              idCaster: 1
+      responses:
+        "201":
+          description: Exito añadiendo la partida
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Match"
+              example:
+                id: 5
+                date: "2025-01-18"
+                hour: "16:00"
+                mapName: "Oasis"
+                type: "group stage"
+                duration: 25,
+                day: 1
+            
+        "404":
+          description: Torneo no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Tournament not found"
+                errorMessages: null
+                
 components:
   schemas:
     UserLoginDto:
@@ -445,6 +945,7 @@ components:
       properties:
         id:
           type: integer
+          format: int64 
         name:
           type: string
         alias:
@@ -487,9 +988,118 @@ components:
           type: string
         region:
           type: integer
+        
+    DetailsMatch:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        winner:
+          type: boolean
+        score:
+          type: integer
+        kills:
+          type: integer
+        deaths:
+          type: integer
+        assists:
+          type: integer
+              
+
+    DetailsMatchInDto:
+      type: object
+      properties:
+        winner:
+          type: boolean
+        score:
+          type: integer
+        kills:
+          type: integer
+        deaths:
+          type: integer
+        assists:
+          type: integer
+
+    DetailsMatchPatchDto:
+      type: object
+      properties:
+        winner:
+          type: boolean
+        score:
+          type: integer
+        kills:
+          type: integer
+        deaths:
+          type: integer
+        assists:
+          type: integer
+          
+    Match:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        date:
+          type: string
+          format: date
+        hour:
+          type: string
+          format: time
+        type:
+          type: string
+        mapName:
+          type: string
+        duration:
+          type: integer
+        day:
+          type: integer
+        
+
+    MatchInDto:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        hour:
+          type: string
+          format: time
+        type:
+          type: string
+        mapName:
+          type: string
+        duration:
+          type: integer
+        day:
+          type: integer
+        idCaster:
+          type: integer
+          format: int64
+
+    MatchPatchDto:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        hour:
+          type: string
+          format: time
+        mapName:
+          type: string
+        duration:
+          type: integer
+        day:
+          type: integer
+
 
 tags:
   - name: Auth
     description: Operaciones relacionadas con el registro e inicio de sesión de usuarios
   - name: Caster
     description: Operaciones con los datos de los comentaristas
+  - name: Details-Match
+    description: Operaciones con la información detallada de las partidas
+    
