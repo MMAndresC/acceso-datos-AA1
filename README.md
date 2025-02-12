@@ -32,7 +32,7 @@ mysql -u mainuser -p -h localhost -P 3306
   
 ## Diagrama Entidad-Relación  
   
-![APIdiagramaE-R.jpg](..%2F..%2FOneDrive%2FEscritorio%2FAPIdiagramaE-R.jpg)  
+  ![APIdiagramaE-R.jpg](APIdiagramaE-R.jpg)
   
 ## Arrancar el proyecto  
 
