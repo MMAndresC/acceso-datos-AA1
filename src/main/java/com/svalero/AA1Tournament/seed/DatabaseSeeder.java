@@ -38,13 +38,13 @@ public class DatabaseSeeder {
             count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM caster", Integer.class);
             if (count == 0) {
                 this.logger.info("Seeding caster table...");
-                fields = "INSERT INTO caster (name, alias, phone, region, hire_date) VALUES ";
-                values = "('Matt Morello', 'Mr X', '623145698', 3, '2023-06-02')";
+                fields = "INSERT INTO caster (name, alias, phone, region, hire_date, languages) VALUES ";
+                values = "('Matt Morello', 'Mr X', '623145698', 3, '2023-06-02', 'english')";
                 jdbcTemplate.execute(fields  + values);
-                values = "('Harry Pollit', 'LEGDAY', '623145987', 3, '2023-06-27')";
+                values = "('Harry Pollit', 'LEGDAY', '623145987', 3, '2023-06-27', 'english, spanish')";
                 jdbcTemplate.execute(fields + values);
 
-                values = "('TO DELETE', 'LEGDAY', '623145987', 3, '2023-06-27')";
+                values = "('TO DELETE', 'LEGDAY', '623145987', 3, '2023-06-27', 'finnish')";
                 jdbcTemplate.execute(fields + values);
 
                 this.logger.info("Seeding completed");

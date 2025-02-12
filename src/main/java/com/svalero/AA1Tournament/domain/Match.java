@@ -7,6 +7,8 @@ import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -46,6 +48,7 @@ public class Match {
     @ManyToOne
     @JoinColumn(name = "caster_id")
     @JsonManagedReference(value = "caster_matches")
+    @OnDelete(action = OnDeleteAction.SET_NULL) //Not delete when caster is deleted, FK = null
     private Caster caster;
 
     @ManyToOne
