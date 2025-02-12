@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -45,9 +47,10 @@ public class Player {
     @JoinColumn(name = "team_id")
     //Evita serializacion infinita de JSON, al estar relacionadas team-player entra en bucle
     @JsonManagedReference(value = "team_players")
+    @OnDelete(action = OnDeleteAction.SET_NULL) //Not delete when team is deleted, FK = null
     private Team team;
 
-    @OneToMany(mappedBy = "player")
+    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference(value = "statistics_player")
     private List<Statistic> statistics;
 

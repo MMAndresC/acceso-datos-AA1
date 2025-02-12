@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Data
 @NoArgsConstructor
@@ -50,6 +52,7 @@ public class DetailsMatch {
     @ManyToOne
     @JoinColumn(name = "team_id")
     @JsonManagedReference(value = "team_details_matches")
+    @OnDelete(action = OnDeleteAction.SET_NULL) //Not delete when team is deleted, FK = null
     private Team team;
 
 }

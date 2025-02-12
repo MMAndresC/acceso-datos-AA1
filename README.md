@@ -46,3 +46,18 @@ Si alguna dependencia no se ha instalado bien o algo no funciona correctamente c
 ~~~  
   mvn clean install
 ~~~ 
+
+## Poblar la base de datos  
+  
+En el primer arranque se poblara la base de datos con varios registros para cada tabla, no volvera a hacerlo si detecta que la tabla contiene registros  
+Si se necesita forzar que las pueble de nuevo, cambiando en **application.properties** la configuración de arranque de la base de datos de está manera:  
+~~~  
+spring.jpa.hibernate.ddl-auto=create-drop
+~~~    
+Se forzara a que al arrancar borre las tablas y las vuelva a crear  
+Volver a poner la configuración inicial:
+~~~  
+spring.jpa.hibernate.ddl-auto=update
+~~~    
+  
+Se ha añadido un registro a cada tabla expresamente para probar la función **DELETE**, está marcado en el registro como 'TO DELETE' siempre que el tipo de campo lo permita  
