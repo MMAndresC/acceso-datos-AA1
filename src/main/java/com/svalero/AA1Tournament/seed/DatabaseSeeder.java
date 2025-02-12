@@ -27,7 +27,7 @@ public class DatabaseSeeder {
                 jdbcTemplate.execute(fields + values);
                 this.logger.info("Seeding completed");
             } else {
-                this.logger.info("Team table already seeded. Skipping...");
+                this.logger.info("team table already seeded. Skipping...");
             }
 
             //CASTER
@@ -41,7 +41,7 @@ public class DatabaseSeeder {
                 jdbcTemplate.execute(fields + values);
                 this.logger.info("Seeding completed");
             } else {
-                this.logger.info("Caster table already seeded. Skipping...");
+                this.logger.info("caster table already seeded. Skipping...");
             }
 
             //TOURNAMENT
@@ -55,7 +55,7 @@ public class DatabaseSeeder {
                 jdbcTemplate.execute(fields + values);
                 this.logger.info("Seeding completed");
             } else {
-                this.logger.info("Tournament table already seeded. Skipping...");
+                this.logger.info("tournament table already seeded. Skipping...");
             }
 
             //PLAYER
@@ -77,13 +77,13 @@ public class DatabaseSeeder {
                 jdbcTemplate.execute(fields + values);
                 this.logger.info("Seeding completed");
             } else {
-                this.logger.info("Player table already seeded. Skipping...");
+                this.logger.info("player table already seeded. Skipping...");
             }
 
             //MATCH
             count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM match_t", Integer.class);
             if (count == 0) {
-                this.logger.info("Seeding match table...");
+                this.logger.info("Seeding match_t table...");
                 fields = "INSERT INTO match_t (date, hour, type, map_name, duration, day, caster_id, tournament_id) VALUES ";
                 values = "('2024-10-17', '18:00', 'group stage', 'Samoa', 21, 2, 2, 2)";
                 jdbcTemplate.execute(fields  + values);
@@ -93,7 +93,86 @@ public class DatabaseSeeder {
                 jdbcTemplate.execute(fields + values);
                 this.logger.info("Seeding completed");
             } else {
-                this.logger.info("Match table already seeded. Skipping...");
+                this.logger.info("match_t table already seeded. Skipping...");
+            }
+
+            //DETAILS MATCH
+            count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM detail_match_team", Integer.class);
+            if (count == 0) {
+                this.logger.info("Seeding detail_match_team table...");
+                fields = "INSERT INTO detail_match_team (score, winner, kills, deaths, assists, match_id, team_id) VALUES ";
+                values = "(2, true, 75, 32, 49, 1, 1)";
+                jdbcTemplate.execute(fields  + values);
+                values = "(1, false, 68, 42, 33, 1, 2)";
+                jdbcTemplate.execute(fields + values);
+
+                values = "(5, true, 90, 43, 49, 2, 1)";
+                jdbcTemplate.execute(fields  + values);
+                values = "(4, false, 77, 51, 41, 2, 2)";
+                jdbcTemplate.execute(fields + values);
+
+                values = "(2, false, 74, 43, 51, 3, 1)";
+                jdbcTemplate.execute(fields  + values);
+                values = "(3, true, 86, 38, 52, 3, 2)";
+                jdbcTemplate.execute(fields + values);
+                this.logger.info("Seeding completed");
+            } else {
+                this.logger.info("detail_match_team table already seeded. Skipping...");
+            }
+
+            //STATITICS
+            count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM statistics_tournament_player", Integer.class);
+            if (count == 0) {
+                this.logger.info("Seeding statistics_tournament_player table...");
+                fields = "INSERT INTO statistics_tournament_player (mvp, kills, deaths, assists, player_id, match_id) VALUES ";
+
+                values = "(false, 15, 6, 21, 1, 1)";
+                jdbcTemplate.execute(fields  + values);
+                values = "(false, 12, 8, 17, 1, 2)";
+                jdbcTemplate.execute(fields  + values);
+                values = "(false, 13, 7, 20, 1, 3)";
+                jdbcTemplate.execute(fields  + values);
+
+
+                values = "(false, 25, 12, 7, 2, 1)";
+                jdbcTemplate.execute(fields  + values);
+                values = "(true, 30, 15, 12, 2, 2)";
+                jdbcTemplate.execute(fields  + values);
+                values = "(false, 22, 13, 6, 2, 3)";
+                jdbcTemplate.execute(fields  + values);
+
+
+                values = "(false, 13, 10, 10, 3, 1)";
+                jdbcTemplate.execute(fields  + values);
+                values = "(false, 21, 16, 20, 3, 2)";
+                jdbcTemplate.execute(fields  + values);
+                values = "(false, 15, 6, 9, 3, 3)";
+                jdbcTemplate.execute(fields  + values);
+
+                values = "(true, 8, 5, 30, 4, 1)";
+                jdbcTemplate.execute(fields  + values);
+                values = "(false, 20, 11, 41, 4, 2)";
+                jdbcTemplate.execute(fields  + values);
+                values = "(false, 12, 7, 14, 4, 3)";
+                jdbcTemplate.execute(fields  + values);
+
+                values = "(false, 25, 12, 7, 5, 1)";
+                jdbcTemplate.execute(fields  + values);
+                values = "(false, 30, 15, 12, 5, 2)";
+                jdbcTemplate.execute(fields  + values);
+                values = "(false, 22, 13, 6, 5, 3)";
+                jdbcTemplate.execute(fields  + values);
+
+                values = "(false, 25, 12, 7, 6, 1)";
+                jdbcTemplate.execute(fields  + values);
+                values = "(false, 30, 15, 12, 6, 2)";
+                jdbcTemplate.execute(fields  + values);
+                values = "(true, 22, 13, 6, 6, 3)";
+                jdbcTemplate.execute(fields  + values);
+
+                this.logger.info("Seeding completed");
+            } else {
+                this.logger.info("statistics_tournament_player table already seeded. Skipping...");
             }
         };
     }
