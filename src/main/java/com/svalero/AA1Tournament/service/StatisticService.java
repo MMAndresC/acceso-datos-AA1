@@ -1,18 +1,12 @@
 package com.svalero.AA1Tournament.service;
 
-import com.svalero.AA1Tournament.domain.Match;
-import com.svalero.AA1Tournament.domain.Player;
-import com.svalero.AA1Tournament.domain.Statistic;
-import com.svalero.AA1Tournament.domain.Tournament;
+import com.svalero.AA1Tournament.domain.*;
 import com.svalero.AA1Tournament.domain.dto.statistics.StatisticsInDto;
-import com.svalero.AA1Tournament.exception.MatchNotFoundException;
-import com.svalero.AA1Tournament.exception.PlayerNotFoundException;
-import com.svalero.AA1Tournament.exception.StatisticsNotFoundException;
-import com.svalero.AA1Tournament.exception.TournamentNotFoundException;
+import com.svalero.AA1Tournament.domain.dto.statistics.StatisticsPatchDto;
+import com.svalero.AA1Tournament.exception.*;
 import com.svalero.AA1Tournament.repository.MatchRepository;
 import com.svalero.AA1Tournament.repository.PlayerRepository;
 import com.svalero.AA1Tournament.repository.StatisticsRepository;
-import com.svalero.AA1Tournament.repository.TournamentRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,8 +26,12 @@ public class StatisticService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public List<Statistic> getAll(){
-        return this.statisticsRepository.findAll();
+    public List<Statistic> getAll(Boolean mvp, Integer kills, Long idPlayer){
+        if(mvp == null && kills == null && idPlayer == null){
+            return this.statisticsRepository.findAll();
+        }else {
+            return this.statisticsRepository.filterStatisticByMvpKillsPlayer(mvp, kills, idPlayer);
+        }
     }
 
     public Statistic getById(long id) throws StatisticsNotFoundException {
@@ -59,5 +57,19 @@ public class StatisticService {
         modelMapper.map(statisticsInDto, statistic);
         this.statisticsRepository.save(statistic);
         return statistic;
+    }
+
+    public Statistic update(long id, StatisticsPatchDto statisticsPatchDto) throws  StatisticsNotFoundException{
+        Statistic statistic = this.statisticsRepository.findById(id).orElseThrow(StatisticsNotFoundException::new);
+        //if attribute is null, skip it in modelMapper
+        modelMapper.getConfiguration().setSkipNullEnabled(true);
+        modelMapper.map(statisticsPatchDto, statistic);
+        this.statisticsRepository.save(statistic);
+        return statistic;
+    }
+
+    public List<Statistic> download(long idPlayer) throws PlayerNotFoundException {
+        Player player = this.playerRepository.findById(idPlayer).orElseThrow(PlayerNotFoundException::new);
+        return this.statisticsRepository.findByPlayerId(idPlayer);
     }
 }

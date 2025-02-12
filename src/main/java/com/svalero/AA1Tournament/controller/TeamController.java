@@ -2,19 +2,23 @@ package com.svalero.AA1Tournament.controller;
 
 import com.svalero.AA1Tournament.domain.Team;
 import com.svalero.AA1Tournament.domain.dto.ErrorResponse;
+import com.svalero.AA1Tournament.domain.dto.team.TeamConsultWinsDto;
 import com.svalero.AA1Tournament.domain.dto.team.TeamInDto;
+import com.svalero.AA1Tournament.domain.dto.team.TeamPatchDto;
 import com.svalero.AA1Tournament.exception.TeamNotFoundException;
 import com.svalero.AA1Tournament.service.TeamService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,10 +32,14 @@ public class TeamController {
     private TeamService teamService;
 
     @GetMapping("/teams")
-    public ResponseEntity<List<Team>> getAll(){
-        this.logger.info("Listing all teams...");
-        List<Team> allTeams = this.teamService.getAll();
-        this.logger.info("End listing all teams");
+    public ResponseEntity<List<Team>> getAll(
+            @RequestParam(required = false) Integer region,
+            @RequestParam(required = false) Boolean partner,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate registrationDate
+    ){
+        this.logger.info("Listing teams...");
+        List<Team> allTeams = this.teamService.getAll(region, partner, registrationDate);
+        this.logger.info("End listing teams");
         return new ResponseEntity<>(allTeams, HttpStatus.OK);
     }
 
@@ -65,6 +73,22 @@ public class TeamController {
         Team modifiedTeam = this.teamService.modify(id, teamInDto);
         this.logger.info("Team modified");
         return new ResponseEntity<>(modifiedTeam, HttpStatus.OK);
+    }
+
+    @PatchMapping("/teams/{id}")
+    public ResponseEntity<Team> update(@PathVariable long id, @Valid @RequestBody TeamPatchDto teamPatchDto) throws TeamNotFoundException {
+        this.logger.info("Updating a team...");
+        Team updatedTeam = this.teamService.update(id, teamPatchDto);
+        this.logger.info("Team updated");
+        return new ResponseEntity<>(updatedTeam, HttpStatus.OK);
+    }
+
+    @GetMapping("/teams/{id}/wins")
+    public ResponseEntity<List<TeamConsultWinsDto>> getAllTournamentWins(@PathVariable long id) throws TeamNotFoundException {
+        this.logger.info("Getting all tournament wins for team...");
+        List<TeamConsultWinsDto> allWins = this.teamService.getAllTournamentWins(id);
+        this.logger.info("All tournament wins for team done");
+        return new ResponseEntity<>(allWins, HttpStatus.OK);
     }
 
     //Excepciones

@@ -4,6 +4,8 @@ import com.svalero.AA1Tournament.domain.Player;
 import com.svalero.AA1Tournament.domain.dto.ErrorResponse;
 import com.svalero.AA1Tournament.domain.dto.player.PlayerInDto;
 import com.svalero.AA1Tournament.domain.dto.player.PlayerModifyDto;
+import com.svalero.AA1Tournament.domain.dto.player.PlayerPatchDto;
+import com.svalero.AA1Tournament.domain.dto.player.PlayerStatisticsDto;
 import com.svalero.AA1Tournament.exception.PlayerNotFoundException;
 import com.svalero.AA1Tournament.exception.TeamNotFoundException;
 import com.svalero.AA1Tournament.service.PlayerService;
@@ -11,12 +13,14 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,10 +34,14 @@ public class PlayerController {
     private PlayerService playerService;
 
     @GetMapping("/players")
-    public ResponseEntity<List<Player>> getAll(){
-        this.logger.info("Listing all players...");
-        List<Player> allPlayers = this.playerService.getAll();
-        this.logger.info("End listing all players");
+    public ResponseEntity<List<Player>> getAll(
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate birthDate,
+            @RequestParam(required = false) Boolean mainRoster,
+            @RequestParam(required = false) String position
+    ){
+        this.logger.info("Listing players...");
+        List<Player> allPlayers = this.playerService.getAll(birthDate, mainRoster, position);
+        this.logger.info("End listing players");
         return new ResponseEntity<>(allPlayers, HttpStatus.OK);
     }
 
@@ -67,6 +75,22 @@ public class PlayerController {
         Player modifiedPlayer = this.playerService.modify(id, playerModifyDto);
         this.logger.info("Player modified");
         return new ResponseEntity<>(modifiedPlayer, HttpStatus.OK);
+    }
+
+    @PatchMapping("/players/{id}")
+    public ResponseEntity<Player> update(@PathVariable long id, @Valid @RequestBody PlayerPatchDto playerPatchDto) throws PlayerNotFoundException {
+        this.logger.info("Updating a player...");
+        Player updatedPlayer = this.playerService.update(id, playerPatchDto);
+        this.logger.info("Player updated");
+        return new ResponseEntity<>(updatedPlayer, HttpStatus.OK);
+    }
+
+    @GetMapping("/players/{id}/highlights")
+    public ResponseEntity<List<PlayerStatisticsDto>> getMvpStatisticsPlayer(@PathVariable long id) throws PlayerNotFoundException {
+        this.logger.info("Getting player highlights...");
+        List<PlayerStatisticsDto> highlightsPlayer = this.playerService.getMvpStatisticsPlayer(id);
+        this.logger.info("Player highlights done");
+        return new ResponseEntity<>(highlightsPlayer, HttpStatus.OK);
     }
 
     //Excepciones

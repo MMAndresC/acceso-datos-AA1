@@ -3,18 +3,21 @@ package com.svalero.AA1Tournament.controller;
 import com.svalero.AA1Tournament.domain.Caster;
 import com.svalero.AA1Tournament.domain.dto.ErrorResponse;
 import com.svalero.AA1Tournament.domain.dto.caster.CasterInDto;
+import com.svalero.AA1Tournament.domain.dto.caster.CasterPatchDto;
 import com.svalero.AA1Tournament.exception.CasterNotFoundException;
 import com.svalero.AA1Tournament.service.CasterService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,10 +30,14 @@ public class CasterController {
     private CasterService casterService;
 
     @GetMapping("/casters")
-    public ResponseEntity<List<Caster>> getAll(){
-        this.logger.info("Listing all casters...");
-        List<Caster> allCasters = this.casterService.getAll();
-        this.logger.info("End listing all casters");
+    public ResponseEntity<List<Caster>> getAll(
+            @RequestParam(required = false) String language,
+            @RequestParam(required = false) Integer region,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate hireDate
+    ){
+        this.logger.info("Listing casters...");
+        List<Caster> allCasters = this.casterService.getAll(language, region, hireDate);
+        this.logger.info("End listing casters");
         return new ResponseEntity<>(allCasters, HttpStatus.OK);
     }
 
@@ -64,6 +71,14 @@ public class CasterController {
         Caster modifiedCaster = this.casterService.modify(id, casterInDto);
         this.logger.info("Caster modified");
         return new ResponseEntity<>(modifiedCaster, HttpStatus.OK);
+    }
+
+    @PatchMapping("/casters/{id}")
+    public ResponseEntity<Caster> update(@PathVariable long id, @Valid @RequestBody CasterPatchDto casterPatchDto) throws CasterNotFoundException{
+        this.logger.info("Updating a caster...");
+        Caster updatedCaster = this.casterService.update(id, casterPatchDto);
+        this.logger.info("Caster updated");
+        return new ResponseEntity<>(updatedCaster, HttpStatus.OK);
     }
 
     //Excepciones

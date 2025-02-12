@@ -2,12 +2,15 @@ package com.svalero.AA1Tournament.service;
 
 import com.svalero.AA1Tournament.domain.Tournament;
 import com.svalero.AA1Tournament.domain.dto.tournament.TournamentInDto;
+import com.svalero.AA1Tournament.domain.dto.tournament.TournamentOutDto;
+import com.svalero.AA1Tournament.domain.dto.tournament.TournamentPatchDto;
 import com.svalero.AA1Tournament.exception.TournamentNotFoundException;
 import com.svalero.AA1Tournament.repository.TournamentRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 @Service
 public class TournamentService {
@@ -17,8 +20,12 @@ public class TournamentService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public List<Tournament> getAll(){
-        return this.tournamentRepository.findAll();
+    public List<Tournament> getAll(LocalDate initDate, String manager, Float prize){
+        if(initDate == null && manager == null && prize == null){
+            return this.tournamentRepository.findAll();
+        }else {
+            return this.tournamentRepository.filterTournamentByRegionManagerPrize(initDate, manager, prize);
+        }
     }
 
     public Tournament getById(long id) throws TournamentNotFoundException {
@@ -40,5 +47,19 @@ public class TournamentService {
         modelMapper.map(tournamentInDto, tournament);
         this.tournamentRepository.save(tournament);
         return tournament;
+    }
+
+    public Tournament update(long id, TournamentPatchDto tournamentPatchDto) throws TournamentNotFoundException {
+        Tournament tournament = this.tournamentRepository.findById(id).orElseThrow(TournamentNotFoundException::new);
+        //if attribute is null, skip it in modelMapper
+        modelMapper.getConfiguration().setSkipNullEnabled(true);
+        modelMapper.map(tournamentPatchDto, tournament);
+        this.tournamentRepository.save(tournament);
+        return tournament;
+    }
+
+    public List<TournamentOutDto> getAllTeamsWinnersMatches(long id) throws TournamentNotFoundException{
+        Tournament tournament = this.tournamentRepository.findById(id).orElseThrow(TournamentNotFoundException::new);
+        return this.tournamentRepository.getAllTeamsWinnersMatches(id);
     }
 }

@@ -4,6 +4,8 @@ import com.svalero.AA1Tournament.domain.Player;
 import com.svalero.AA1Tournament.domain.Team;
 import com.svalero.AA1Tournament.domain.dto.player.PlayerInDto;
 import com.svalero.AA1Tournament.domain.dto.player.PlayerModifyDto;
+import com.svalero.AA1Tournament.domain.dto.player.PlayerPatchDto;
+import com.svalero.AA1Tournament.domain.dto.player.PlayerStatisticsDto;
 import com.svalero.AA1Tournament.exception.PlayerNotFoundException;
 import com.svalero.AA1Tournament.exception.TeamNotFoundException;
 import com.svalero.AA1Tournament.repository.PlayerRepository;
@@ -12,6 +14,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -25,8 +28,12 @@ public class PlayerService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public List<Player> getAll(){
-        return this.playerRepository.findAll();
+    public List<Player> getAll(LocalDate birthDate, Boolean mainRoster, String position){
+        if(birthDate == null && mainRoster == null && position == null){
+            return this.playerRepository.findAll();
+        }else {
+            return this.playerRepository.filterPlayerByBirthDateMainRosterPosition(birthDate, mainRoster, position);
+        }
     }
 
     public Player getById(long id) throws PlayerNotFoundException {
@@ -60,5 +67,19 @@ public class PlayerService {
         modelMapper.map(playerModifyDto, player);
         this.playerRepository.save(player);
         return player;
+    }
+
+    public Player update(long id, PlayerPatchDto playerPatchDto) throws PlayerNotFoundException {
+        Player player = this.playerRepository.findById(id).orElseThrow(PlayerNotFoundException::new);
+        //if attribute is null, skip it in modelMapper
+        modelMapper.getConfiguration().setSkipNullEnabled(true);
+        modelMapper.map(playerPatchDto, player);
+        this.playerRepository.save(player);
+        return player;
+    }
+
+    public List<PlayerStatisticsDto> getMvpStatisticsPlayer(long id) throws PlayerNotFoundException{
+        Player player = this.playerRepository.findById(id).orElseThrow(PlayerNotFoundException::new);
+        return this.playerRepository.getMvpStatisticsPlayer(id);
     }
 }

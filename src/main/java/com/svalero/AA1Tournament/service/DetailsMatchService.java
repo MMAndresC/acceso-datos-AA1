@@ -4,6 +4,7 @@ import com.svalero.AA1Tournament.domain.DetailsMatch;
 import com.svalero.AA1Tournament.domain.Match;
 import com.svalero.AA1Tournament.domain.Team;
 import com.svalero.AA1Tournament.domain.dto.detailsMatch.DetailsMatchInDto;
+import com.svalero.AA1Tournament.domain.dto.detailsMatch.DetailsMatchPatchDto;
 import com.svalero.AA1Tournament.exception.*;
 import com.svalero.AA1Tournament.repository.DetailsMatchRepository;
 import com.svalero.AA1Tournament.repository.MatchRepository;
@@ -28,8 +29,12 @@ public class DetailsMatchService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public List<DetailsMatch> getAll(){
-        return this.detailsMatchRepository.findAll();
+    public List<DetailsMatch> getAll(Boolean winner, Integer score, Integer kills){
+        if(winner == null && score == null && kills == null){
+            return this.detailsMatchRepository.findAll();
+        }else {
+            return this.detailsMatchRepository.filterDetailsByWinnerScoreKills(winner, score, kills);
+        }
     }
 
     public DetailsMatch getById(long id) throws DetailsMatchNotFoundException {
@@ -56,6 +61,15 @@ public class DetailsMatchService {
     public DetailsMatch modify(long id, DetailsMatchInDto detailsMatchInDto) throws DetailsMatchNotFoundException {
         DetailsMatch detailsMatch = this.detailsMatchRepository.findById(id).orElseThrow(DetailsMatchNotFoundException::new);
         modelMapper.map(detailsMatchInDto, detailsMatch);
+        this.detailsMatchRepository.save(detailsMatch);
+        return detailsMatch;
+    }
+
+    public DetailsMatch update(long id, DetailsMatchPatchDto detailsMatchPatchDto) throws  DetailsMatchNotFoundException{
+        DetailsMatch detailsMatch = this.detailsMatchRepository.findById(id).orElseThrow(DetailsMatchNotFoundException::new);
+        //if attribute is null, skip it in modelMapper
+        modelMapper.getConfiguration().setSkipNullEnabled(true);
+        modelMapper.map(detailsMatchPatchDto, detailsMatch);
         this.detailsMatchRepository.save(detailsMatch);
         return detailsMatch;
     }

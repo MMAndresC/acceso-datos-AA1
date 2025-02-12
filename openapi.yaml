@@ -1,0 +1,2468 @@
+openapi: 3.0.1
+info:
+  title: Tournaments API
+  version: 1.0.0
+  description: >-
+    Una API con la información de los torneos que se organizan fuera de la liga
+    regular de un eSport
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Servidor local
+paths:
+  /register:
+    summary: Registro de un usuario
+    description: >-
+      Solo es necesario registrarse para poder realizar operaciones de borrado
+      en las tablas
+    post:
+      summary: Registrar nuevo usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLoginDto'
+            examples:
+              example1:
+                summary: Registro de usuario válido
+                value:
+                  username: visitor
+                  pasword: 1234
+              example2:
+                summary: Registro de usuario no válido
+                value:
+                  username: visitor
+      responses:
+        '201':
+          description: Usuario registrado correctamente
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                example1:
+                  summary: Usuario creado
+                  value: visitor created
+        '400':
+          description: Los datos de registro están incompletos o no son correctos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                status: 400
+                message: Bad request
+                errorMessages:
+                password: Password required
+        '409':
+          description: El usuario ya existe
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                status: 409
+                message: User already exist
+                errorMessages: null
+      tags:
+        - Auth
+  /login:
+    summary: >-
+      Iniciar sesion con uusario y contraseña y obtener el token de
+      autenticación
+    description: El token solo es necesario para las operaciones de borrado
+    post:
+      summary: Identificarse con usuario y contraseña
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLoginDto'
+            examples:
+              example1:
+                summary: Login de usuario válido
+                value:
+                  username: visitor
+                  pasword: 1234
+              example2:
+                summary: Login con password incorrecto
+                value:
+                  username: visitor
+                  password: 3897
+      responses:
+        '200':
+          description: Exito al iniciar sesión, devuelve el token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthTokenDto'
+              example:
+                token: eyJhbGciOiJIUzI1NiJ9..
+        '401':
+          description: Contraseña incorrecta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                code: 401
+                message: Invalid credentials
+                errorMessage: null
+        '404':
+          description: Usuario no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                code: 404
+                message: User not found
+                errorMessage: null
+      tags:
+        - Auth
+  /casters:
+    summary: Datos de los comentaristas de las partidas
+    get:
+      summary: Obtener todos los comentaristas o filtrados por los parámetros
+      parameters:
+        - name: languages
+          in: query
+          description: Filtra por los idiomas que habla el comentarista
+          required: false
+          schema:
+            type: string
+          example: english
+        - name: region
+          in: query
+          description: Filtra por la región del comentarista
+          required: false
+          schema:
+            type: integer
+          example: 3
+        - name: hireDate
+          in: query
+          description: Filtra por la fecha de contratación del comentarista
+          required: false
+          schema:
+            type: string
+            format: date
+          example: '2023-05-15'
+      responses:
+        '200':
+          description: Exito al obtener la lista de comentaristas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Caster'
+              example:
+                - id: 1
+                  name: Scott Kennedy
+                  alias: Custa
+                  languages: english, french
+                  phone: '688794512'
+                  region: 3
+                  hireDate: '2023-01-01'
+      tags:
+        - Caster
+    post:
+      summary: Crear un nuevo comentarista
+      tags:
+        - Caster
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasterInDto"
+            example:
+              name: Scott Kennedy
+              alias: Custa
+              languages: english, french
+              phone: '688794512'
+              region: 3
+              hireDate: '2023-01-01' 
+      responses:
+        "201":
+          description: Exito al crear un nuevo registro de comentarista
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Caster"
+              example:
+                id: 1
+                name: Scott Kennedy
+                alias: Custa
+                languages: english, french
+                phone: '688794512'
+                region: 3
+                hireDate: '2023-01-01'
+
+  /casters/{id}:
+    get:
+      summary: Obtener un comentatista por ID
+      tags:
+        - Caster
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          example: 1
+      responses:
+        "200":
+          description: Comentarista encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Caster"
+              example:
+                id: 1
+                name: Scott Kennedy
+                alias: Custa
+                languages: english, french
+                phone: '688794512'
+                region: 3
+                hireDate: '2023-01-01'
+        "404":
+          description: Comentarista no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example: 
+                code: 404
+                message: "Caster not found"
+                errorMessages: null
+
+    delete:
+      summary: Eliminar un comentarista por ID
+      tags:
+        - Caster
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          example: 1
+      responses:
+        "204":
+          description: Exito borrando comentarista
+        "404":
+          description: Comentarista no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Caster not found"
+                errorMessages: null
+
+    put:
+      summary: Modificar un registro completo de un comentarista
+      tags:
+        - Caster
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasterInDto"
+            example:
+              name: Scott Kennedy
+              alias: Custa
+              languages: english, spanish
+              phone: '699999999'
+              region: 3
+              hireDate: '2023-01-01'
+      responses:
+        "200":
+          description: Comentarista modificado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Caster"
+              example:
+                id: 1
+                name: Scott Kennedy
+                alias: Custa
+                languages: english, spanish
+                phone: '699999999'
+                region: 3
+                hireDate: '2023-01-01'
+        "404":
+          description: Comentarista no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Caster not found"
+                errorMessages: null
+
+    patch:
+      summary: Actualizar parcialmente un comentarista
+      tags:
+        - Caster
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CasterPatchDto"
+            example:
+              alias: Custa
+              languages: english
+              phone: '688794512'
+              region: 2
+      responses:
+        "200":
+          description: Comentarista actualizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Caster"
+              example:
+                id: 1
+                name: Scott Kennedy
+                alias: Custa
+                languages: english
+                phone: '688794512'
+                region: 2
+                hireDate: '2023-01-01'
+        "404":
+          description: Comentarista no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Caster not found"
+                errorMessages: null
+                    
+  /details-match:
+    get:
+      summary: Obtiene todos los detalles de las partidas
+      tags:
+        - Details-Match
+      parameters:
+        - name: winner
+          in: query
+          description: Filtra segun gano o perdio la partida
+          required: false
+          schema:
+            type: boolean
+          example: true
+        - name: score
+          in: query
+          description: Filtra por puntuación mayor o igual
+          required: false
+          schema:
+            type: integer
+          example: 3
+        - name: kills
+          in: query
+          description: Filtra por nº de eliminaciones mayor o igual
+          required: false
+          schema:
+            type: integer
+          example: 15
+      responses:
+        "200":
+          description: Lista de detalles de la partida
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DetailsMatch"
+              example:
+                - id: 1
+                  winner: true
+                  score: 15
+                  kills: 5
+                  deaths: 5
+                  assists: 5
+
+  /details-match/{id}:
+    get:
+      summary: Obtiene los datos de partida por ID
+      tags:
+        - Details-Match
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the details match
+          schema:
+            type: integer
+          example: 1
+      responses:
+        "200":
+          description: Detalles de la partida encontrados
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DetailsMatch"
+              example:
+                id: 1
+                winner: true
+                score: 15
+                kills: 5
+                deaths: 5
+                assists: 5
+              
+        "404":
+          description: No se han encontrado los datos de la partida
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Details match not found"
+                errorMessages: null
+
+    delete:
+      summary: Borrar un detalle de una partida por ID
+      tags:
+        - Details-Match
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del detalle de la partida a borrar
+          schema:
+            type: integer
+          example: 1
+      responses:
+        "204":
+          description: Exito al borrar el detalle de la partida
+        "404":
+          description: Detalles de partida no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Details match not found"
+                errorMessages: null
+
+    put:
+      summary: Modificar un registro completo de un detalle de partida
+      tags:
+        - Details-Match
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the details match to modify
+          schema:
+            type: integer
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DetailsMatchInDto"
+            example:
+              winner: true
+              score: 6
+              kills: 15
+              deaths: 5
+              assists: 7
+      responses:
+        "200":
+          description: Detalle de partida modificada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DetailsMatch"
+              example:
+                id: 1
+                winner: true
+                score: 6
+                kills: 15
+                deaths: 5
+                assists: 7
+              
+        "404":
+          description: Detalles de partida no encontrada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Details match not found"
+                errorMessages: null
+
+    patch:
+      summary: Actualiza un detalle de partida
+      tags:
+        - Details-Match
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del detalle de partida a actualizar
+          schema:
+            type: integer
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DetailsMatchPatchDto"
+            example:
+              winner: true
+              score: 6
+              kills: 15
+              deaths: 5
+              assists: 7
+      responses:
+        "200":
+          description: Detalle de partida actualizada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DetailsMatch"
+              example:
+                winner: true
+                score: 6
+                kills: 15
+                deaths: 5
+                assists: 7
+               
+        "404":
+          description: Detalles de partida no encontrados
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Details match not found"
+                errorMessages: null
+
+  /match/{idMatch}/team/{idTeam}/details:
+    post:
+      summary: Añade un nuevo detalle de partida
+      tags:
+        - Details-Match
+      parameters:
+        - name: idMatch
+          in: path
+          required: true
+          description: ID de partida
+          schema:
+            type: integer
+          example: 1
+        - name: idTeam
+          in: path
+          required: true
+          description: ID de equipo
+          schema:
+            type: integer
+          example: 2
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DetailsMatchInDto"
+            example:
+              winner: true
+              score: 6
+              kills: 15
+              deaths: 5
+              assists: 7
+      responses:
+        "201":
+          description: Detalle de partida añadida
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DetailsMatch"
+              example:
+                winner: true
+                score: 6
+                kills: 15
+                deaths: 5
+                assists: 7
+               
+        "404":
+          description: Partida o equipo no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Match or Team not found"
+                errorMessages: null
+        "409":
+          description: Detalle de partida ya existe
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 409
+                message: "Details match already exists"
+                errorMessages: null
+                    
+  /matches:
+    get:
+      summary: Lista todas las partidas
+      tags:
+        - Match
+      parameters:
+        - name: mapName
+          in: query
+          description: Filtra por nombre del mapa
+          required: false
+          schema:
+            type: string
+          example: Dorado
+        - name: duration
+          in: query
+          description: Filtra por duración (en minutos) de la partida, mayor o igual
+          required: false
+          schema:
+            type: integer
+          example: 20
+        - name: hour
+          in: query
+          description: Filtra por la hora de la partida, mayor o igual
+          required: false
+          schema:
+            type: string
+            format: time
+          example: 18:00
+      responses:
+        "200":
+          description: Lista las partidas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Match"
+              example:
+                - id: 1
+                  date: "2025-06-12"
+                  hour: "18:00"
+                  mapName: "Ruta 66"
+                  type: "quarter-finals"
+                  duration: 20,
+                  day: 3
+                  idCaster: 1
+
+  /matches/{id}:
+    get:
+      summary: Obtiene una partida por ID
+      tags:
+        - Match
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de la partida
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Partida encontrada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Match"
+              example:
+                  id: 2
+                  date: "2025-06-12"
+                  hour: "19:00"
+                  mapName: "Dorado"
+                  type: "quarter-finals"
+                  duration: 25,
+                  day: 3
+                  idCaster: 2
+                
+        "404":
+          description: Partida no encontrada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Match not found"
+                errorMessages: null
+
+    delete:
+      summary: Borra una partida
+      tags:
+        - Match
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the match to delete
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      responses:
+        "204":
+          description: Exito al borrar la partida
+        "404":
+          description: Partida no encontrada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Match not found"
+                errorMessages: null
+
+    put:
+      summary: Modifica una partida
+      tags:
+        - Match
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the match to modify
+          schema:
+            type: integer
+            format: int64
+          example: 2
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MatchInDto"
+            example:
+              date: "2025-06-12"
+              hour: "20:00"
+              mapName: "Dorado"
+              type: "quarter-finals"
+              duration: 25,
+              day: 3
+              idCaster: 2
+      responses:
+        "200":
+          description: Exito al modficar la partida
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Match"
+              example:
+                id: 2
+                date: "2025-06-12"
+                hour: "20:00"
+                mapName: "Dorado"
+                type: "quarter-finals"
+                duration: 25,
+                day: 3
+                idCaster: 2
+        "404":
+          description: Partida no encontrada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example: 
+                code: 404
+                message: "Match not found"
+                errorMessages: null
+
+    patch:
+      summary: Actualiza una partida
+      tags:
+        - Match
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the match to update
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MatchPatchDto"
+            example:
+              date: "2025-06-12"
+              hour: "20:00"
+              mapName: "Dorado"
+              duration: 15
+              day: 3
+      responses:
+        "200":
+          description: Exito al actualizar la partida
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Match"
+              example:
+                id: 1
+                date: "2025-06-12"
+                hour: "20:00"
+                mapName: "Dorado"
+                type: "quarter-finals"
+                duration: 15
+                day: 3
+            
+        "404":
+          description: Partida no encontrada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Match not found"
+                errorMessages: null
+
+  /tournaments/{idTournament}/matches:
+    post:
+      summary: Añade una nueva partida
+      tags:
+        - Match
+      parameters:
+        - name: idTournament
+          in: path
+          required: true
+          description: Torneo ID
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MatchInDto"
+            example:
+              date: "2025-01-18"
+              hour: "16:00"
+              mapName: "Oasis"
+              type: "group stage"
+              duration: 25,
+              day: 1
+              idCaster: 1
+      responses:
+        "201":
+          description: Exito añadiendo la partida
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Match"
+              example:
+                id: 5
+                date: "2025-01-18"
+                hour: "16:00"
+                mapName: "Oasis"
+                type: "group stage"
+                duration: 25,
+                day: 1
+            
+        "404":
+          description: Torneo no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Tournament not found"
+                errorMessages: null
+                
+  /players:
+    get:
+      summary: Obtener todos los jugadores
+      tags:
+        - Player
+      parameters:
+        - name: birthDate
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+          description: Filtrar por fecha de nacimiento
+          example: "1996-04-21"
+        - name: mainRoster
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: Filtrar por si está en el equipo principal
+          example: true
+        - name: position
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Filtrar por posición
+          example: tank
+      responses:
+        "200":
+          description: Lista de jugadores obtenida correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Player"
+              example:
+                - id: 1
+                  name: "Niclas Smidt Jensen"
+                  alias: "sHockWave"
+                  phone: "699784512"
+                  birthDate: "2000-02-11"
+                  mainRoster: true
+                  position: "DPS"
+
+  /players/{id}:
+    get:
+      summary: Obtener un jugador por ID
+      tags:
+        - Player
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de jugador
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      responses:
+        "200":
+          description: Jugador encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Player"
+              example:
+                id: 1
+                name: "Niclas Smidt Jensen"
+                alias: "sHockWave"
+                phone: "699784512"
+                birthDate: "2000-02-11"
+                mainRoster: true
+                position: "DPS"
+                
+        "404":
+          description: Jugador no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Player not found"
+                errorMessages: null
+
+    delete:
+      summary: Eliminar un jugador
+      tags:
+        - Player
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de jugador
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      responses:
+        "204":
+          description: Jugador eliminado correctamente
+        "404":
+          description: Jugador no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Player not found"
+                errorMessages: null
+
+    put:
+      summary: Modificar un jugador
+      tags:
+        - Player
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de jugador
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlayerModifyDto"
+            example:
+                name: "Niclas Smidt Jensen"
+                alias: "sHockWave"
+                phone: "699999999"
+                birthDate: "2000-02-11"
+                mainRoster: true
+                position: "DPS"
+                idTeam: 1
+      responses:
+        "200":
+          description: Jugador modificado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Player"
+              example:
+                id: 1
+                name: "Niclas Smidt Jensen"
+                alias: "sHockWave"
+                phone: "699999999"
+                birthDate: "2000-02-11"
+                mainRoster: true
+                position: "DPS"
+              
+        "404":
+          description: Jugador o equipo no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Player or Team not found"
+                errorMessages: null
+
+    patch:
+      summary: Actualizar parcialmente un jugador
+      tags: 
+        - Player
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del jugador
+          schema:
+            type: integer
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlayerPatchDto"
+            example:
+              phone: "688888888"
+              mainRoster: false
+              position: "support"
+      responses:
+        "200":
+          description: Jugador actualizado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Player"
+              example:
+                id: 1
+                name: "Niclas Smidt Jensen"
+                alias: "sHockWave"
+                phone: "688888888"
+                birthDate: "2000-02-11"
+                mainRoster: false
+                position: "support"
+               
+        "404":
+          description: Jugador no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Player not found"
+                errorMessages: null
+
+  /teams/{idTeam}/players:
+    post:
+      summary: Añadir un jugador a un equipo
+      tags: 
+        - Player
+      parameters:
+        - name: idTeam
+          in: path
+          required: true
+          description: ID del equipo
+          schema:
+            type: integer
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlayerInDto"
+            example: 
+              name: "Niclas Smidt Jensen"
+              alias: "sHockWave"
+              phone: "699784512"
+              birthDate: "2000-02-11"
+              mainRoster: true
+              position: "DPS"
+          
+              
+      responses:
+        "201":
+          description: Jugador agregado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Player"
+              example:
+                id: 1
+                name: "Niclas Smidt Jensen"
+                alias: "sHockWave"
+                phone: "699784512"
+                birthDate: "2000-02-11"
+                mainRoster: true
+                position: "DPS"
+                
+        "404":
+          description: Equipo no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example: 
+                code: 404
+                message: "Team not found"
+                errorMessages: null
+
+  /players/{id}/highlights:
+    get:
+      summary: Obtener estadísticas destacadas de un jugador
+      tags:
+        - Player
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Estadísticas obtenidas correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PlayerStatisticsDto"
+                example:
+                  idTournament: 1
+                  name: "Niclas Smidt Jensen"
+                  tournamentDate: "2025-02-11"
+                  mapName: "Anubis"
+                  mvp: true
+                  typeMatch: "group stage"
+                  kills: 27
+                  deaths: 9
+                  assists: 12
+        "404":
+          description: Jugador no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example: 
+                code: 404
+                message: "Player not found"
+                errorMessages: null
+  /statistics:
+    get:
+      summary: Obtener todas las estadísticas
+      tags:
+        - Statistic
+      parameters:
+        - name: mvp
+          in: query
+          description: Filtrar por si el jugador fue MVP 
+          schema:
+            type: boolean
+          example: true
+        - name: kills
+          in: query
+          description: Filtrar por número de eliminaciones
+          schema:
+            type: integer
+          example: 15
+        - name: idPlayer
+          in: query
+          description: Filtrar por ID del jugador
+          schema:
+            type: integer
+          example: 1
+      responses:
+        "200":
+          description: Lista de estadísticas obtenida correctamente
+          content:
+            application/json:
+             schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Statistic"
+                example:
+                  - id: 1
+                    kills: 20
+                    deaths: 8
+                    assists: 5
+                    mvp: true
+                    idPlayer: 1
+                  - id: 2
+                    kills: 15
+                    deaths: 11
+                    assists: 3
+                    mvp: false
+                    idPlayer: 2
+
+  /statistics/{id}:
+    get:
+      summary: Obtener una estadística por ID
+      tags:
+        - Statistic
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de la estadística
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      responses:
+        "200":
+          description: Estadística encontrada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Statistic"
+              example:
+                id: 1
+                kills: 20
+                deaths: 8
+                assists: 5
+                mvp: true
+                idPlayer: 1
+        "404":
+          description: Estadística no encontrada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Statistic not found"
+                errorMessages: null
+
+    delete:
+      summary: Eliminar una estadística
+      tags:
+        - Statistic
+      description: Borra la estadística con el ID especificado.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de la estadística
+          schema:
+            type: integer
+            format: int64
+          example: 1
+      responses:
+        "204":
+          description: Estadística eliminada correctamente
+        "404":
+          description: Estadística no encontrada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                code: 404
+                message: "Statistic not found"
+                errorMessages: null
+
+    put:
+      summary: Modificar una estadística
+      tags:
+        - Statistic
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de la estadística
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StatisticsInDto"
+            example:
+              kills: 25
+              deaths: 12
+              assists: 10
+              mvp: false
+      responses:
+        "200":
+          description: Estadística modificada con éxito
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Statistic"
+              example:
+                id: 1
+                kills: 25
+                deaths: 12
+                assists: 10
+                mvp: false
+        "400":
+          description: Datos de entrada no válidos
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Estadística no encontrada
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+    patch:
+      summary: Actualizar parcialmente una estadística
+      tags:
+        - Statistic
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de la estadística
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                $ref: "#/components/schemas/StatisticsPatchDto"
+            example:
+              mvp: true
+      responses:
+        "200":
+          description: Estadística actualizada con éxito
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Statistic"
+        "400":
+          description: Datos de entrada no válidos
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Estadística no encontrada
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /match/{idMatch}/player/{idPlayer}/statistic:
+    post:
+      summary: Agregar una estadística a un jugador en una partida
+      tags: 
+        - Statistic
+      parameters:
+        - name: idMatch
+          in: path
+          required: true
+          description: ID del partido
+          schema:
+            type: integer
+            format: int64
+        - name: idPlayer
+          in: path
+          required: true
+          description: ID del jugador
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                $ref: "#/components/schemas/StatisticsInDto"
+            example:
+              kills: 18
+              deaths: 5
+              assists: 7
+              mvp: false
+      responses:
+        "201":
+          description: Estadística añadida con éxito
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Statistic"
+        "404":
+          description: Partido o jugador no encontrado
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "400":
+          description: Datos de entrada no válidos
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /statistics/{idPlayer}/download:
+    get:
+      summary: Descargar estadísticas de un jugador en archivo CSV
+      tags:
+        - Statistic
+      parameters:
+        - name: idPlayer
+          in: path
+          required: true
+          description: ID del jugador
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Archivo CSV generado con éxito
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+        "404":
+          description: Jugador no encontrado
+        "500":
+          description: Error al generar el archivo CSV
+          
+  /teams:
+    get:
+      tags:
+        - Team
+      summary: Obtener todos los equipos
+      parameters:
+        - name: region
+          in: query
+          description: Filtrar por región del equipo
+          schema:
+            type: integer
+        - name: partner
+          in: query
+          description: Filtrar por si el equipo está asociado con la liga
+          schema:
+            type: boolean
+        - name: registrationDate
+          in: query
+          description: Filtrar por fecha de registro del equipo
+          schema:
+            type: string
+            format: date
+      responses:
+        "200":
+          description: Lista de equipos obtenida correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Team"
+              example:
+                - id: 1
+                  name: "Virtus pro"
+                  region: 3
+                  partner: true
+                  registrationDate: "2024-01-15"
+                  address: "Direccion 1"
+                  phone: "698523147"
+                  representative: "Carlos Perez"
+                - id: 2
+                  name: "Sakura"
+                  region: 3
+                  partner: false
+                  registrationDate: "2024-01-10"
+                  address: "Direccion 2"
+                  phone: "698523147"
+                  representative: "Mark Vanderloo"
+
+    post:
+      tags:
+        - Team
+      summary: Agregar un nuevo equipo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                $ref: "#/components/schemas/TeamInDto"
+            example:
+              name: "Sakura"
+              region: 3
+              partner: false
+              registrationDate: "2024-01-10"
+              address: "Direccion 2"
+              phone: "698523147"
+              representative: "Mark Vanderloo"
+      responses:
+        "201":
+          description: Equipo agregado con éxito
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Team"
+              example:
+                id: 2
+                name: "Sakura"
+                region: 3
+                partner: false
+                registrationDate: "2024-01-10"
+                address: "Direccion 2"
+                phone: "698523147"
+                representative: "Mark Vanderloo"
+                
+        "400":
+          description: Datos de entrada inválidos
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /teams/{id}:
+    get:
+      tags:
+        - Team
+      summary: Obtener un equipo por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del equipo
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Equipo encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Team"
+              example:
+                id: 1
+                name: "Los Titanes"
+                region: 3
+                partner: true
+                registrationDate: "2024-01-15"
+        "404":
+          description: Equipo no encontrado
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+    delete:
+      tags:
+        - Team
+      summary: Eliminar un equipo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del equipo
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Equipo eliminado con éxito
+        "404":
+          description: Equipo no encontrado
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+    put:
+      tags:
+        - Team
+      summary: Modificar un equipo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del equipo
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                $ref: "#/components/schemas/TeamInDto"
+      responses:
+        "200":
+          description: Equipo modificado con éxito
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Team"
+        "400":
+          description: Datos de entrada no válidos
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Equipo no encontrado
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+    patch:
+      tags:
+        - Team
+      summary: Actualizar parcialmente un equipo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del equipo
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TeamPatchDto"
+      responses:
+        "200":
+          description: Equipo actualizado con éxito
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Team"
+        "400":
+          description: Datos de entrada no válidos
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Equipo no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /teams/{id}/wins:
+    get:
+      tags:
+        - Team
+      summary: Consultar torneos ganados por un equipo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del equipo
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Lista de torneos ganados obtenida correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TeamConsultWinsDto"
+          
+        "404":
+          description: Equipo no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          
+  /tournaments:
+    get:
+      tags:
+        - Tournament
+      summary: Obtener todos los torneos
+      parameters:
+        - name: initDate
+          in: query
+          description: Filtrar por fecha de inicio del torneo
+          schema:
+            type: string
+            format: date
+        - name: manager
+          in: query
+          description: Filtrar por nombre del organizador del torneo
+          schema:
+            type: string
+        - name: prize
+          in: query
+          description: Filtrar por el premio del torneo
+          schema:
+            type: number
+            format: float
+      responses:
+        "200":
+          description: Lista de torneos obtenida correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/Tournament"
+       
+    post:
+      tags:
+        - Tournament
+      summary: Agregar un nuevo torneo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TournamentInDto"
+      responses:
+        "201":
+          description: Torneo agregado con éxito
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tournament"
+        "400":
+          description: Datos de entrada inválidos
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TournamentInDto"
+
+  /tournaments/{id}:
+    get:
+      tags:
+        - Tournament
+      summary: Obtener un torneo por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del torneo
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Torneo encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tournament"
+        "404":
+          description: Torneo no encontrado 
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+                
+    delete:
+      tags:
+        - Tournament
+      summary: Eliminar un torneo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del torneo
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "204":
+          description: Torneo eliminado con éxito
+        "404":
+          description: Torneo no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+    put:
+      tags:
+        - Tournament
+      summary: Modificar un torneo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del torneo
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TournamentInDto"
+      responses:
+        "200":
+          description: Torneo modificado con éxito
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tournament"
+        "400":
+          description: Datos de entrada no válidos
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Torneo no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+    patch:
+      tags:
+        - Tournament
+      summary: Actualizar parcialmente un torneo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del torneo
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TournamentPatchDto"
+      responses:
+        "200":
+          description: Torneo actualizado con éxito
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tournament"
+        "400":
+          description: Datos de entrada no válidos
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Torneo no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /tournaments/{id}/match-winners:
+    get:
+      tags:
+        - Tournament
+      summary: Consultar los equipos ganadores de los partidos de un torneo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del torneo
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Lista de equipos ganadores obtenida correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TournamentOutDto"
+            
+        "404":
+          description: Torneo no encontrado
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+components:
+  schemas:
+    UserLoginDto:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+          format: password
+          
+    AuthTokenDto:
+      type: object
+      properties:
+        token:
+          type: string
+          
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        errorMessages:
+          type: object
+          additionalProperties:
+            type: string
+          
+    Caster:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64 
+        name:
+          type: string
+        alias:
+          type: string
+        phone:
+          type: string
+        languages:
+          type: string
+        region:
+          type: integer
+        hireDate:
+          type: string
+          format: date
+
+    CasterInDto:
+      type: object
+      properties:
+        name:
+          type: string
+        alias:
+          type: string
+        phone:
+          type: string
+        languages:
+          type: string
+        region:
+          type: integer
+        hireDate:
+          type: string
+          format: date
+
+    CasterPatchDto:
+      type: object
+      properties:
+        alias:
+          type: string
+        phone:
+          type: string
+        languages:
+          type: string
+        region:
+          type: integer
+        
+    DetailsMatch:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        winner:
+          type: boolean
+        score:
+          type: integer
+        kills:
+          type: integer
+        deaths:
+          type: integer
+        assists:
+          type: integer
+              
+
+    DetailsMatchInDto:
+      type: object
+      properties:
+        winner:
+          type: boolean
+        score:
+          type: integer
+        kills:
+          type: integer
+        deaths:
+          type: integer
+        assists:
+          type: integer
+
+    DetailsMatchPatchDto:
+      type: object
+      properties:
+        winner:
+          type: boolean
+        score:
+          type: integer
+        kills:
+          type: integer
+        deaths:
+          type: integer
+        assists:
+          type: integer
+          
+    Match:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        date:
+          type: string
+          format: date
+        hour:
+          type: string
+          format: time
+        type:
+          type: string
+        mapName:
+          type: string
+        duration:
+          type: integer
+        day:
+          type: integer
+        
+
+    MatchInDto:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        hour:
+          type: string
+          format: time
+        type:
+          type: string
+        mapName:
+          type: string
+        duration:
+          type: integer
+        day:
+          type: integer
+        idCaster:
+          type: integer
+          format: int64
+
+    MatchPatchDto:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        hour:
+          type: string
+          format: time
+        mapName:
+          type: string
+        duration:
+          type: integer
+        day:
+          type: integer
+          
+    Player:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        alias:
+          type: string
+        phone:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        mainRoster:
+          type: boolean
+        position:
+          type: string
+      
+
+    PlayerInDto:
+      type: object
+      properties:
+        name:
+          type: string
+        alias:
+          type: string
+        phone:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        mainRoster:
+          type: boolean
+        position:
+          type: string
+     
+
+    PlayerModifyDto:
+      type: object
+      properties:
+        name:
+          type: string
+        alias:
+          type: string
+        phone:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        mainRoster:
+          type: boolean
+        position:
+          type: string
+        idTeam:
+          type: integer
+          format: int64
+    
+    PlayerPatchDto:
+      type: object
+      properties:
+        phone:
+          type: string
+        position:
+          type: string
+        mainRoster:
+          type: boolean
+    
+
+    PlayerStatisticsDto:
+      type: object
+      properties:
+        idTournament:
+          type: integer
+          format: int64
+        name:
+          type: string
+        tournamentDate:
+          type: string
+          format: date
+        mapName:
+          type: string
+        mvp:
+          type: boolean
+        typeMatch:
+          type: string
+        kills:
+          type: integer
+        deaths: 
+          type: integer
+        assists:
+          type: integer
+          
+    Statistic:
+      type: object
+      properties:
+        id:
+          type: integer
+        mvp:
+          type: boolean
+        kills:
+          type: integer
+        deaths:
+          type: integer
+        assists:
+          type: integer
+        
+    StatisticsInDto:
+      type: object
+      properties:
+        mvp:
+          type: boolean
+        kills:
+          type: integer
+        deaths:
+          type: integer
+        assists:
+          type: integer
+          
+    StatisticsPatchDto:
+      type: object
+      properties:
+        mvp:
+          type: boolean
+        kills:
+          type: integer
+        deaths:
+          type: integer
+        assists:
+          type: integer
+          
+    Team:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        representative:
+          type: string
+        phone:
+          type: string
+        region:
+          type: integer
+        partner:
+          type: boolean
+        registrationDate:
+          type: string
+          format: date
+        address:
+          type: string
+       
+    TeamInDto:
+      type: object
+      properties:
+        name:
+          type: string
+        representative:
+          type: string
+        phone:
+          type: string
+        region:
+          type: integer
+        partner:
+          type: boolean
+        address:
+          type: string
+  
+          
+    TeamPatchDto:
+      type: object
+      properties:
+        representative:
+          type: string
+        phone:
+          type: string
+        region:
+          type: integer
+        partner:
+          type: boolean
+        address:
+          type: string
+      
+    
+    TeamConsultWinsDto:
+      type: object
+      properties:
+        idTournament:
+          type: integer
+          format: int64
+        nameTournament:
+          type: string
+        dateFinal:
+          type: string
+          format: int64
+        score:
+          type: integer
+        prize:
+          type: number
+          format: float
+        idMatch:
+          type: integer
+          format: int64
+        rivalName:
+          type: string
+        rivalScore:
+          type: integer
+          
+    Tournament:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        initDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        manager:
+          type: string
+        prize:
+          type: number
+          format: float
+        address:
+          type: string
+        latitude:
+          type: number
+          format: float
+        longitude:
+          type: number
+          format: float
+    
+    TournamentInDto:
+      type: object
+      properties:
+        name:
+          type: string
+        initDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        manager:
+          type: string
+        prize:
+          type: number
+          format: float
+        address:
+          type: string
+        latitude:
+          type: number
+          format: float
+        longitude:
+          type: number
+          format: float
+          
+    TournamentOutDto:
+      type: object
+      properties:
+        idTournament:
+          type: integer
+          format: int64
+        nameTournament:
+          type: string
+        date:
+          type: string
+          format: date
+        day:
+          type: integer
+        nameTeam:
+          type: string
+       
+    TournamentPatchDto:
+      type: object
+      properties:
+        name:
+          type: string
+        initDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        manager:
+          type: string
+        prize:
+          type: number
+          format: float
+        address:
+          type: string
+        latitude:
+          type: number
+          format: float
+        longitude:
+          type: number
+          format: float
+
+tags:
+  - name: Auth
+    description: Operaciones relacionadas con el registro e inicio de sesión de usuarios
+  - name: Caster
+    description: Operaciones con los datos de los comentaristas
+  - name: Details-Match
+    description: Operaciones con la información detallada de las partidas
+  - name: Player
+    description: Operaciones con la información de los jugadores
+  - name: Statistic
+    description: Operaciones con la información de las estadisticas de los jugadores en cada partida
+  - name: Team
+    description: Operaciones con la información de los equipos
+  - name: Tournament
+    description: Operaciones con la información de los torneos
+    

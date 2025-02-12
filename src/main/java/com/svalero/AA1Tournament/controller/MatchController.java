@@ -1,14 +1,11 @@
 package com.svalero.AA1Tournament.controller;
 
 import com.svalero.AA1Tournament.domain.Match;
-import com.svalero.AA1Tournament.domain.Player;
 import com.svalero.AA1Tournament.domain.dto.ErrorResponse;
 import com.svalero.AA1Tournament.domain.dto.match.MatchInDto;
-import com.svalero.AA1Tournament.domain.dto.player.PlayerInDto;
-import com.svalero.AA1Tournament.domain.dto.player.PlayerModifyDto;
+import com.svalero.AA1Tournament.domain.dto.match.MatchPatchDto;
 import com.svalero.AA1Tournament.exception.*;
 import com.svalero.AA1Tournament.service.MatchService;
-import com.svalero.AA1Tournament.service.PlayerService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +16,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,9 +30,13 @@ public class MatchController {
     private MatchService matchService;
 
     @GetMapping("/matches")
-    public ResponseEntity<List<Match>> getAll(){
+    public ResponseEntity<List<Match>> getAll(
+            @RequestParam(required = false) String mapName,
+            @RequestParam(required = false) Integer duration,
+            @RequestParam(required = false) LocalTime hour
+    ){
         this.logger.info("Listing all matches...");
-        List<Match> allMatches = this.matchService.getAll();
+        List<Match> allMatches = this.matchService.getAll(mapName, duration, hour);
         this.logger.info("End listing all matches");
         return new ResponseEntity<>(allMatches, HttpStatus.OK);
     }
@@ -69,6 +71,14 @@ public class MatchController {
         Match modifiedMatch = this.matchService.modify(id, matchInDto);
         this.logger.info("Match modified");
         return new ResponseEntity<>(modifiedMatch, HttpStatus.OK);
+    }
+
+    @PatchMapping("/matches/{id}")
+    public ResponseEntity<Match> update(@PathVariable long id, @Valid @RequestBody MatchPatchDto matchPatchDto) throws MatchNotFoundException{
+        this.logger.info("Updating a match...");
+        Match updatedMatch = this.matchService.update(id, matchPatchDto);
+        this.logger.info("Match updated");
+        return new ResponseEntity<>(updatedMatch, HttpStatus.OK);
     }
 
     //Excepciones

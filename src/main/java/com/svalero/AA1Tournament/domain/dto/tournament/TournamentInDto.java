@@ -13,6 +13,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class TournamentInDto {
 
+    @NotNull(message = "Tournament name is a mandatory field")
+    private String name;
+
     @NotNull(message = "Tournament initio date is a mandatory field")
     private LocalDate initDate;
 
