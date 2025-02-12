@@ -25,6 +25,10 @@ public class DatabaseSeeder {
                 jdbcTemplate.execute(fields  + values);
                 values = "('Gen.G', 'Kent Wakeford', '678456123', true, '2023-05-05', 'South Korea', 3)" ;
                 jdbcTemplate.execute(fields + values);
+
+                values = "('TO DELETE', 'Kent Wakeford', '678456123', true, '2023-05-05', 'South Korea', 3)" ;
+                jdbcTemplate.execute(fields + values);
+
                 this.logger.info("Seeding completed");
             } else {
                 this.logger.info("team table already seeded. Skipping...");
@@ -39,6 +43,10 @@ public class DatabaseSeeder {
                 jdbcTemplate.execute(fields  + values);
                 values = "('Harry Pollit', 'LEGDAY', '623145987', 3, '2023-06-27')";
                 jdbcTemplate.execute(fields + values);
+
+                values = "('TO DELETE', 'LEGDAY', '623145987', 3, '2023-06-27')";
+                jdbcTemplate.execute(fields + values);
+
                 this.logger.info("Seeding completed");
             } else {
                 this.logger.info("caster table already seeded. Skipping...");
@@ -53,6 +61,10 @@ public class DatabaseSeeder {
                 jdbcTemplate.execute(fields  + values);
                 values = "('FACEIT league Season 3 - EMEA masters', '2024-10-7', '2024-12-15', 17000, 'Berlin, Germany', 'Mark Salling', 52.52000660, 13.40495400)";
                 jdbcTemplate.execute(fields + values);
+
+                values = "('TO DELETE', '2024-10-7', '2024-12-15', 17000, 'Berlin, Germany', 'Mark Salling', 52.52000660, 13.40495400)";
+                jdbcTemplate.execute(fields + values);
+
                 this.logger.info("Seeding completed");
             } else {
                 this.logger.info("tournament table already seeded. Skipping...");
@@ -75,6 +87,10 @@ public class DatabaseSeeder {
                 jdbcTemplate.execute(fields + values);
                 values = "('Ilari Vestola', 'Vestola', '699854123', '2000-04-07', 'tank', true, 1)";
                 jdbcTemplate.execute(fields + values);
+
+                values = "('TO DELETE', 'Vestola', '699854123', '2000-04-07', 'tank', true, 3)";
+                jdbcTemplate.execute(fields + values);
+
                 this.logger.info("Seeding completed");
             } else {
                 this.logger.info("player table already seeded. Skipping...");
@@ -91,6 +107,11 @@ public class DatabaseSeeder {
                 jdbcTemplate.execute(fields + values);
                 values = "('2025-01-30', '19:00', 'quarter-finals', 'Suravasa', 19, 5, 2, 1)";
                 jdbcTemplate.execute(fields + values);
+
+                //TO DELETE
+                values = "('2025-01-30', '19:00', 'quarter-finals', 'TO DELETE', 19, 5, 3, 3)";
+                jdbcTemplate.execute(fields + values);
+
                 this.logger.info("Seeding completed");
             } else {
                 this.logger.info("match_t table already seeded. Skipping...");
@@ -115,6 +136,11 @@ public class DatabaseSeeder {
                 jdbcTemplate.execute(fields  + values);
                 values = "(3, true, 86, 38, 52, 3, 2)";
                 jdbcTemplate.execute(fields + values);
+
+                //TO DELETE
+                values = "(3, true, 86, 38, 52, 4, 3)";
+                jdbcTemplate.execute(fields + values);
+
                 this.logger.info("Seeding completed");
             } else {
                 this.logger.info("detail_match_team table already seeded. Skipping...");
@@ -170,6 +196,9 @@ public class DatabaseSeeder {
                 values = "(true, 22, 13, 6, 6, 3)";
                 jdbcTemplate.execute(fields  + values);
 
+                //TO DELETE
+                values = "(false, 30, 15, 12, 7, 4)";
+                jdbcTemplate.execute(fields  + values);
                 this.logger.info("Seeding completed");
             } else {
                 this.logger.info("statistics_tournament_player table already seeded. Skipping...");
