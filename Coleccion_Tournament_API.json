@@ -104,7 +104,7 @@
           "v": "11",
           "name": "Add new  details match",
           "method": "POST",
-          "endpoint": "http://localhost:8080/api/v1/match/1/team/1/details",
+          "endpoint": "http://localhost:8080/api/v1/match/4/team/3/details",
           "params": [],
           "headers": [],
           "preRequestScript": "",
@@ -720,7 +720,7 @@
           "v": "11",
           "name": "Filter teams",
           "method": "GET",
-          "endpoint": "http://localhost:8080/api/v1/teams?region=3&partner=true&registrationDate=202-01-01",
+          "endpoint": "http://localhost:8080/api/v1/teams?region=3&partner=true&registrationDate=2020-01-01",
           "params": [],
           "headers": [],
           "preRequestScript": "",
@@ -791,7 +791,7 @@
           },
           "body": {
             "contentType": "application/json",
-            "body": "{\n  \"initDate\": \"2025-02-13\",\n  \"endDate\": \"2025-02-15\",\n  \"prize\": 5000.00,\n  \"manager\": \"Annita Smith\",\n  \"address\": \"Awrwefwe 11,Berlin,Germany\",\n  \"latitude\": -123.23,\n  \"longitude\": 85.15\n}"
+            "body": "{\n  \"name\": \"G2 esports\",\n  \"representative\": \"Pepitp Perez\",\n  \"phone\": \"698532471\",\n  \"partner\": true,\n  \"address\": \"Awrwefwe 11,Berlin,Germany\",\n  \"region\": 3\n}"
           },
           "requestVariables": [],
           "responses": {}
