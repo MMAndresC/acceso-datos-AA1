@@ -138,8 +138,8 @@ public class DatabaseSeeder {
                 jdbcTemplate.execute(fields + values);
 
                 //TO DELETE
-                values = "(3, true, 86, 38, 52, 4, 3)";
-                jdbcTemplate.execute(fields + values);
+               /* values = "(3, true, 86, 38, 52, 4, 3)";
+                jdbcTemplate.execute(fields + values);*/
 
                 this.logger.info("Seeding completed");
             } else {

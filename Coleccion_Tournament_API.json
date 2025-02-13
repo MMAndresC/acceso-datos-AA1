@@ -211,160 +211,6 @@
     },
     {
       "v": 6,
-      "name": "Match",
-      "folders": [],
-      "requests": [
-        {
-          "v": "11",
-          "name": "Filter matches",
-          "method": "GET",
-          "endpoint": "http://localhost:8080/api/v1/matches?mapName=Dorado&duration=30&hour=18:00",
-          "params": [],
-          "headers": [],
-          "preRequestScript": "",
-          "testScript": "",
-          "auth": {
-            "authType": "inherit",
-            "authActive": true
-          },
-          "body": {
-            "contentType": null,
-            "body": null
-          },
-          "requestVariables": [],
-          "responses": {}
-        },
-        {
-          "v": "11",
-          "name": "Get match by Id",
-          "method": "GET",
-          "endpoint": "http://localhost:8080/api/v1/matches/1",
-          "params": [],
-          "headers": [],
-          "preRequestScript": "",
-          "testScript": "",
-          "auth": {
-            "authType": "inherit",
-            "authActive": true
-          },
-          "body": {
-            "contentType": null,
-            "body": null
-          },
-          "requestVariables": [],
-          "responses": {}
-        },
-        {
-          "v": "11",
-          "name": "Add new  match",
-          "method": "POST",
-          "endpoint": "http://localhost:8080/api/v1/tournaments/1/matches",
-          "params": [],
-          "headers": [],
-          "preRequestScript": "",
-          "testScript": "",
-          "auth": {
-            "authType": "inherit",
-            "authActive": true
-          },
-          "body": {
-            "contentType": "application/json",
-            "body": "{\n  \"date\": \"2025-06-12\",\n  \"hour\": \"18:00\",\n  \"mapName\": \"Dorado\",\n  \"type\": \"final\",\n  \"duration\": \"54\",\n  \"day\": 1,\n  \"idCaster\": 1\n}"
-          },
-          "requestVariables": [],
-          "responses": {}
-        },
-        {
-          "v": "11",
-          "name": "Modify match",
-          "method": "PUT",
-          "endpoint": "http://localhost:8080/api/v1/matches/1",
-          "params": [],
-          "headers": [],
-          "preRequestScript": "",
-          "testScript": "",
-          "auth": {
-            "authType": "inherit",
-            "authActive": true
-          },
-          "body": {
-            "contentType": "application/json",
-            "body": "{\n  \"date\": \"2025-06-12\",\n  \"hour\": \"18:00\",\n  \"mapName\": \"Gibraltar\",\n  \"type\": \"final\",\n  \"duration\": \"54\",\n  \"day\": 1,\n  \"idCaster\": 1\n}"
-          },
-          "requestVariables": [],
-          "responses": {}
-        },
-        {
-          "v": "11",
-          "name": "Update match",
-          "method": "PATCH",
-          "endpoint": "http://localhost:8080/api/v1/matches/1",
-          "params": [],
-          "headers": [],
-          "preRequestScript": "",
-          "testScript": "",
-          "auth": {
-            "authType": "inherit",
-            "authActive": true
-          },
-          "body": {
-            "contentType": "application/json",
-            "body": "{\n  \"date\": \"2025-06-01\",\n  \"hour\": \"19:00\"\n}"
-          },
-          "requestVariables": [],
-          "responses": {}
-        },
-        {
-          "v": "11",
-          "name": "Delete match",
-          "method": "DELETE",
-          "endpoint": "http://localhost:8080/api/v1/matches/4",
-          "params": [],
-          "headers": [],
-          "preRequestScript": "",
-          "testScript": "",
-          "auth": {
-            "authType": "bearer",
-            "token": "<<token>>",
-            "authActive": true
-          },
-          "body": {
-            "contentType": null,
-            "body": null
-          },
-          "requestVariables": [],
-          "responses": {}
-        },
-        {
-          "v": "11",
-          "name": "Get all matches",
-          "method": "GET",
-          "endpoint": "http://localhost:8080/api/v1/matches",
-          "params": [],
-          "headers": [],
-          "preRequestScript": "",
-          "testScript": "",
-          "auth": {
-            "authType": "inherit",
-            "authActive": true
-          },
-          "body": {
-            "contentType": null,
-            "body": null
-          },
-          "requestVariables": [],
-          "responses": {}
-        }
-      ],
-      "auth": {
-        "authType": "inherit",
-        "authActive": true
-      },
-      "headers": [],
-      "_ref_id": "coll_m6shmucg_5ae126bf-e617-4002-b6b8-1d0c24a20039"
-    },
-    {
-      "v": 6,
       "name": "Statistic",
       "folders": [],
       "requests": [
@@ -536,6 +382,160 @@
       },
       "headers": [],
       "_ref_id": "coll_m6tpmy76_777f6572-ab88-4e57-8713-00074374182c"
+    },
+    {
+      "v": 6,
+      "name": "Match",
+      "folders": [],
+      "requests": [
+        {
+          "v": "11",
+          "name": "Filter matches",
+          "method": "GET",
+          "endpoint": "http://localhost:8080/api/v1/matches?mapName=Dorado&duration=30&hour=18:00",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Get match by Id",
+          "method": "GET",
+          "endpoint": "http://localhost:8080/api/v1/matches/1",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Add new  match",
+          "method": "POST",
+          "endpoint": "http://localhost:8080/api/v1/tournaments/1/matches",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"date\": \"2025-06-12\",\n  \"hour\": \"18:00\",\n  \"mapName\": \"Dorado\",\n  \"type\": \"final\",\n  \"duration\": \"54\",\n  \"day\": 1,\n  \"idCaster\": 1\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Modify match",
+          "method": "PUT",
+          "endpoint": "http://localhost:8080/api/v1/matches/1",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"date\": \"2025-06-12\",\n  \"hour\": \"18:00\",\n  \"mapName\": \"Gibraltar\",\n  \"type\": \"final\",\n  \"duration\": \"54\",\n  \"day\": 1,\n  \"idCaster\": 1\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Update match",
+          "method": "PATCH",
+          "endpoint": "http://localhost:8080/api/v1/matches/1",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"date\": \"2025-06-01\",\n  \"hour\": \"19:00\"\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Delete match",
+          "method": "DELETE",
+          "endpoint": "http://localhost:8080/api/v1/matches/4",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "bearer",
+            "token": "<<token>>",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Get all matches",
+          "method": "GET",
+          "endpoint": "http://localhost:8080/api/v1/matches",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        }
+      ],
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "headers": [],
+      "_ref_id": "coll_m6shmucg_5ae126bf-e617-4002-b6b8-1d0c24a20039"
     },
     {
       "v": 6,
