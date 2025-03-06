@@ -9,7 +9,7 @@
   ~~~
     docker run -d --name mariadb_container -p 3307:3306 my-mariadb 
   ~~~
-El contenedor está corriendo en el puerto 3307 para que no entre en conflicto con MariaDb en local. v
+El contenedor está corriendo en el puerto 3307 para que no entre en conflicto con MariaDb en local.  
   
 Para entrar en el contenedor y realizar consultas directamente a la base de datos:  
   ~~~  

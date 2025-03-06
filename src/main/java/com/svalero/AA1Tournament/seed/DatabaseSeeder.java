@@ -57,12 +57,12 @@ public class DatabaseSeeder {
             if (count == 0) {
                 this.logger.info("Seeding tournament table...");
                 fields = "INSERT INTO tournament (name, init_date, end_date, prize, address, manager, latitude, longitude) VALUES ";
-                values = "('Dragons community open tournament #9', '2025-01-26', '2025-01-31', 500.80, 'Paris, France', 'Clara Moreau', 48.85661400, 2.35222190)";
+                values = "('Dragons community open tournament #9', '2025-03-26', '2025-03-31', 500.80, 'Paris, France', 'Clara Moreau', 48.85661400, 2.35222190)";
                 jdbcTemplate.execute(fields  + values);
-                values = "('FACEIT league Season 3 - EMEA masters', '2024-10-7', '2024-12-15', 17000, 'Berlin, Germany', 'Mark Salling', 52.52000660, 13.40495400)";
+                values = "('FACEIT league Season 3 - EMEA masters', '2025-10-07', '2025-12-15', 17000, 'Berlin, Germany', 'Mark Salling', 52.52000660, 13.40495400)";
                 jdbcTemplate.execute(fields + values);
 
-                values = "('TO DELETE', '2024-10-7', '2024-12-15', 17000, 'Berlin, Germany', 'Mark Salling', 52.52000660, 13.40495400)";
+                values = "('TO DELETE', '2024-10-07', '2024-12-15', 17000, 'Berlin, Germany', 'Mark Salling', 52.52000660, 13.40495400)";
                 jdbcTemplate.execute(fields + values);
 
                 this.logger.info("Seeding completed");

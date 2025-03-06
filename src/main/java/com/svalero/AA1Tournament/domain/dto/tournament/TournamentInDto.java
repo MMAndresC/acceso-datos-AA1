@@ -29,7 +29,7 @@ public class TournamentInDto {
 
     private String manager;
 
-    private float latitude;
+    private double latitude;
 
-    private float longitude;
+    private double longitude;
 }

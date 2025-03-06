@@ -40,10 +40,10 @@ public class Tournament {
     private String manager;
 
     @Column
-    private float latitude;
+    private double latitude;
 
     @Column
-    private float longitude;
+    private double longitude;
 
     @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference(value = "tournament_matches")
