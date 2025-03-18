@@ -26,7 +26,7 @@ public class DatabaseSeeder {
                 values = "('Gen.G', 'Kent Wakeford', '678456123', true, '2023-05-05', 'South Korea', 3)" ;
                 jdbcTemplate.execute(fields + values);
 
-                values = "('TO DELETE', 'Kent Wakeford', '678456123', true, '2023-05-05', 'South Korea', 3)" ;
+                values = "('Sakura', 'Kent Wakeford', '678456123', false, '2023-05-05', 'France', 3)" ;
                 jdbcTemplate.execute(fields + values);
 
                 this.logger.info("Seeding completed");
@@ -62,7 +62,7 @@ public class DatabaseSeeder {
                 values = "('FACEIT league Season 3 - EMEA masters', '2025-10-07', '2025-12-15', 17000, 'Berlin, Germany', 'Mark Salling', 52.52000660, 13.40495400)";
                 jdbcTemplate.execute(fields + values);
 
-                values = "('TO DELETE', '2024-10-07', '2024-12-15', 17000, 'Berlin, Germany', 'Mark Salling', 52.52000660, 13.40495400)";
+                values = "('Prove your luck', '2024-10-07', '2024-12-15', 17000, 'Berlin, Germany', 'Mark Salling', 52.52018660, 13.40495500)";
                 jdbcTemplate.execute(fields + values);
 
                 this.logger.info("Seeding completed");
