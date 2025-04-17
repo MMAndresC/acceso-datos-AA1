@@ -7,22 +7,25 @@ import com.svalero.AA1Tournament.domain.dto.team.TeamPatchDto;
 import com.svalero.AA1Tournament.domain.dto.team.TeamRivalDataDto;
 import com.svalero.AA1Tournament.exception.TeamNotFoundException;
 import com.svalero.AA1Tournament.repository.TeamRepository;
+import lombok.Data;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+@Data
 @Service
 public class TeamService {
 
-    @Autowired
-    private TeamRepository teamRepository;
-
-    @Autowired
+    private final TeamRepository teamRepository;
     private ModelMapper modelMapper;
+
+    public TeamService(TeamRepository teamRepository, ModelMapper modelMapper) {
+        this.teamRepository = teamRepository;
+        this.modelMapper = modelMapper;
+    }
 
     public List<Team> getAll(Integer region, Boolean partner, LocalDate registrationDate){
         if(region == null && partner == null && registrationDate == null) {
