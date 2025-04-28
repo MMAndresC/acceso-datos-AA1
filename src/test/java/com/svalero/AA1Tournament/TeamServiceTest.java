@@ -153,7 +153,7 @@ public class TeamServiceTest {
                 false, LocalDate.parse("2023-05-14"), "Armenia", 3, null, null
         );
 
-        when(teamRepository.findById(id)).thenReturn(Optional.ofNullable(teamToModify));
+        when(teamRepository.findById(id)).thenReturn(Optional.of(teamToModify));
 
         doAnswer(invocation -> {
             TeamInDto dto = invocation.getArgument(0);
