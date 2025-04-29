@@ -19,7 +19,8 @@ import java.util.Optional;
 @Service
 public class TeamService {
 
-    private final TeamRepository teamRepository;
+    private TeamRepository teamRepository;
+
     private ModelMapper modelMapper;
 
     public TeamService(TeamRepository teamRepository, ModelMapper modelMapper) {

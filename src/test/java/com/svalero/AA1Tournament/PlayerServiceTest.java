@@ -71,7 +71,6 @@ public class PlayerServiceTest {
 
         verify(playerRepository, times(1)).findAll();
         verify(playerRepository, times(0)).filterPlayerByBirthDateMainRosterPosition(null, null, null);
-
     }
 
     @Test
@@ -104,7 +103,8 @@ public class PlayerServiceTest {
     public void testGetById() throws PlayerNotFoundException {
         long id = 2;
 
-        when(playerRepository.findById(id)).thenReturn(Optional.ofNullable(mockPlayers.get((int) id - 1)));
+        when(playerRepository.findById(id)).thenReturn(Optional.of(mockPlayers.get((int) id - 1)));
+
         Player result = playerService.getById(id);
 
         assertEquals(mockPlayers.get((int) id - 1).getName(), result.getName());
@@ -117,6 +117,7 @@ public class PlayerServiceTest {
     @MockitoSettings(strictness = Strictness.LENIENT)
     public void testAdd() throws TeamNotFoundException {
         long teamId = 1;
+
         PlayerInDto playerInDto = new PlayerInDto(
                 "Jane Austen", "Eskay", "675421236", LocalDate.parse("2000-09-12"),
                 "support", false
@@ -151,6 +152,7 @@ public class PlayerServiceTest {
     @Test
     public void testDelete() throws PlayerNotFoundException {
         long id = 6;
+
         Player playerToDelete = mockPlayers.getLast();
 
         when(playerRepository.findById(id)).thenReturn(Optional.ofNullable(mockPlayers.getLast()));

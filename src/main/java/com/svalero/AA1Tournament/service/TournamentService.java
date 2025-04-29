@@ -17,7 +17,7 @@ import java.util.List;
 @Service
 public class TournamentService {
 
-    private final TournamentRepository tournamentRepository;
+    private TournamentRepository tournamentRepository;
 
     private ModelMapper modelMapper;
 

@@ -137,6 +137,7 @@ public class TeamServiceTest {
     @Test
     public void testModify() throws TeamNotFoundException {
         long id = 1;
+
         Team teamToModify = new Team(
                 1, "Virtus Pro", "Aapo Vartiainen",
                 "654123987", true, LocalDate.parse("2023-05-14"),
