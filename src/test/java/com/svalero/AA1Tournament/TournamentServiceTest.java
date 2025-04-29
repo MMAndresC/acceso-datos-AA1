@@ -53,7 +53,67 @@ public class TournamentServiceTest {
         assertEquals(mockTournaments.getLast().getName(), tournaments.getLast().getName());
 
         verify(tournamentRepository, times(1)).findAll();
-        verify(tournamentRepository, times(0)).filterTournamentByRegionManagerPrize(null, null, null);
+        verify(tournamentRepository, times(0)).filterTournamentByInitDateManagerPrize(null, null, null);
+    }
+
+    @Test
+    public void testGetAllByInitDate(){
+        LocalDate initDate = LocalDate.parse("2025-01-01");
+
+        //Expected result
+        List<Tournament> filteredTournaments = mockTournaments.stream()
+                .filter(tournament -> tournament.getInitDate().isAfter(initDate) || tournament.getInitDate().isEqual(initDate))
+                .toList();
+
+        when(tournamentRepository.filterTournamentByInitDateManagerPrize(initDate, null, null)).thenReturn(filteredTournaments);
+        List<Tournament> result = tournamentService.getAll(initDate, null, null);
+
+        assertEquals(2, result.size());
+        assertEquals(mockTournaments.getFirst().getName(), result.getFirst().getName());
+        assertEquals(mockTournaments.get(1).getName(), result.getLast().getName());
+
+        verify(tournamentRepository, times(0)).findAll();
+        verify(tournamentRepository, times(1)).filterTournamentByInitDateManagerPrize(initDate, null, null);
+    }
+
+    @Test
+    public void testGetAllByManager(){
+        String manager = "Clara Moreau";
+
+        //Expected result
+        List<Tournament> filteredTournaments = mockTournaments.stream()
+                .filter(tournament -> tournament.getManager().contains(manager))
+                .toList();
+
+        when(tournamentRepository.filterTournamentByInitDateManagerPrize(null, manager, null)).thenReturn(filteredTournaments);
+        List<Tournament> result = tournamentService.getAll(null, manager, null);
+
+        assertEquals(1, result.size());
+        assertEquals(mockTournaments.getFirst().getName(), result.getFirst().getName());
+        assertEquals(mockTournaments.getFirst().getPrize(), result.getFirst().getPrize());
+
+        verify(tournamentRepository, times(0)).findAll();
+        verify(tournamentRepository, times(1)).filterTournamentByInitDateManagerPrize(null, manager, null);
+    }
+
+    @Test
+    public void testGetAllByPrize(){
+        float prize = 1000;
+
+        //Expected result
+        List<Tournament> filteredTournaments = mockTournaments.stream()
+                .filter(tournament -> tournament.getPrize() >= prize)
+                .toList();
+
+        when(tournamentRepository.filterTournamentByInitDateManagerPrize(null, null, prize)).thenReturn(filteredTournaments);
+        List<Tournament> result = tournamentService.getAll(null, null, prize);
+
+        assertEquals(2, result.size());
+        assertEquals(mockTournaments.get(1).getName(), result.getFirst().getName());
+        assertEquals(mockTournaments.getLast().getName(), result.getLast().getName());
+
+        verify(tournamentRepository, times(0)).findAll();
+        verify(tournamentRepository, times(1)).filterTournamentByInitDateManagerPrize(null, null, prize);
     }
 
     @Test
@@ -69,7 +129,7 @@ public class TournamentServiceTest {
                     && tournament.getManager().contains(manager) && tournament.getPrize() >= prize)
                 .toList();
 
-        when(tournamentRepository.filterTournamentByRegionManagerPrize(initDate, manager, prize)).thenReturn(filteredTournaments);
+        when(tournamentRepository.filterTournamentByInitDateManagerPrize(initDate, manager, prize)).thenReturn(filteredTournaments);
         List<Tournament> result = tournamentService.getAll(initDate, manager, prize);
 
         assertEquals(2, result.size());
@@ -77,7 +137,7 @@ public class TournamentServiceTest {
         assertEquals(mockTournaments.get(1).getName(), result.getLast().getName());
 
         verify(tournamentRepository, times(0)).findAll();
-        verify(tournamentRepository, times(1)).filterTournamentByRegionManagerPrize(initDate, manager, prize);
+        verify(tournamentRepository, times(1)).filterTournamentByInitDateManagerPrize(initDate, manager, prize);
     }
 
     @Test

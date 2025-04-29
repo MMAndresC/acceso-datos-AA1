@@ -74,6 +74,72 @@ public class PlayerServiceTest {
     }
 
     @Test
+    public void testGetAllByBirthDate(){
+        LocalDate birthDate = LocalDate.parse("2004-01-01");
+
+        List<Player> filteredPlayers = mockPlayers.stream()
+                .filter(player -> player.getBirthDate().isAfter(birthDate) || player.getBirthDate().isEqual(birthDate))
+                .toList();
+
+        when(playerRepository.filterPlayerByBirthDateMainRosterPosition(birthDate, null, null)).thenReturn(filteredPlayers);
+
+        List<Player> result = playerService.getAll(birthDate, null, null);
+
+        assertEquals(3, result.size());
+        assertEquals("Khenail", result.getFirst().getAlias());
+        assertEquals(LocalDate.parse("2005-08-20"), result.getFirst().getBirthDate());
+        assertEquals("Galaa", result.getLast().getAlias());
+        assertEquals(LocalDate.parse("2004-04-09"), result.getLast().getBirthDate());
+
+        verify(playerRepository, times(0)).findAll();
+        verify(playerRepository, times(1)).filterPlayerByBirthDateMainRosterPosition(birthDate, null, null);
+    }
+
+    @Test
+    public void testGetAllByMainRoster(){
+        boolean mainRoster = true;
+
+        List<Player> filteredPlayers = mockPlayers.stream()
+                .filter(player -> player.isMainRoster() == mainRoster)
+                .toList();
+
+        when(playerRepository.filterPlayerByBirthDateMainRosterPosition(null, mainRoster, null)).thenReturn(filteredPlayers);
+
+        List<Player> result = playerService.getAll(null, mainRoster, null);
+
+        assertEquals(6, result.size());
+        assertEquals("Khenail", result.getFirst().getAlias());
+        assertEquals(LocalDate.parse("2005-08-20"), result.getFirst().getBirthDate());
+        assertEquals("Vestola", result.getLast().getAlias());
+        assertEquals(LocalDate.parse("2000-04-07"), result.getLast().getBirthDate());
+
+        verify(playerRepository, times(0)).findAll();
+        verify(playerRepository, times(1)).filterPlayerByBirthDateMainRosterPosition(null, mainRoster, null);
+    }
+
+    @Test
+    public void testGetAllByPosition(){
+        String position = "support";
+
+        List<Player> filteredPlayers = mockPlayers.stream()
+                .filter(player -> player.getPosition().equals(position))
+                .toList();
+
+        when(playerRepository.filterPlayerByBirthDateMainRosterPosition(null, null, position)).thenReturn(filteredPlayers);
+
+        List<Player> result = playerService.getAll(null, null, position);
+
+        assertEquals(2, result.size());
+        assertEquals("Khenail", result.getFirst().getAlias());
+        assertEquals(LocalDate.parse("2005-08-20"), result.getFirst().getBirthDate());
+        assertEquals("Galaa", result.getLast().getAlias());
+        assertEquals(LocalDate.parse("2004-04-09"), result.getLast().getBirthDate());
+
+        verify(playerRepository, times(0)).findAll();
+        verify(playerRepository, times(1)).filterPlayerByBirthDateMainRosterPosition(null, null, position);
+    }
+
+    @Test
     public void testGetAllWithParams(){
         LocalDate birthDate = LocalDate.parse("2004-01-01");
         boolean mainRoster = true;

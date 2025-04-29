@@ -30,7 +30,7 @@ public class TournamentService {
         if(initDate == null && manager == null && prize == null){
             return this.tournamentRepository.findAll();
         }else {
-            return this.tournamentRepository.filterTournamentByRegionManagerPrize(initDate, manager, prize);
+            return this.tournamentRepository.filterTournamentByInitDateManagerPrize(initDate, manager, prize);
         }
     }
 

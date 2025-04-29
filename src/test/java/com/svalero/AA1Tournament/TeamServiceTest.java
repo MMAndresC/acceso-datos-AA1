@@ -56,6 +56,62 @@ public class TeamServiceTest {
     }
 
     @Test
+    public void testGetAllByRegion(){
+        int region = 3;
+
+        List<Team> filteredTeams = mockTeams.stream()
+                .filter(team -> team.getRegion() == region)
+                .toList();
+
+        when(teamRepository.filterTeamByRegionPartnerRegistrationDate(region, null, null)).thenReturn(filteredTeams);
+        List<Team> result = teamService.getAll(region, null, null);
+
+        assertEquals(3, result.size());
+        assertEquals(mockTeams.getFirst().getName(), result.getFirst().getName());
+        assertEquals(mockTeams.getLast().getName(), result.getLast().getName());
+
+        verify(teamRepository, times(0)).findAll();
+        verify(teamRepository, times(1)).filterTeamByRegionPartnerRegistrationDate(region, null, null);
+    }
+
+    @Test
+    public void testGetAllByPartner(){
+        boolean partner = true;
+
+        List<Team> filteredTeams = mockTeams.stream()
+                .filter(team -> team.isPartner() == partner)
+                .toList();
+
+        when(teamRepository.filterTeamByRegionPartnerRegistrationDate(null, partner, null)).thenReturn(filteredTeams);
+        List<Team> result = teamService.getAll(null, partner, null);
+
+        assertEquals(2, result.size());
+        assertEquals(mockTeams.getFirst().getName(), result.getFirst().getName());
+        assertEquals(mockTeams.get(1).getName(), result.getLast().getName());
+
+        verify(teamRepository, times(0)).findAll();
+        verify(teamRepository, times(1)).filterTeamByRegionPartnerRegistrationDate(null, partner, null);
+    }
+
+    @Test
+    public void testGetAllByRegistrationDate(){
+        LocalDate registrationDate = LocalDate.parse("2023-05-10");
+
+        List<Team> filteredTeams = mockTeams.stream()
+                .filter(team -> team.getRegistrationDate().isAfter(registrationDate) || team.getRegistrationDate().isEqual(registrationDate))
+                .toList();
+
+        when(teamRepository.filterTeamByRegionPartnerRegistrationDate(null, null, registrationDate)).thenReturn(filteredTeams);
+        List<Team> result = teamService.getAll(null, null, registrationDate);
+
+        assertEquals(1, result.size());
+        assertEquals(mockTeams.getFirst().getName(), result.getFirst().getName());
+
+        verify(teamRepository, times(0)).findAll();
+        verify(teamRepository, times(1)).filterTeamByRegionPartnerRegistrationDate(null, null, registrationDate);
+    }
+
+    @Test
     public void testGetAllWithParams(){
         LocalDate registrationDate = LocalDate.parse("2023-01-01");
         boolean partner = true;

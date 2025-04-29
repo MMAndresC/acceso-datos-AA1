@@ -79,6 +79,66 @@ public class MatchServiceTest {
     }
 
     @Test
+    public void testGetAllByMapName(){
+        String mapName = "Suravasa";
+
+        List<Match> filteredMatches = mockMatches.stream()
+                .filter(match -> match.getMapName().equals(mapName))
+                .toList();
+
+        when(matchRepository.filterMatchesByMapNameDurationHour(mapName, null, null)).thenReturn(filteredMatches);
+
+        List<Match> result = matchService.getAll(mapName, null, null);
+
+        assertEquals(1, result.size());
+        assertEquals(mockMatches.getLast().getDate(), result.getFirst().getDate());
+        assertEquals(mockMatches.getLast().getType(), result.getFirst().getType());
+
+        verify(matchRepository, times(0)).findAll();
+        verify(matchRepository, times(1)).filterMatchesByMapNameDurationHour(mapName, null, null);
+    }
+
+    @Test
+    public void testGetAllByDuration(){
+        int duration = 19;
+
+        List<Match> filteredMatches = mockMatches.stream()
+                .filter(match -> match.getDuration() == duration)
+                .toList();
+
+        when(matchRepository.filterMatchesByMapNameDurationHour(null, duration, null)).thenReturn(filteredMatches);
+
+        List<Match> result = matchService.getAll(null, duration, null);
+
+        assertEquals(1, result.size());
+        assertEquals(mockMatches.getLast().getDate(), result.getFirst().getDate());
+        assertEquals(mockMatches.getLast().getType(), result.getFirst().getType());
+
+        verify(matchRepository, times(0)).findAll();
+        verify(matchRepository, times(1)).filterMatchesByMapNameDurationHour(null, duration, null);
+    }
+
+    @Test
+    public void testGetAllByHour(){
+        LocalTime hour = LocalTime.parse("16:00");
+
+        List<Match> filteredMatches = mockMatches.stream()
+                .filter(match -> match.getHour().isAfter(hour) || match.getHour().equals(hour))
+                .toList();
+
+        when(matchRepository.filterMatchesByMapNameDurationHour(null, null, hour)).thenReturn(filteredMatches);
+
+        List<Match> result = matchService.getAll(null, null, hour);
+
+        assertEquals(3, result.size());
+        assertEquals(mockMatches.getFirst().getDate(), result.getFirst().getDate());
+        assertEquals(mockMatches.getLast().getType(), result.getLast().getType());
+
+        verify(matchRepository, times(0)).findAll();
+        verify(matchRepository, times(1)).filterMatchesByMapNameDurationHour(null, null, hour);
+    }
+
+    @Test
     public void testGetAllWithParams(){
         LocalTime hour = LocalTime.parse("16:00");
         String mapName = "Suravasa";
@@ -153,6 +213,41 @@ public class MatchServiceTest {
         verify(casterRepository, times(1)).findById(casterId);
         verify(tournamentRepository, times(1)).findById(tournamentId);
         verify(matchRepository, times(1)).save(matchToSave);
+    }
+
+    @Test
+    public void testAddNotExistingTournament()  {
+        long tournamentId = 9;
+        long casterId = 1;
+
+        MatchInDto matchInDto = new MatchInDto(
+                LocalDate.parse("2025-01-30"), LocalTime.parse("20:00"),
+                "quarter-finals", "Oasis", 22, 5, casterId
+        );
+
+        when(tournamentRepository.findById(tournamentId)).thenReturn(Optional.empty());
+
+        assertThrows(TournamentNotFoundException.class, () -> {
+            matchService.add(matchInDto,tournamentId);
+        });
+    }
+
+    @Test
+    public void testAddNotExistingCaster()  {
+        long tournamentId = 1;
+        long casterId = 9;
+
+        MatchInDto matchInDto = new MatchInDto(
+                LocalDate.parse("2025-01-30"), LocalTime.parse("20:00"),
+                "quarter-finals", "Oasis", 22, 5, casterId
+        );
+
+        when(tournamentRepository.findById(tournamentId)).thenReturn(Optional.of(mockTournaments.getFirst()));
+        when(casterRepository.findById(casterId)).thenReturn(Optional.empty());
+
+        assertThrows(CasterNotFoundException.class, () -> {
+            matchService.add(matchInDto,tournamentId);
+        });
     }
 
     @Test

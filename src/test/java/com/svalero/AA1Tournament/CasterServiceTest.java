@@ -56,6 +56,64 @@ public class CasterServiceTest {
     }
 
     @Test
+    public void testGetAllByRegion(){
+        int region = 3;
+
+        List<Caster> filteredCasters = mockCasters.stream()
+                .filter(caster -> caster.getRegion() == region)
+                .toList();
+
+        when(casterRepository.filterCastersByRegionLanguageHireDate(region, null, null)).thenReturn(filteredCasters);
+
+        List<Caster> result = casterService.getAll(null, region, null);
+
+        assertEquals(2, result.size());
+        assertEquals("Mr X", result.getFirst().getAlias());
+        assertEquals("LEGDAY", result.getLast().getAlias());
+
+        verify(casterRepository, times(0)).findAll();
+        verify(casterRepository, times(1)).filterCastersByRegionLanguageHireDate(region, null, null);
+    }
+
+    @Test
+    public void testGetAllByLanguage(){
+        String language  = "spanish";
+
+        List<Caster> filteredCasters = mockCasters.stream()
+                .filter(caster -> caster.getLanguages().contains(language))
+                .toList();
+
+        when(casterRepository.filterCastersByRegionLanguageHireDate(null, language, null)).thenReturn(filteredCasters);
+
+        List<Caster> result = casterService.getAll(language, null, null);
+
+        assertEquals(1, result.size());
+        assertEquals("LEGDAY", result.getFirst().getAlias());
+
+        verify(casterRepository, times(0)).findAll();
+        verify(casterRepository, times(1)).filterCastersByRegionLanguageHireDate(null, language, null);
+    }
+
+    @Test
+    public void testGetAllByHireDate(){
+        LocalDate hireDate = LocalDate.parse("2023-06-20");
+
+        List<Caster> filteredCasters = mockCasters.stream()
+                .filter(caster -> (caster.getHireDate().isAfter(hireDate) || caster.getHireDate().isEqual(hireDate)))
+                .toList();
+
+        when(casterRepository.filterCastersByRegionLanguageHireDate(null, null, hireDate)).thenReturn(filteredCasters);
+
+        List<Caster> result = casterService.getAll(null, null, hireDate);
+
+        assertEquals(1, result.size());
+        assertEquals("LEGDAY", result.getFirst().getAlias());
+
+        verify(casterRepository, times(0)).findAll();
+        verify(casterRepository, times(1)).filterCastersByRegionLanguageHireDate(null, null, hireDate);
+    }
+
+    @Test
     public void testGetAllWithParams(){
         LocalDate hireDate = LocalDate.parse("2023-06-20");
         String language  = "english";
