@@ -7,7 +7,6 @@ import com.svalero.AA1Tournament.exception.CasterNotFoundException;
 import com.svalero.AA1Tournament.repository.CasterRepository;
 import lombok.Data;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

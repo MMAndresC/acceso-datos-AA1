@@ -11,26 +11,31 @@ import com.svalero.AA1Tournament.exception.TournamentNotFoundException;
 import com.svalero.AA1Tournament.repository.CasterRepository;
 import com.svalero.AA1Tournament.repository.MatchRepository;
 import com.svalero.AA1Tournament.repository.TournamentRepository;
+import lombok.Data;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
 import java.util.List;
 
+@Data
 @Service
 public class MatchService {
-    @Autowired
+
     private MatchRepository matchRepository;
 
-    @Autowired
     private CasterRepository casterRepository;
 
-    @Autowired
     private TournamentRepository tournamentRepository;
 
-    @Autowired
     private ModelMapper modelMapper;
+
+    public MatchService(MatchRepository matchRepository, CasterRepository casterRepository, TournamentRepository tournamentRepository, ModelMapper modelMapper) {
+        this.matchRepository = matchRepository;
+        this.casterRepository = casterRepository;
+        this.tournamentRepository = tournamentRepository;
+        this.modelMapper = modelMapper;
+    }
 
     public List<Match> getAll(String mapName, Integer duration, LocalTime hour){
         if(mapName == null && duration == null && hour == null){
