@@ -202,7 +202,7 @@ public class CasterControllerTest {
 
     //Response HTTP 400 Bad request
     @Test
-    void addCaster_ShouldReturnKO() throws Exception {
+    void addCaster_BadRequest_ShouldReturnKO() throws Exception {
         String invalidRequestBody = """
                 {
                     "alias": "LemonKiwi",
