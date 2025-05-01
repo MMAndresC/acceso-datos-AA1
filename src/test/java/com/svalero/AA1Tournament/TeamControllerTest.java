@@ -51,7 +51,7 @@ public class TeamControllerTest {
     );
 
     @BeforeEach
-    void setUp() throws CasterNotFoundException {
+    void setUp() {
         JwtUtil jwtUtil = new JwtUtil();
         this.token = "Bearer " + jwtUtil.generateToken("visitor");
     }
@@ -350,9 +350,6 @@ public class TeamControllerTest {
     @Test
     void modifyTeam_BadRequest_ShouldReturnKO() throws Exception {
         long id = 1;
-
-        when(teamService.modify(eq(id), any(TeamInDto.class)))
-                .thenThrow(new TeamNotFoundException());
 
         String invalidRequestBody = """
                 {
