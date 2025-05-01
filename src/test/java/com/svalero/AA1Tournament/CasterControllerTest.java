@@ -43,7 +43,7 @@ public class CasterControllerTest {
     );
 
     @BeforeEach
-    void setUp() throws CasterNotFoundException {
+    void setUp() {
         JwtUtil jwtUtil = new JwtUtil();
         this.token = "Bearer " + jwtUtil.generateToken("visitor");
     }

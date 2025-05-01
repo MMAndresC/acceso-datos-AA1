@@ -64,7 +64,7 @@ public class MatchControllerTest {
     private String token;
 
     @BeforeEach
-    void setUp() throws CasterNotFoundException {
+    void setUp() {
         JwtUtil jwtUtil = new JwtUtil();
         this.token = "Bearer " + jwtUtil.generateToken("visitor");
     }
@@ -445,13 +445,6 @@ public class MatchControllerTest {
     @Test
     void modifyMatch_BadRequest_ShouldReturnKO() throws Exception {
         long id = 1;
-        Match modifiedMatch = new Match(
-                4, LocalDate.parse("2025-01-30"), LocalTime.parse("20:00"),
-                "quarter-finals", "Oasis", 22, 5,
-                mockCasters.getFirst(), mockTournaments.getFirst(), null, null
-        );
-
-        when(matchService.modify(eq(id), any(MatchInDto.class))).thenReturn(modifiedMatch);
 
         String invalidRequestBody = """
                 {

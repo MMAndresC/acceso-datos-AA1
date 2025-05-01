@@ -4,7 +4,6 @@ import com.svalero.AA1Tournament.domain.Team;
 import com.svalero.AA1Tournament.domain.dto.team.TeamConsultWinsDto;
 import com.svalero.AA1Tournament.domain.dto.team.TeamInDto;
 import com.svalero.AA1Tournament.domain.dto.team.TeamPatchDto;
-import com.svalero.AA1Tournament.exception.CasterNotFoundException;
 import com.svalero.AA1Tournament.exception.TeamNotFoundException;
 import com.svalero.AA1Tournament.security.JwtUtil;
 import com.svalero.AA1Tournament.service.TeamService;
