@@ -10,23 +10,28 @@ import com.svalero.AA1Tournament.exception.PlayerNotFoundException;
 import com.svalero.AA1Tournament.exception.TeamNotFoundException;
 import com.svalero.AA1Tournament.repository.PlayerRepository;
 import com.svalero.AA1Tournament.repository.TeamRepository;
+import lombok.Data;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Data
 @Service
 public class PlayerService {
-    @Autowired
+
     private PlayerRepository playerRepository;
 
-    @Autowired
     private TeamRepository teamRepository;
 
-    @Autowired
     private ModelMapper modelMapper;
+
+    public PlayerService(ModelMapper modelMapper,PlayerRepository playerRepository, TeamRepository teamRepository) {
+        this.playerRepository = playerRepository;
+        this.teamRepository = teamRepository;
+        this.modelMapper = modelMapper;
+    }
 
     public List<Player> getAll(LocalDate birthDate, Boolean mainRoster, String position){
         if(birthDate == null && mainRoster == null && position == null){

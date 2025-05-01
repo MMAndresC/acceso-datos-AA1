@@ -31,7 +31,7 @@ public interface TournamentRepository extends CrudRepository<Tournament, Long> {
             + "(:initDate IS NULL OR tr.initDate >= :initDate) AND "
             + "(:manager IS NULL OR tr.manager LIKE %:manager%) AND "
             + "(:prize IS NULL OR tr.prize >= :prize)")
-    List<Tournament> filterTournamentByRegionManagerPrize(LocalDate initDate, String manager, Float prize);
+    List<Tournament> filterTournamentByInitDateManagerPrize(LocalDate initDate, String manager, Float prize);
 
     //SQL
     @Query(

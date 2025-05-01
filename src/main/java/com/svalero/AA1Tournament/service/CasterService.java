@@ -5,20 +5,25 @@ import com.svalero.AA1Tournament.domain.dto.caster.CasterInDto;
 import com.svalero.AA1Tournament.domain.dto.caster.CasterPatchDto;
 import com.svalero.AA1Tournament.exception.CasterNotFoundException;
 import com.svalero.AA1Tournament.repository.CasterRepository;
+import lombok.Data;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Data
 @Service
 public class CasterService {
-    @Autowired
+
     private CasterRepository casterRepository;
 
-    @Autowired
     private ModelMapper modelMapper;
+
+    public CasterService(CasterRepository casterRepository, ModelMapper modelMapper) {
+        this.casterRepository = casterRepository;
+        this.modelMapper = modelMapper;
+    }
 
     public List<Caster> getAll(String language, Integer region, LocalDate hireDate){
         if(language == null && region == null && hireDate == null){

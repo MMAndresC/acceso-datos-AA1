@@ -6,25 +6,31 @@ import com.svalero.AA1Tournament.domain.dto.tournament.TournamentOutDto;
 import com.svalero.AA1Tournament.domain.dto.tournament.TournamentPatchDto;
 import com.svalero.AA1Tournament.exception.TournamentNotFoundException;
 import com.svalero.AA1Tournament.repository.TournamentRepository;
+import lombok.Data;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+
+@Data
 @Service
 public class TournamentService {
-    @Autowired
+
     private TournamentRepository tournamentRepository;
 
-    @Autowired
     private ModelMapper modelMapper;
+
+    public TournamentService(TournamentRepository tournamentRepository, ModelMapper modelMapper) {
+        this.tournamentRepository = tournamentRepository;
+        this.modelMapper = modelMapper;
+    }
 
     public List<Tournament> getAll(LocalDate initDate, String manager, Float prize){
         if(initDate == null && manager == null && prize == null){
             return this.tournamentRepository.findAll();
         }else {
-            return this.tournamentRepository.filterTournamentByRegionManagerPrize(initDate, manager, prize);
+            return this.tournamentRepository.filterTournamentByInitDateManagerPrize(initDate, manager, prize);
         }
     }
 

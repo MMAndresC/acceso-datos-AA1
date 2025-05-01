@@ -25,7 +25,7 @@ public class TournamentPatchDto {
 
     private String manager;
 
-    private Float latitude;
+    private Double latitude;
 
-    private Float longitude;
+    private Double longitude;
 }
