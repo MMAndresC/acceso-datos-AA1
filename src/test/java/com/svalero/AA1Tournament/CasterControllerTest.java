@@ -155,7 +155,7 @@ public class CasterControllerTest {
         verify(casterService).getById(1);
     }
 
-    //Response HTTP 404
+    //Response HTTP 404 Not Found
     @Test
     void getCasterById_WhenNotExists_ShouldReturnNotFound() throws Exception {
         long id = 79;
