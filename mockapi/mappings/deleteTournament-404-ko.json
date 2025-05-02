@@ -1,0 +1,14 @@
+{
+  "priority": 2,
+  "request": {
+    "method": "DELETE",
+    "url": "/api/v1/tournaments/79"
+  },
+  "response": {
+    "status": 404,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "notFoundTournament.json"
+  }
+}

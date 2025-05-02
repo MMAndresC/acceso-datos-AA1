@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "name": "Dragons community open tournament #9",
+    "initDate": "2025-02-25",
+    "endDate": "2025-02-28",
+    "prize": 1500.0,
+    "address": "Paris, France",
+    "manager": "Clara Moreau",
+    "latitude": 0.0,
+    "longitude": 0.0
+  },
+  {
+    "id": 2,
+    "name": "FACEIT league Season 3 - EMEA masters",
+    "initDate": "2025-10-07",
+    "endDate": "2025-12-15",
+    "prize": 17000.0,
+    "address": "Berlin, Germany",
+    "manager": "Mark Salling",
+    "latitude": 52.5200066,
+    "longitude": 13.404954
+  },
+  {
+    "id": 3,
+    "name": "Prove your luck",
+    "initDate": "2024-10-07",
+    "endDate": "2024-12-15",
+    "prize": 17000.0,
+    "address": "Berlin, Germany",
+    "manager": "Mark Salling",
+    "latitude": 52.5201866,
+    "longitude": 13.404955
+  },
+  {
+    "id": 4,
+    "name": "Ultra maz II",
+    "initDate": "2025-05-12",
+    "endDate": "2025-05-18",
+    "prize": 12300.0,
+    "address": "Amsterdan, Netherlands",
+    "manager": "kiko",
+    "latitude": 52.01955187474755,
+    "longitude": 5.626776062311336
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "priority": 3,
+  "request": {
+    "method": "PUT",
+    "url": "/api/v1/tournaments/1"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "tournament-ok.json"
+  }
+}
