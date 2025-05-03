@@ -1,0 +1,13 @@
+[
+  {
+    "idTournament": 2,
+    "name": "FACEIT league Season 3 - EMEA masters",
+    "tournamentDate": "2025-10-07",
+    "mapName": "Watchpoint:Gibraltar",
+    "mvp": true,
+    "typeMatch": "final",
+    "kills": 30,
+    "deaths": 15,
+    "assists": 12
+  }
+]

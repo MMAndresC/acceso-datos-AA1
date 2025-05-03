@@ -1,0 +1,24 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/api/v1/players",
+    "queryParameters": {
+      "birthDate": {
+        "contains": "1996-01-0"
+      },
+      "mainRoster": {
+        "equalTo": "true"
+      },
+      "position": {
+        "equalTo": "tank"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "getPlayersWithParams-ok.json"
+  }
+}

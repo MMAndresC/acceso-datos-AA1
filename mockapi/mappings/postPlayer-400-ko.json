@@ -1,0 +1,22 @@
+{
+  "priority": 2,
+  "request": {
+    "method": "POST",
+    "url": "/api/v1/teams/1/players",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": {
+          "expression": "$.name",
+          "absent": true
+        }
+      }
+    ]
+  },
+  "response": {
+    "status": 400,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "badRequestPlayer.json"
+  }
+}

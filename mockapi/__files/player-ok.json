@@ -1,0 +1,19 @@
+{
+  "id": 1,
+  "name": "Scott Kennedy",
+  "alias": "Custa",
+  "phone": "688794512",
+  "birthDate": "1996-09-15",
+  "position": "support",
+  "mainRoster": true,
+  "team": {
+    "id": 1,
+    "name": "Virtus Pro",
+    "representative": "Pepito Perez",
+    "phone": "699999999",
+    "partner": false,
+    "registrationDate": "2023-05-14",
+    "address": "calle del vado,Cuenca,España",
+    "region": 3
+  }
+}
