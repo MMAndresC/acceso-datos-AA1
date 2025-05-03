@@ -1,0 +1,24 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/api/v1/matches",
+    "queryParameters": {
+      "mapName": {
+        "contains": "Samoa"
+      },
+      "duration": {
+        "equalTo": "21"
+      },
+      "hour": {
+        "equalTo": "18:00:00"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "caster-ok.json"
+  }
+}

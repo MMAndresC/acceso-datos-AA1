@@ -1,0 +1,14 @@
+{
+  "priority": 3,
+  "request": {
+    "method": "GET",
+    "url": "/api/v1/players/2/highlights"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "getPlayerHighlights-ok.json"
+  }
+}

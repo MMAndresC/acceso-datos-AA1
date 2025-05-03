@@ -1,0 +1,14 @@
+{
+  "priority": 10,
+  "request": {
+    "method": "GET",
+    "url": "/api/v1/teams/wins"
+  },
+  "response": {
+    "status": 500,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "internalServerError.json"
+  }
+}

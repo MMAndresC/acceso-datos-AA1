@@ -1,0 +1,24 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/api/v1/tournaments",
+    "queryParameters": {
+      "manager": {
+        "contains": "ar"
+      },
+      "initDate": {
+        "equalTo": "2025-02-05"
+      },
+      "prize": {
+        "equalTo": "1500.0"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "getTournamentsWithParams-ok.json"
+  }
+}

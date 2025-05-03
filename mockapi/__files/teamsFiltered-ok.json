@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Virtus Pro",
+    "representative": "Aapo Vartiainen",
+    "phone": "654123987",
+    "partner": true,
+    "registrationDate": "2023-05-14",
+    "address": "Armenia",
+    "region": 3
+  },
+  {
+    "id": 2,
+    "name": "Gen.G",
+    "representative": "Kent Wakeford",
+    "phone": "678456123",
+    "partner": true,
+    "registrationDate": "2023-05-05",
+    "address": "South Korea",
+    "region": 3
+  }
+]

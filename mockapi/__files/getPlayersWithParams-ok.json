@@ -1,0 +1,40 @@
+[
+  {
+    "id": 3,
+    "name": "Kim Tae-sung",
+    "alias": "Mag",
+    "phone": "622365894",
+    "birthDate": "2002-06-12",
+    "position": "tank",
+    "mainRoster": true,
+    "team": {
+      "id": 2,
+      "name": "Gen.G",
+      "representative": "Kent Wakeford",
+      "phone": "678456123",
+      "partner": true,
+      "registrationDate": "2023-05-05",
+      "address": "South Korea",
+      "region": 3
+    }
+  },
+  {
+    "id": 6,
+    "name": "Ilari Vestola",
+    "alias": "Vestola",
+    "phone": "699854123",
+    "birthDate": "2000-04-07",
+    "position": "tank",
+    "mainRoster": true,
+    "team": {
+      "id": 1,
+      "name": "Virtus Pro",
+      "representative": "Pepito Perez",
+      "phone": "699999999",
+      "partner": false,
+      "registrationDate": "2023-05-14",
+      "address": "calle del vado,Cuenca,España",
+      "region": 3
+    }
+  }
+]

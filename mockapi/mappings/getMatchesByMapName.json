@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/api/v1/matches",
+    "queryParameters": {
+      "mapName": {
+        "equalTo": "Samoa"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "getMatchesWithParams-ok.json"
+  }
+}

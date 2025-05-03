@@ -1,0 +1,13 @@
+{
+  "priority": 3,
+  "request": {
+    "method": "DELETE",
+    "url": "/api/v1/players/2"
+  },
+  "response": {
+    "status": 204,
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

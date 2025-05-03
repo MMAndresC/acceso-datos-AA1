@@ -1,0 +1,22 @@
+{
+  "priority": 1,
+  "request": {
+    "method": "PUT",
+    "url": "/api/v1/casters/1",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": {
+          "expression": "$.name",
+          "absent": true
+        }
+      }
+    ]
+  },
+  "response": {
+    "status": 400,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "badRequestCaster.json"
+  }
+}

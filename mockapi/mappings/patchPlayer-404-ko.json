@@ -1,0 +1,14 @@
+{
+  "priority": 2,
+  "request": {
+    "method": "PATCH",
+    "url": "/api/v1/players/79"
+  },
+  "response": {
+    "status": 404,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "notFoundPlayer.json"
+  }
+}

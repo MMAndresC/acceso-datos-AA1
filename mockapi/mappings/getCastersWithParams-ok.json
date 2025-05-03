@@ -1,0 +1,24 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/api/v1/casters",
+    "queryParameters": {
+      "hireDate": {
+        "contains": "2024-10-15"
+      },
+      "language": {
+        "equalTo": "english"
+      },
+      "region": {
+        "equalTo": "3"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "getCastersWithParams-ok.json"
+  }
+}
