@@ -1,0 +1,19 @@
+{
+  "priority": 1,
+  "request": {
+    "method": "PATCH",
+    "urlPath": "/api/v1/teams/1",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": "$[?(@.region > 5)]"
+      }
+    ]
+  },
+  "response": {
+    "status": 400,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "badRequestNotValidRegion.json"
+  }
+}
