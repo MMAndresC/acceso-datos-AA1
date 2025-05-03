@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "18ffa6da-35bc-45e3-8b0d-76d93287cac1",
 		"name": "Tournament API",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "44615570",
 		"_collection_link": "https://mandres-9689600.postman.co/workspace/M-Andres's-Workspace~ac0b8851-919d-4887-853e-f3842a28066f/collection/44615570-18ffa6da-35bc-45e3-8b0d-76d93287cac1?action=share&source=collection_link&creator=44615570"
 	},
@@ -46,7 +46,17 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}/api/v1/register"
+						"url": {
+							"raw": "{{host}}{{port}}/api/v1/register",
+							"host": [
+								"{{host}}{{port}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"register"
+							]
+						}
 					},
 					"response": []
 				},
@@ -89,7 +99,17 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}/api/v1/login"
+						"url": {
+							"raw": "{{host}}{{port}}/api/v1/login",
+							"host": [
+								"{{host}}{{port}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
 					},
 					"response": []
 				}
@@ -180,7 +200,18 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}/api/v1/details-match/1"
+						"url": {
+							"raw": "{{host}}{{port}}/api/v1/details-match/1",
+							"host": [
+								"{{host}}{{port}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"details-match",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -220,7 +251,21 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}/api/v1/match/4/team/3/details"
+						"url": {
+							"raw": "{{host}}{{port}}/api/v1/match/4/team/3/details",
+							"host": [
+								"{{host}}{{port}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"match",
+								"4",
+								"team",
+								"3",
+								"details"
+							]
+						}
 					},
 					"response": []
 				},
@@ -260,7 +305,18 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}/api/v1/details-match/1"
+						"url": {
+							"raw": "{{host}}{{port}}/api/v1/details-match/1",
+							"host": [
+								"{{host}}{{port}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"details-match",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -300,7 +356,18 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}/api/v1/details-match/1"
+						"url": {
+							"raw": "{{host}}{{port}}/api/v1/details-match/1",
+							"host": [
+								"{{host}}{{port}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"details-match",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -331,13 +398,28 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "DELETE",
 						"header": [],
-						"url": "{{host}}{{port}}/api/v1/details-match/7"
+						"url": {
+							"raw": "{{host}}{{port}}/api/v1/details-match/7",
+							"host": [
+								"{{host}}{{port}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"details-match",
+								"7"
+							]
+						}
 					},
 					"response": []
 				},
@@ -368,7 +450,17 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}/api/v1/details-match"
+						"url": {
+							"raw": "{{host}}{{port}}/api/v1/details-match",
+							"host": [
+								"{{host}}{{port}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"details-match"
+							]
+						}
 					},
 					"response": []
 				}
@@ -459,7 +551,18 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}/api/v1/statistics/1"
+						"url": {
+							"raw": "{{host}}{{port}}/api/v1/statistics/1",
+							"host": [
+								"{{host}}{{port}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"statistics",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -499,7 +602,21 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}/api/v1/match/1/player/1/statistic"
+						"url": {
+							"raw": "{{host}}{{port}}/api/v1/match/1/player/1/statistic",
+							"host": [
+								"{{host}}{{port}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"match",
+								"1",
+								"player",
+								"1",
+								"statistic"
+							]
+						}
 					},
 					"response": []
 				},
@@ -539,7 +656,18 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}/api/v1/statistics/1"
+						"url": {
+							"raw": "{{host}}{{port}}/api/v1/statistics/1",
+							"host": [
+								"{{host}}{{port}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"statistics",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -579,7 +707,18 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}/api/v1/statistics/1"
+						"url": {
+							"raw": "{{host}}{{port}}/api/v1/statistics/1",
+							"host": [
+								"{{host}}{{port}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"statistics",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -610,7 +749,19 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}/api/v1/statistics/1/download"
+						"url": {
+							"raw": "{{host}}{{port}}/api/v1/statistics/1/download",
+							"host": [
+								"{{host}}{{port}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"statistics",
+								"1",
+								"download"
+							]
+						}
 					},
 					"response": []
 				},
@@ -641,13 +792,28 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "DELETE",
 						"header": [],
-						"url": "{{host}}{{port}}/api/v1/statistics/19"
+						"url": {
+							"raw": "{{host}}{{port}}/api/v1/statistics/19",
+							"host": [
+								"{{host}}{{port}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"statistics",
+								"19"
+							]
+						}
 					},
 					"response": []
 				},
@@ -678,7 +844,17 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}/api/v1/statistics"
+						"url": {
+							"raw": "{{host}}{{port}}/api/v1/statistics",
+							"host": [
+								"{{host}}{{port}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"statistics"
+							]
+						}
 					},
 					"response": []
 				}
@@ -704,6 +880,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test('Number of matches returned = ' + responseJson.length, () => {\r",
+									"    pm.expect(responseJson.length).to.equal(3);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson[0].mapName).to.eql('Samoa');\r",
+									"    pm.expect(responseJson[2].mapName).to.eql('Suravasa');\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -714,13 +905,25 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/matches"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/matches",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"matches"
+							]
+						}
 					},
 					"response": []
 				},
@@ -741,6 +944,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test('Number of matches returned = ' + responseJson.length, () => {\r",
+									"    pm.expect(responseJson.length).to.equal(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson[0].mapName).to.eql('Samoa');\r",
+									"    pm.expect(responseJson[0].caster.alias).to.eql('LEGDAY');\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -751,9 +969,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
@@ -792,6 +1014,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test('Number of matches returned = ' + responseJson.length, () => {\r",
+									"    pm.expect(responseJson.length).to.equal(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson[0].mapName).to.eql('Samoa');\r",
+									"    pm.expect(responseJson[0].tournament.id).to.eql(2);\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -802,9 +1039,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
@@ -851,6 +1092,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 201\", () => {\r",
+									"  pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson.mapName).to.eql('Samoa');\r",
+									"    pm.expect(responseJson.type).to.eql('group stage');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has caster and tournament properties\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('caster');\r",
+									"    pm.expect(responseJson).to.have.property('tournament');\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -861,22 +1117,36 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"date\": \"2025-06-12\",\n  \"hour\": \"18:00\",\n  \"mapName\": \"Dorado\",\n  \"type\": \"final\",\n  \"duration\": \"54\",\n  \"day\": 1,\n  \"idCaster\": 1\n}",
+							"raw": "{\n  \"date\": \"2024-10-17\",\n  \"hour\": \"18:00:00\",\n  \"type\": \"group stage\",\n  \"mapName\": \"Samoa\",\n  \"duration\": 21,\n  \"day\": 2,\n  \"idCaster\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/tournaments/1/matches"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/tournaments/1/matches",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"tournaments",
+								"1",
+								"matches"
+							]
+						}
 					},
 					"response": []
 				},
@@ -897,6 +1167,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"  pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Bad Request');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has date errorMessages\", () => {\r",
+									"    pm.expect(responseJson.errorMessages).to.have.property('date');\r",
+									"    pm.expect(responseJson.errorMessages.date).to.eql('Match date required');\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -907,9 +1192,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [],
@@ -922,7 +1211,17 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/tournaments/1/matches"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/tournaments/1/matches",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"tournaments",
+								"1",
+								"matches"
+							]
+						}
 					},
 					"response": []
 				},
@@ -943,6 +1242,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Tournament not found');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -953,9 +1267,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [],
@@ -968,7 +1286,17 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/tournaments/79/matches"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/tournaments/79/matches",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"tournaments",
+								"79",
+								"matches"
+							]
+						}
 					},
 					"response": []
 				},
@@ -989,7 +1317,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson.mapName).to.eql('Samoa');\r",
+									"    pm.expect(responseJson.day).to.eql(2);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has caster and tournament properties\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('caster');\r",
+									"    pm.expect(responseJson).to.have.property('tournament');\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -999,13 +1341,26 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/matches/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/matches/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"matches",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1026,6 +1381,17 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"  pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has empty body\", () => {\r",
+									"    pm.expect(pm.response.text().trim()).to.eql(\"\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Headers not has authorization\", function () {\r",
+									"    pm.expect(pm.response.headers.has('Authorization')).to.be.false;\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -1039,7 +1405,16 @@
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/matches/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/matches/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"matches",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1060,6 +1435,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Match not found');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -1070,13 +1460,26 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/matches/79"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/matches/79",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"matches",
+								"79"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1097,6 +1500,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson.mapName).to.eql('Samoa');\r",
+									"    pm.expect(responseJson.type).to.eql('group stage');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has caster and tournament properties\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('caster');\r",
+									"    pm.expect(responseJson).to.have.property('tournament');\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -1107,9 +1525,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [],
@@ -1122,7 +1544,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/matches/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/matches/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"matches",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1143,6 +1574,22 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Caster not found');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -1153,9 +1600,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [],
@@ -1168,7 +1619,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/matches/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/matches/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"matches",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1189,6 +1649,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Match not found');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -1199,9 +1674,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [],
@@ -1214,7 +1693,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/matches/79"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/matches/79",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"matches",
+								"79"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1235,7 +1723,17 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Status code is 204\", function () {\r",
+									"  pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has empty body\", () => {\r",
+									"    pm.expect(pm.response.text().trim()).to.eql(\"\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Headers not has authorization\", function () {\r",
+									"    pm.expect(pm.response.headers.has('Authorization')).to.be.false;\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -1245,13 +1743,26 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "DELETE",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/matches/2"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/matches/2",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"matches",
+								"2"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1272,6 +1783,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Match not found');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -1282,13 +1808,26 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "DELETE",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/matches/79"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/matches/79",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"matches",
+								"79"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1309,6 +1848,17 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"  pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has empty body\", () => {\r",
+									"    pm.expect(pm.response.text().trim()).to.eql(\"\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Headers not has authorization\", function () {\r",
+									"    pm.expect(pm.response.headers.has('Authorization')).to.be.false;\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -1322,7 +1872,16 @@
 						},
 						"method": "DELETE",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/matches/2"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/matches/2",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"matches",
+								"2"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1343,6 +1902,22 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson.mapName).to.eql('Samoa');\r",
+									"    pm.expect(responseJson.type).to.eql('group stage');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has caster and tournament properties\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('caster');\r",
+									"    pm.expect(responseJson).to.have.property('tournament');\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -1353,9 +1928,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PATCH",
 						"header": [],
@@ -1368,7 +1947,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/matches/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/matches/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"matches",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1389,6 +1977,22 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"  pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Bad Request');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has date errorMessages\", () => {\r",
+									"    pm.expect(responseJson.errorMessages).to.have.property('duration');\r",
+									"    pm.expect(responseJson.errorMessages.duration).to.eql('debe ser mayor que o igual a 0');\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -1408,7 +2012,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/matches/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/matches/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"matches",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1429,6 +2042,22 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Match not found');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -1448,7 +2077,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/matches/79"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/matches/79",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"matches",
+								"79"
+							]
+						}
 					},
 					"response": []
 				}
@@ -1474,6 +2112,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test('Number of players returned = ' + responseJson.length, () => {\r",
+									"    pm.expect(responseJson.length).to.equal(6);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson[0].alias).to.eql('Custa');\r",
+									"    pm.expect(responseJson[5].alias).to.eql('Vestola');\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -1484,13 +2137,25 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/players"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/players",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"players"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1511,6 +2176,20 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test('Number of players returned = ' + responseJson.length, () => {\r",
+									"    pm.expect(responseJson.length).to.equal(2);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson[0].alias).to.eql('Mag');\r",
+									"    pm.expect(responseJson[1].alias).to.eql('Vestola');\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -1521,9 +2200,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
@@ -1570,6 +2253,20 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test('Number of players returned = ' + responseJson.length, () => {\r",
+									"    pm.expect(responseJson.length).to.equal(2);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson[0].alias).to.eql('Mag');\r",
+									"    pm.expect(responseJson[1].alias).to.eql('Vestola');\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -1580,9 +2277,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
@@ -1621,6 +2322,20 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"  pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson.name).to.eql('Scott Kennedy');\r",
+									"    pm.expect(responseJson.position).to.eql('support');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has team property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('team');\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -1631,9 +2346,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [],
@@ -1646,7 +2365,17 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/teams/1/players"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/teams/1/players",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"teams",
+								"1",
+								"players"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1667,7 +2396,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Team not found');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -1677,9 +2420,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [],
@@ -1692,7 +2439,17 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/teams/79/players"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/teams/79/players",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"teams",
+								"79",
+								"players"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1713,6 +2470,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"  pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Bad Request');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has date errorMessages\", () => {\r",
+									"    pm.expect(responseJson.errorMessages).to.have.property('name');\r",
+									"    pm.expect(responseJson.errorMessages.name).to.eql('Player name is a mandatory field');\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -1723,9 +2495,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [],
@@ -1738,7 +2514,17 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/teams/1/players"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/teams/1/players",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"teams",
+								"1",
+								"players"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1759,6 +2545,20 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson.name).to.eql('Scott Kennedy');\r",
+									"    pm.expect(responseJson.position).to.eql('support');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has team property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('team');\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -1769,13 +2569,26 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/players/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/players/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"players",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1796,6 +2609,22 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Player not found');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -1806,13 +2635,26 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/players/79"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/players/79",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"players",
+								"79"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1833,6 +2675,17 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"  pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has empty body\", () => {\r",
+									"    pm.expect(pm.response.text().trim()).to.eql(\"\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Headers not has authorization\", function () {\r",
+									"    pm.expect(pm.response.headers.has('Authorization')).to.be.false;\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -1846,7 +2699,16 @@
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/players/2"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/players/2",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"players",
+								"2"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1867,6 +2729,20 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson.name).to.eql('Scott Kennedy');\r",
+									"    pm.expect(responseJson.position).to.eql('support');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has team property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('team');\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -1877,9 +2753,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [],
@@ -1892,7 +2772,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/players/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/players/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"players",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1913,6 +2802,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Player not found');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -1923,9 +2827,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [],
@@ -1938,7 +2846,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/players/79"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/players/79",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"players",
+								"79"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1959,6 +2876,22 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"  pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Bad Request');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has date errorMessages\", () => {\r",
+									"    pm.expect(responseJson.errorMessages).to.have.property('name');\r",
+									"    pm.expect(responseJson.errorMessages.name).to.eql('Player name is a mandatory field');\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -1969,9 +2902,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [],
@@ -1984,7 +2921,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/players/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/players/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"players",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2005,7 +2951,17 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Status code is 204\", function () {\r",
+									"  pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has empty body\", () => {\r",
+									"    pm.expect(pm.response.text().trim()).to.eql(\"\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Headers not has authorization\", function () {\r",
+									"    pm.expect(pm.response.headers.has('Authorization')).to.be.false;\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -2015,13 +2971,26 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "DELETE",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/players/2"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/players/2",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"players",
+								"2"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2042,6 +3011,22 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Player not found');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -2052,13 +3037,26 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "DELETE",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/players/79"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/players/79",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"players",
+								"79"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2079,6 +3077,17 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"  pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has empty body\", () => {\r",
+									"    pm.expect(pm.response.text().trim()).to.eql(\"\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Headers not has authorization\", function () {\r",
+									"    pm.expect(pm.response.headers.has('Authorization')).to.be.false;\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -2092,7 +3101,16 @@
 						},
 						"method": "DELETE",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/players/2"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/players/2",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"players",
+								"2"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2113,6 +3131,20 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson.name).to.eql('Scott Kennedy');\r",
+									"    pm.expect(responseJson.position).to.eql('support');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has team property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('team');\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -2123,9 +3155,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PATCH",
 						"header": [],
@@ -2138,7 +3174,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/players/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/players/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"players",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2159,6 +3204,22 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Player not found');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -2169,9 +3230,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PATCH",
 						"header": [],
@@ -2184,12 +3249,21 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/players/79"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/players/79",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"players",
+								"79"
+							]
+						}
 					},
 					"response": []
 				},
 				{
-					"name": "Update player 400",
+					"name": "Update player 500",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -2205,6 +3279,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 500\", function () {\r",
+									"  pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Internal Server Error');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -2215,9 +3304,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PATCH",
 						"header": [],
@@ -2230,7 +3323,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/players/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/players/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"players",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2251,6 +3353,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test('Number of players returned = ' + responseJson.length, () => {\r",
+									"    pm.expect(responseJson.length).to.equal(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson[0].idTournament).to.eql(2);\r",
+									"    pm.expect(responseJson[0].mapName).to.eql('Watchpoint:Gibraltar');\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -2261,13 +3378,27 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/players/2/highlights"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/players/2/highlights",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"players",
+								"2",
+								"highlights"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2288,6 +3419,22 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Player not found');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -2298,13 +3445,27 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/players/79/highlights"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/players/79/highlights",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"players",
+								"79",
+								"highlights"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2325,7 +3486,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Status code is 500\", function () {\r",
+									"  pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Internal Server Error');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -2335,13 +3510,26 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/players/highlights"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/players/highlights",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"players",
+								"highlights"
+							]
+						}
 					},
 					"response": []
 				}
@@ -2367,6 +3555,20 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test('Number of teams returned = ' + responseJson.length, () => {\r",
+									"    pm.expect(responseJson.length).to.equal(3);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson[0].name).to.eql('Virtus Pro');\r",
+									"    pm.expect(responseJson[2].name).to.eql('Florida Mayhem');\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -2377,13 +3579,25 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/teams"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/teams",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"teams"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2404,6 +3618,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test('Number of teams returned = ' + responseJson.length, () => {\r",
+									"    pm.expect(responseJson.length).to.equal(2);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson[0].name).to.eql('Virtus Pro');\r",
+									"    pm.expect(responseJson[1].name).to.eql('Gen.G');\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -2414,9 +3643,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
@@ -2463,6 +3696,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test('Number of teams returned = ' + responseJson.length, () => {\r",
+									"    pm.expect(responseJson.length).to.equal(3);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson[0].name).to.eql('Virtus Pro');\r",
+									"    pm.expect(responseJson[2].name).to.eql('Florida Mayhem');\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -2473,9 +3721,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
@@ -2514,7 +3766,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Status code is 201\", function () {\r",
+									"  pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson.name).to.eql('G2 esports');\r",
+									"    pm.expect(responseJson.partner).to.eql(true);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has type properties valid\", () => {\r",
+									"    pm.expect(responseJson.phone).to.be.a('string');\r",
+									"    pm.expect(responseJson.region).to.be.a('number');\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -2524,9 +3790,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [],
@@ -2539,7 +3809,15 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/teams"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/teams",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"teams"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2560,7 +3838,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Status code is 400\", function () {\r",
+									"  pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Bad Request');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has date errorMessages\", () => {\r",
+									"    pm.expect(responseJson.errorMessages).to.have.property('name');\r",
+									"    pm.expect(responseJson.errorMessages.name).to.eql('Team name is a mandatory field');\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -2570,9 +3862,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [],
@@ -2585,7 +3881,15 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/teams"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/teams",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"teams"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2606,6 +3910,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"  pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has empty body\", () => {\r",
+									"    pm.expect(pm.response.text().trim()).to.eql(\"\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Headers not has authorization\", function () {\r",
+									"    pm.expect(pm.response.headers.has('Authorization')).to.be.false;\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -2628,7 +3947,15 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/teams"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/teams",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"teams"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2649,7 +3976,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson.name).to.eql('Virtus Pro');\r",
+									"    pm.expect(responseJson.partner).to.eql(true);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has type properties valid\", () => {\r",
+									"    pm.expect(responseJson.phone).to.be.a('string');\r",
+									"    pm.expect(responseJson.region).to.be.a('number');\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -2659,13 +4000,26 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/teams/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/teams/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"teams",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2686,6 +4040,22 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Team not found');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -2696,13 +4066,26 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/teams/79"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/teams/79",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"teams",
+								"79"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2723,7 +4106,17 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Status code is 403\", function () {\r",
+									"  pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has empty body\", () => {\r",
+									"    pm.expect(pm.response.text().trim()).to.eql(\"\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Headers not has authorization\", function () {\r",
+									"    pm.expect(pm.response.headers.has('Authorization')).to.be.false;\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -2736,7 +4129,16 @@
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/teams/2"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/teams/2",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"teams",
+								"2"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2757,7 +4159,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson.name).to.eql('Virtus Pro');\r",
+									"    pm.expect(responseJson.partner).to.eql(true);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has type properties valid\", () => {\r",
+									"    pm.expect(responseJson.phone).to.be.a('string');\r",
+									"    pm.expect(responseJson.region).to.be.a('number');\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -2767,9 +4183,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [],
@@ -2782,7 +4202,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/teams/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/teams/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"teams",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2803,6 +4232,22 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Team not found');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -2813,9 +4258,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [],
@@ -2828,7 +4277,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/teams/79"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/teams/79",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"teams",
+								"79"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2849,7 +4307,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Status code is 400\", function () {\r",
+									"  pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Bad Request');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has date errorMessages\", () => {\r",
+									"    pm.expect(responseJson.errorMessages).to.have.property('name');\r",
+									"    pm.expect(responseJson.errorMessages.name).to.eql('Team name is a mandatory field');\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -2859,9 +4331,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [],
@@ -2874,7 +4350,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/teams/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/teams/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"teams",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2895,6 +4380,17 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"  pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has empty body\", () => {\r",
+									"    pm.expect(pm.response.text().trim()).to.eql(\"\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Headers not has authorization\", function () {\r",
+									"    pm.expect(pm.response.headers.has('Authorization')).to.be.false;\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -2905,13 +4401,26 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "DELETE",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/teams/3"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/teams/3",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"teams",
+								"3"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2932,6 +4441,22 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Team not found');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -2942,13 +4467,26 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "DELETE",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/teams/79"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/teams/79",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"teams",
+								"79"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2969,6 +4507,17 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"  pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has empty body\", () => {\r",
+									"    pm.expect(pm.response.text().trim()).to.eql(\"\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Headers not has authorization\", function () {\r",
+									"    pm.expect(pm.response.headers.has('Authorization')).to.be.false;\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -2982,7 +4531,16 @@
 						},
 						"method": "DELETE",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/teams/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/teams/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"teams",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3003,7 +4561,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson.name).to.eql('Virtus Pro');\r",
+									"    pm.expect(responseJson.partner).to.eql(true);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has type properties valid\", () => {\r",
+									"    pm.expect(responseJson.phone).to.be.a('string');\r",
+									"    pm.expect(responseJson.region).to.be.a('number');\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -3013,9 +4585,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PATCH",
 						"header": [],
@@ -3028,7 +4604,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/teams/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/teams/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"teams",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3049,6 +4634,22 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Team not found');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -3059,9 +4660,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PATCH",
 						"header": [],
@@ -3074,7 +4679,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/teams/79"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/teams/79",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"teams",
+								"79"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3095,7 +4709,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Status code is 400\", function () {\r",
+									"  pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Bad Request');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has date errorMessages\", () => {\r",
+									"    pm.expect(responseJson.errorMessages).to.have.property('region');\r",
+									"    pm.expect(responseJson.errorMessages.region).to.eql('debe ser menor que o igual a 5');\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -3105,9 +4733,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PATCH",
 						"header": [],
@@ -3120,7 +4752,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/teams/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/teams/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"teams",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3141,6 +4782,20 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test('Number of teams returned = ' + responseJson.length, () => {\r",
+									"    pm.expect(responseJson.length).to.equal(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson[0].dateFinal).to.eql('2025-12-15');\r",
+									"    pm.expect(responseJson[0].idMatch).to.eql(2);\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -3151,13 +4806,27 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/teams/2/wins"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/teams/2/wins",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"teams",
+								"2",
+								"wins"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3178,6 +4847,22 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Team not found');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -3188,13 +4873,27 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/teams/79/wins"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/teams/79/wins",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"teams",
+								"79",
+								"wins"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3215,7 +4914,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Status code is 500\", function () {\r",
+									"  pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Internal Server Error');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -3225,13 +4938,26 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/teams/wins"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/teams/wins",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"teams",
+								"wins"
+							]
+						}
 					},
 					"response": []
 				}
@@ -3257,7 +4983,20 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test('Number of casters returned = ' + responseJson.length, () => {\r",
+									"    pm.expect(responseJson.length).to.equal(2);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson[0].alias).to.eql('Custa');\r",
+									"    pm.expect(responseJson[1].alias).to.eql('LEGDAY');\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -3267,13 +5006,25 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/casters"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/casters",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"casters"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3294,7 +5045,20 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test('Number of casters returned = ' + responseJson.length, () => {\r",
+									"    pm.expect(responseJson.length).to.equal(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson[0].alias).to.eql('Custa');\r",
+									"    pm.expect(responseJson[0].hireDate).to.eql('2024-10-15');\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -3304,9 +5068,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
@@ -3353,6 +5121,20 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test('Number of casters returned = ' + responseJson.length, () => {\r",
+									"    pm.expect(responseJson.length).to.equal(2);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson[0].alias).to.eql('Custa');\r",
+									"    pm.expect(responseJson[1].alias).to.eql('LEGDAY');\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -3363,9 +5145,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
@@ -3404,7 +5190,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Status code is 201\", function () {\r",
+									"  pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson.name).to.eql('Scott Kennedy');\r",
+									"    pm.expect(responseJson.region).to.eql(3);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has type properties valid\", () => {\r",
+									"    pm.expect(responseJson.phone).to.be.a('string');\r",
+									"    pm.expect(responseJson.id).to.be.a('number');\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -3414,9 +5214,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [],
@@ -3429,7 +5233,15 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/casters"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/casters",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"casters"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3450,6 +5262,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"  pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Bad Request');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has date errorMessages\", () => {\r",
+									"    pm.expect(responseJson.errorMessages).to.have.property('name');\r",
+									"    pm.expect(responseJson.errorMessages.name).to.eql('Caster name is a mandatory field');\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -3460,9 +5287,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [],
@@ -3475,7 +5306,15 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/casters"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/casters",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"casters"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3496,6 +5335,17 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"  pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has empty body\", () => {\r",
+									"    pm.expect(pm.response.text().trim()).to.eql(\"\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Headers not has authorization\", function () {\r",
+									"    pm.expect(pm.response.headers.has('Authorization')).to.be.false;\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -3518,7 +5368,15 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/casters"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/casters",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"casters"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3539,7 +5397,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson.name).to.eql('Scott Kennedy');\r",
+									"    pm.expect(responseJson.region).to.eql(3);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has type properties valid\", () => {\r",
+									"    pm.expect(responseJson.phone).to.be.a('string');\r",
+									"    pm.expect(responseJson.id).to.be.a('number');\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -3549,13 +5421,26 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/casters/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/casters/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"casters",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3576,6 +5461,22 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Caster not found');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -3586,13 +5487,26 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/casters/79"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/casters/79",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"casters",
+								"79"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3613,6 +5527,17 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"  pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has empty body\", () => {\r",
+									"    pm.expect(pm.response.text().trim()).to.eql(\"\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Headers not has authorization\", function () {\r",
+									"    pm.expect(pm.response.headers.has('Authorization')).to.be.false;\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -3626,7 +5551,16 @@
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/casters/2"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/casters/2",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"casters",
+								"2"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3647,7 +5581,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson.name).to.eql('Scott Kennedy');\r",
+									"    pm.expect(responseJson.region).to.eql(3);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has type properties valid\", () => {\r",
+									"    pm.expect(responseJson.phone).to.be.a('string');\r",
+									"    pm.expect(responseJson.id).to.be.a('number');\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -3657,9 +5605,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [],
@@ -3672,7 +5624,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/casters/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/casters/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"casters",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3693,6 +5654,22 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Caster not found');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -3703,9 +5680,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [],
@@ -3718,7 +5699,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/casters/79"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/casters/79",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"casters",
+								"79"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3739,7 +5729,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Status code is 400\", function () {\r",
+									"  pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Bad Request');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has date errorMessages\", () => {\r",
+									"    pm.expect(responseJson.errorMessages).to.have.property('name');\r",
+									"    pm.expect(responseJson.errorMessages.name).to.eql('Caster name is a mandatory field');\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -3749,9 +5753,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [],
@@ -3764,7 +5772,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/casters/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/casters/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"casters",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3785,7 +5802,17 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Status code is 204\", function () {\r",
+									"  pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has empty body\", () => {\r",
+									"    pm.expect(pm.response.text().trim()).to.eql(\"\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Headers not has authorization\", function () {\r",
+									"    pm.expect(pm.response.headers.has('Authorization')).to.be.false;\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -3795,13 +5822,26 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "DELETE",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/casters/2"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/casters/2",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"casters",
+								"2"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3822,6 +5862,22 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Caster not found');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -3832,13 +5888,26 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "DELETE",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/casters/79"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/casters/79",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"casters",
+								"79"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3859,6 +5928,17 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"  pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has empty body\", () => {\r",
+									"    pm.expect(pm.response.text().trim()).to.eql(\"\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Headers not has authorization\", function () {\r",
+									"    pm.expect(pm.response.headers.has('Authorization')).to.be.false;\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -3872,7 +5952,16 @@
 						},
 						"method": "DELETE",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/casters/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/casters/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"casters",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3893,6 +5982,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson.name).to.eql('Scott Kennedy');\r",
+									"    pm.expect(responseJson.region).to.eql(3);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has type properties valid\", () => {\r",
+									"    pm.expect(responseJson.phone).to.be.a('string');\r",
+									"    pm.expect(responseJson.id).to.be.a('number');\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -3903,9 +6007,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PATCH",
 						"header": [],
@@ -3918,7 +6026,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/casters/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/casters/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"casters",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3939,6 +6056,22 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Caster not found');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -3949,9 +6082,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PATCH",
 						"header": [],
@@ -3964,7 +6101,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/casters/79"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/casters/79",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"casters",
+								"79"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3985,7 +6131,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Status code is 400\", function () {\r",
+									"  pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Bad Request');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has date errorMessages\", () => {\r",
+									"    pm.expect(responseJson.errorMessages).to.have.property('region');\r",
+									"    pm.expect(responseJson.errorMessages.region).to.eql('debe ser menor que o igual a 5');\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -3995,9 +6155,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PATCH",
 						"header": [],
@@ -4010,7 +6174,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/casters/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/casters/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"casters",
+								"1"
+							]
+						}
 					},
 					"response": []
 				}
@@ -4036,6 +6209,20 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test('Number of tournaments returned = ' + responseJson.length, () => {\r",
+									"    pm.expect(responseJson.length).to.equal(4);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson[0].name).to.eql('Dragons community open tournament #9');\r",
+									"    pm.expect(responseJson[3].name).to.eql('Ultra maz II');\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -4046,13 +6233,25 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/tournaments"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/tournaments",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"tournaments"
+							]
+						}
 					},
 					"response": []
 				},
@@ -4073,6 +6272,20 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test('Number of tournaments returned = ' + responseJson.length, () => {\r",
+									"    pm.expect(responseJson.length).to.equal(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson[0].name).to.eql('Dragons community open tournament #9');\r",
+									"    pm.expect(responseJson[0].id).to.eql(1);\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -4083,9 +6296,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
@@ -4117,12 +6334,41 @@
 				},
 				{
 					"name": "Get tournament by manager",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test('Number of tournaments returned = ' + responseJson.length, () => {\r",
+									"    pm.expect(responseJson.length).to.equal(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson.name).to.be.undefined;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
@@ -4161,7 +6407,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Status code is 201\", function () {\r",
+									"  pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson.name).to.eql('Spring Recall');\r",
+									"    pm.expect(responseJson.prize).to.eql(1000.00);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has type properties valid\", () => {\r",
+									"    pm.expect(responseJson.name).to.be.a('string');\r",
+									"    pm.expect(responseJson.latitude).to.be.a('number');\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -4171,9 +6431,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [],
@@ -4186,18 +6450,57 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/tournaments"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/tournaments",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"tournaments"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "Add new tournament 400",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"  pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Bad Request');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has date errorMessages\", () => {\r",
+									"    pm.expect(responseJson.errorMessages).to.have.property('name');\r",
+									"    pm.expect(responseJson.errorMessages.name).to.eql('Tournament name is a mandatory field');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [],
@@ -4210,12 +6513,53 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/tournaments"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/tournaments",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"tournaments"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "Add new tournament 403",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"  pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has empty body\", () => {\r",
+									"    pm.expect(pm.response.text().trim()).to.eql(\"\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Headers not has authorization\", function () {\r",
+									"    pm.expect(pm.response.headers.has('Authorization')).to.be.false;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -4231,7 +6575,15 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/tournaments"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/tournaments",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"tournaments"
+							]
+						}
 					},
 					"response": []
 				},
@@ -4252,6 +6604,76 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson.name).to.eql('Dragons community open tournament #9');\r",
+									"    pm.expect(responseJson.prize).to.eql(1500.00);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has type properties valid\", () => {\r",
+									"    pm.expect(responseJson.name).to.be.a('string');\r",
+									"    pm.expect(responseJson.latitude).to.be.a('number');\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/tournaments/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"tournaments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get tournament by id 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Tournament not found');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -4262,40 +6684,70 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/tournaments/1"
-					},
-					"response": []
-				},
-				{
-					"name": "Get tournament by id 404",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
-						},
-						"method": "GET",
-						"header": [],
-						"url": "{{host}}{{port}}{{version}}/tournaments/79"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/tournaments/79",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"tournaments",
+								"79"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "Get tournament by id 403",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"  pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has empty body\", () => {\r",
+									"    pm.expect(pm.response.text().trim()).to.eql(\"\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Headers not has authorization\", function () {\r",
+									"    pm.expect(pm.response.headers.has('Authorization')).to.be.false;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "noauth"
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/tournaments/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/tournaments/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"tournaments",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -4316,6 +6768,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson.name).to.eql('Dragons community open tournament #9');\r",
+									"    pm.expect(responseJson.prize).to.eql(1500.00);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has type properties valid\", () => {\r",
+									"    pm.expect(responseJson.name).to.be.a('string');\r",
+									"    pm.expect(responseJson.latitude).to.be.a('number');\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -4326,9 +6793,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [],
@@ -4341,18 +6812,58 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/tournaments/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/tournaments/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"tournaments",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "Modify tournament 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Tournament not found');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [],
@@ -4365,18 +6876,59 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/tournaments/79"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/tournaments/79",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"tournaments",
+								"79"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "Modify tournament 400",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"  pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Bad Request');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has date errorMessages\", () => {\r",
+									"    pm.expect(responseJson.errorMessages).to.have.property('name');\r",
+									"    pm.expect(responseJson.errorMessages.name).to.eql('Tournament name is a mandatory field');\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [],
@@ -4389,7 +6941,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/tournaments/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/tournaments/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"tournaments",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -4410,7 +6971,17 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Status code is 204\", function () {\r",
+									"  pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has empty body\", () => {\r",
+									"    pm.expect(pm.response.text().trim()).to.eql(\"\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Headers not has authorization\", function () {\r",
+									"    pm.expect(pm.response.headers.has('Authorization')).to.be.false;\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -4420,13 +6991,28 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "DELETE",
 						"header": [],
-						"url": "{{host}}{{port}}/api/v1/tournaments/3"
+						"url": {
+							"raw": "{{host}}{{port}}/api/v1/tournaments/3",
+							"host": [
+								"{{host}}{{port}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tournaments",
+								"3"
+							]
+						}
 					},
 					"response": []
 				},
@@ -4447,6 +7033,22 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Tournament not found');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -4457,13 +7059,26 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "DELETE",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/tournaments/79"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/tournaments/79",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"tournaments",
+								"79"
+							]
+						}
 					},
 					"response": []
 				},
@@ -4484,6 +7099,17 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"  pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has empty body\", () => {\r",
+									"    pm.expect(pm.response.text().trim()).to.eql(\"\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Headers not has authorization\", function () {\r",
+									"    pm.expect(pm.response.headers.has('Authorization')).to.be.false;\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -4497,7 +7123,16 @@
 						},
 						"method": "DELETE",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/tournaments/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/tournaments/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"tournaments",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -4518,7 +7153,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson.name).to.eql('Dragons community open tournament #9');\r",
+									"    pm.expect(responseJson.prize).to.eql(1500.00);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has type properties valid\", () => {\r",
+									"    pm.expect(responseJson.name).to.be.a('string');\r",
+									"    pm.expect(responseJson.latitude).to.be.a('number');\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -4528,9 +7177,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PATCH",
 						"header": [],
@@ -4543,7 +7196,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/tournaments/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/tournaments/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"tournaments",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -4564,6 +7226,22 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Tournament not found');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -4574,9 +7252,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PATCH",
 						"header": [],
@@ -4589,7 +7271,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/tournaments/79"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/tournaments/79",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"tournaments",
+								"79"
+							]
+						}
 					},
 					"response": []
 				},
@@ -4610,6 +7301,22 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"  pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Bad Request');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has date errorMessages\", () => {\r",
+									"    pm.expect(responseJson.errorMessages).to.have.property('prize');\r",
+									"    pm.expect(responseJson.errorMessages.prize).to.eql('debe ser mayor que o igual a 0');\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -4620,9 +7327,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PATCH",
 						"header": [],
@@ -4635,7 +7346,16 @@
 								}
 							}
 						},
-						"url": "{{host}}{{port}}{{version}}/tournaments/1"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/tournaments/1",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"tournaments",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -4656,6 +7376,20 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test('Number of tournaments returned = ' + responseJson.length, () => {\r",
+									"    pm.expect(responseJson.length).to.equal(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has correct properties\", () => {\r",
+									"    pm.expect(responseJson[0].nameTournament).to.eql('Spring Recall Special');\r",
+									"    pm.expect(responseJson[0].nameTeam).to.eql('Gen.G');\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -4666,13 +7400,27 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/tournaments/1/match-winners"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/tournaments/1/match-winners",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"tournaments",
+								"1",
+								"match-winners"
+							]
+						}
 					},
 					"response": []
 				},
@@ -4693,6 +7441,22 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Tournament not found');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -4703,13 +7467,27 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/tournaments/79/match-winners"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/tournaments/79/match-winners",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"tournaments",
+								"79",
+								"match-winners"
+							]
+						}
 					},
 					"response": []
 				},
@@ -4730,6 +7508,21 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 500\", function () {\r",
+									"  pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"The response has message error\", () => {\r",
+									"    pm.expect(responseJson.message).to.eql('Internal Server Error');\r",
+									"    pm.expect(responseJson).to.have.property('message');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response has errorMessages property\", () => {\r",
+									"    pm.expect(responseJson).to.have.property('errorMessages');\r",
+									"    pm.expect(responseJson.errorMessages).to.be.null;\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -4740,13 +7533,26 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{host}}{{port}}{{version}}/tournaments/match-winners"
+						"url": {
+							"raw": "{{host}}{{port}}{{version}}/tournaments/match-winners",
+							"host": [
+								"{{host}}{{port}}{{version}}"
+							],
+							"path": [
+								"tournaments",
+								"match-winners"
+							]
+						}
 					},
 					"response": []
 				}
