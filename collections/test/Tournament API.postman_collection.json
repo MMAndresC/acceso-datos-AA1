@@ -146,13 +146,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}{{port}}/api/v1/details-match?winner=true&score=3&kills=12",
+							"raw": "{{host}}{{port}}{{version}}/details-match?winner=true&score=3&kills=12",
 							"host": [
-								"{{host}}{{port}}"
+								"{{host}}{{port}}{{version}}"
 							],
 							"path": [
-								"api",
-								"v1",
 								"details-match"
 							],
 							"query": [
@@ -201,13 +199,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}{{port}}/api/v1/details-match/1",
+							"raw": "{{host}}{{port}}{{version}}/details-match/1",
 							"host": [
-								"{{host}}{{port}}"
+								"{{host}}{{port}}{{version}}"
 							],
 							"path": [
-								"api",
-								"v1",
 								"details-match",
 								"1"
 							]
@@ -252,17 +248,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}{{port}}/api/v1/match/4/team/3/details",
+							"raw": "{{host}}{{port}}{{version}}/match/2/team/2/details",
 							"host": [
-								"{{host}}{{port}}"
+								"{{host}}{{port}}{{version}}"
 							],
 							"path": [
-								"api",
-								"v1",
 								"match",
-								"4",
+								"2",
 								"team",
-								"3",
+								"2",
 								"details"
 							]
 						}
@@ -306,13 +300,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}{{port}}/api/v1/details-match/1",
+							"raw": "{{host}}{{port}}{{version}}/details-match/1",
 							"host": [
-								"{{host}}{{port}}"
+								"{{host}}{{port}}{{version}}"
 							],
 							"path": [
-								"api",
-								"v1",
 								"details-match",
 								"1"
 							]
@@ -357,13 +349,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}{{port}}/api/v1/details-match/1",
+							"raw": "{{host}}{{port}}{{version}}/details-match/1",
 							"host": [
-								"{{host}}{{port}}"
+								"{{host}}{{port}}{{version}}"
 							],
 							"path": [
-								"api",
-								"v1",
 								"details-match",
 								"1"
 							]
@@ -409,13 +399,11 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}{{port}}/api/v1/details-match/7",
+							"raw": "{{host}}{{port}}{{version}}/details-match/7",
 							"host": [
-								"{{host}}{{port}}"
+								"{{host}}{{port}}{{version}}"
 							],
 							"path": [
-								"api",
-								"v1",
 								"details-match",
 								"7"
 							]
@@ -451,13 +439,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}{{port}}/api/v1/details-match",
+							"raw": "{{host}}{{port}}{{version}}/details-match",
 							"host": [
-								"{{host}}{{port}}"
+								"{{host}}{{port}}{{version}}"
 							],
 							"path": [
-								"api",
-								"v1",
 								"details-match"
 							]
 						}
@@ -497,13 +483,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}{{port}}/api/v1/statistics?mvp=true&kills=10&idPlayer=1",
+							"raw": "{{host}}{{port}}{{version}}/statistics?mvp=true&kills=10&idPlayer=1",
 							"host": [
-								"{{host}}{{port}}"
+								"{{host}}{{port}}{{version}}"
 							],
 							"path": [
-								"api",
-								"v1",
 								"statistics"
 							],
 							"query": [
@@ -552,13 +536,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}{{port}}/api/v1/statistics/1",
+							"raw": "{{host}}{{port}}{{version}}/statistics/1",
 							"host": [
-								"{{host}}{{port}}"
+								"{{host}}{{port}}{{version}}"
 							],
 							"path": [
-								"api",
-								"v1",
 								"statistics",
 								"1"
 							]
@@ -573,6 +555,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -603,13 +586,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}{{port}}/api/v1/match/1/player/1/statistic",
+							"raw": "{{host}}{{port}}{{version}}/match/1/player/1/statistic",
 							"host": [
-								"{{host}}{{port}}"
+								"{{host}}{{port}}{{version}}"
 							],
 							"path": [
-								"api",
-								"v1",
 								"match",
 								"1",
 								"player",
@@ -657,13 +638,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}{{port}}/api/v1/statistics/1",
+							"raw": "{{host}}{{port}}{{version}}/statistics/1",
 							"host": [
-								"{{host}}{{port}}"
+								"{{host}}{{port}}{{version}}"
 							],
 							"path": [
-								"api",
-								"v1",
 								"statistics",
 								"1"
 							]
@@ -708,13 +687,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}{{port}}/api/v1/statistics/1",
+							"raw": "{{host}}{{port}}{{version}}/statistics/1",
 							"host": [
-								"{{host}}{{port}}"
+								"{{host}}{{port}}{{version}}"
 							],
 							"path": [
-								"api",
-								"v1",
 								"statistics",
 								"1"
 							]
@@ -750,13 +727,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}{{port}}/api/v1/statistics/1/download",
+							"raw": "{{host}}{{port}}{{version}}/statistics/1/download",
 							"host": [
-								"{{host}}{{port}}"
+								"{{host}}{{port}}{{version}}"
 							],
 							"path": [
-								"api",
-								"v1",
 								"statistics",
 								"1",
 								"download"
@@ -803,13 +778,11 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}{{port}}/api/v1/statistics/19",
+							"raw": "{{host}}{{port}}{{version}}/statistics/19",
 							"host": [
-								"{{host}}{{port}}"
+								"{{host}}{{port}}{{version}}"
 							],
 							"path": [
-								"api",
-								"v1",
 								"statistics",
 								"19"
 							]
@@ -845,13 +818,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}{{port}}/api/v1/statistics",
+							"raw": "{{host}}{{port}}{{version}}/statistics",
 							"host": [
-								"{{host}}{{port}}"
+								"{{host}}{{port}}{{version}}"
 							],
 							"path": [
-								"api",
-								"v1",
 								"statistics"
 							]
 						}
@@ -6357,6 +6328,16 @@
 								"type": "text/javascript",
 								"packages": {}
 							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
 						}
 					],
 					"request": {
@@ -6484,6 +6465,16 @@
 									"    pm.expect(responseJson.errorMessages).to.have.property('name');\r",
 									"    pm.expect(responseJson.errorMessages.name).to.eql('Tournament name is a mandatory field');\r",
 									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
 									""
 								],
 								"type": "text/javascript",
@@ -6679,6 +6670,16 @@
 								"type": "text/javascript",
 								"packages": {}
 							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
 						}
 					],
 					"request": {
@@ -6725,6 +6726,16 @@
 									"pm.test(\"Headers not has authorization\", function () {\r",
 									"    pm.expect(pm.response.headers.has('Authorization')).to.be.false;\r",
 									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
 									""
 								],
 								"type": "text/javascript",
@@ -6852,6 +6863,16 @@
 								"type": "text/javascript",
 								"packages": {}
 							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
 						}
 					],
 					"request": {
@@ -6912,6 +6933,16 @@
 									"    pm.expect(responseJson.errorMessages.name).to.eql('Tournament name is a mandatory field');\r",
 									"});\r",
 									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
 									""
 								],
 								"type": "text/javascript",
@@ -7431,6 +7462,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -7557,6 +7589,46 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"//Check environment if apikey is added to Mockapi will fail\r",
+					"if (pm.environment.name === \"Apiman\") {\r",
+					"    \r",
+					"    const apiKey = pm.environment.get(\"apikey\");\r",
+					"    if (apiKey) {\r",
+					"        let url = pm.request.url.toString();\r",
+					"        const queryParam = `apikey=${apiKey}`;\r",
+					"        \r",
+					"        if (!url.includes(\"apikey=\")) {\r",
+					"            if (url.includes(\"?\")) {\r",
+					"                url += `&${queryParam}`;\r",
+					"            } else {\r",
+					"                url += `?${queryParam}`;\r",
+					"            }\r",
+					"            pm.request.url = url;\r",
+					"        }\r",
+					"    }\r",
+					"}\r",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }
