@@ -40,8 +40,8 @@ mysql -u mainuser -p -h localhost -P 3306
   mvn spring-boot:run
 ~~~    
 
-La primera vez se instalaran todas las dependencias especificadas en el pom.xml  
-Si alguna dependencia no se ha instalado bien o algo no funciona correctamente con esta comando se fuerza a recompilar:  
+La primera vez se instalarán todas las dependencias especificadas en el pom.xml  
+Si alguna dependencia no se ha instalado bien o algo no funciona correctamente con este comando se fuerza a recompilar:  
 
 ~~~  
   mvn clean install
@@ -49,12 +49,12 @@ Si alguna dependencia no se ha instalado bien o algo no funciona correctamente c
 
 ## Poblar la base de datos  
   
-En el primer arranque se poblara la base de datos con varios registros para cada tabla, no volvera a hacerlo si detecta que la tabla contiene registros  
-Si se necesita forzar que las pueble de nuevo, cambiando en **application.properties** la configuración de arranque de la base de datos de está manera:  
+En el primer arranque se poblará la base de datos con varios registros para cada tabla, no volvera a hacerlo si detecta que la tabla contiene registros  
+Si se necesita forzar que las pueble de nuevo, cambiando en **application.properties** la configuración de arranque de la base de datos de esta manera:  
 ~~~  
 spring.jpa.hibernate.ddl-auto=create-drop
 ~~~    
-Se forzara a que al arrancar borre las tablas y las vuelva a crear  
+Se forzará a que al arrancar borre las tablas y las vuelva a crear  
 Volver a poner la configuración inicial:
 ~~~  
 spring.jpa.hibernate.ddl-auto=update
@@ -78,4 +78,24 @@ Crear un certificado público (app.pub)
 
 Crear un certificado privado (app.key)  
 `openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in keypair.pem -out app.key`
+
+## Mock API  
   
+En el directorio **/mockapi** está hecha la mock API con **Wiremock** para testear.  
+Para ponerla en marcha ejecutar este comando dentro del directorio /mockapi:  
+
+`java -jar /mockapi/wiremock-standalone-3.13.0.jar --port 8085`
+
+## NewMan (Con colección de Postman)  
+  
+Runner para ejecutar desde consola y generar informes de los resultados de los test de la colección de Postman.  
+Los test de Postman están preparados para que funcionen con los resultados del entorno Mockapi.  
+  
+1. Instalar Newman (Es necesario tener instalado Node)  
+` npm install -g newman `
+2.  Instalar para poder ver los reportes de NewMan en html  
+    `npm i newman-reporter-htmlextra`
+3. Ejecutar donde están los archivos json de la colección y del entorno Mockapi  
+  ` newman run Tournament_API.postman_collection.json -e MockApi.postman_environment.json -r htmlextra `  
+El archivo con el informe en html se creará en el directorio /collections/test/newman
+
