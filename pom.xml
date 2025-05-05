@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.svalero</groupId>
-	<artifactId>Tournament</artifactId>
+	<artifactId>tournament</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>AA1Tournament</name>
-	<description>AA1 Acceso datos - API torneos eSports</description>
+	<name>tournament</name>
+	<description>Acceso datos - API torneos eSports</description>
 	<url/>
 	<licenses>
 		<license/>
