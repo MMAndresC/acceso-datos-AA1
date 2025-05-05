@@ -7598,25 +7598,19 @@
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
-					"//Check environment if apikey is added to Mockapi will fail\r",
+					"//Check environment to add header with API key if needed\r",
 					"if (pm.environment.name === \"Apiman\") {\r",
 					"    \r",
 					"    const apiKey = pm.environment.get(\"apikey\");\r",
 					"    if (apiKey) {\r",
-					"        let url = pm.request.url.toString();\r",
-					"        const queryParam = `apikey=${apiKey}`;\r",
-					"        \r",
-					"        if (!url.includes(\"apikey=\")) {\r",
-					"            if (url.includes(\"?\")) {\r",
-					"                url += `&${queryParam}`;\r",
-					"            } else {\r",
-					"                url += `?${queryParam}`;\r",
+					"        pm.request.headers.add(\r",
+					"            {\r",
+					"                key:'X-API-Key', \r",
+					"                value: apiKey\r",
 					"            }\r",
-					"            pm.request.url = url;\r",
-					"        }\r",
+					"        );\r",
 					"    }\r",
-					"}\r",
-					""
+					"}"
 				]
 			}
 		},
