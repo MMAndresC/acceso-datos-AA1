@@ -6,7 +6,7 @@ info:
     Una API con la información de los torneos que se organizan fuera de la liga
     regular de un eSport
 servers:
-  - url: http://localhost:8080/api/v1
+  - url: http://localhost:8089/api/v1
     description: Servidor local
 paths:
   /register:

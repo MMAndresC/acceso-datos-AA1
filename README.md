@@ -61,3 +61,21 @@ spring.jpa.hibernate.ddl-auto=update
 ~~~    
   
 Se ha añadido un registro a cada tabla expresamente para probar la función **DELETE**, está marcado en el registro como 'TO DELETE' siempre que el tipo de campo lo permita  
+
+## Segurizar la API  
+  
+Usa token JWT con certificados.  
+Todas las operaciones de la API necesitan token menos **/register** y **/login**  
+Para obtener el token es necesarío loguearse con un usuario válido.  
+  
+Generar los certificados en la carpeta **/cert** en el root del proyecto, fuera de **/src**:  
+
+ Crear un par de claves rsa (keypair.pem)  
+`openssl genrsa -out private_key.pem 2048`  
+
+Crear un certificado público (app.pub)  
+`openssl rsa -in keypair.pem -pubout -out app.pub`  
+
+Crear un certificado privado (app.key)  
+`openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in keypair.pem -out app.key`
+  

@@ -29,8 +29,9 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
 
-        // Aplicar solo a métodos DELETE
-        if (!request.getMethod().equals(HttpMethod.DELETE.name())) {
+        String path = request.getServletPath();
+        //Exclude auth for login & register
+        if (path.equals("/api/v1/login") || path.equals("/api/v1/register")) {
             chain.doFilter(request, response);
             return;
         }
@@ -38,7 +39,7 @@ public class JwtFilter extends OncePerRequestFilter {
         String authHeader = request.getHeader("Authorization");
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Falta el token de autorización");
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authorization token not found");
             return;
         }
 
