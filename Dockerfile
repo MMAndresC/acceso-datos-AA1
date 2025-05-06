@@ -1,7 +1,5 @@
-FROM mariadb:latest
-
-# Variables de entorno
-ENV MYSQL_ROOT_PASSWORD=root
-ENV MYSQL_DATABASE=esports
-ENV MYSQL_USER=mainuser
-ENV MYSQL_PASSWORD=1234
+FROM eclipse-temurin:21-jdk-alpine
+VOLUME /tmp
+EXPOSE 8089
+COPY target/tournament-0.0.1-SNAPSHOT.jar app.jar
+ENTRYPOINT ["java", "-jar", "app.jar"]

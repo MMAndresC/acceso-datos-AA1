@@ -1,0 +1,7 @@
+{
+  "code": 400,
+  "message": "Bad Request",
+  "errorMessages": {
+    "region": "debe ser menor que o igual a 5"
+  }
+}

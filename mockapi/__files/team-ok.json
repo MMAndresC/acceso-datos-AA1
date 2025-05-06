@@ -1,0 +1,10 @@
+{
+  "id": 1,
+  "name": "Virtus Pro",
+  "representative": "Aapo Vartiainen",
+  "phone": "654123987",
+  "partner": true,
+  "registrationDate": "2023-05-14",
+  "address": "Armenia",
+  "region": 3
+}

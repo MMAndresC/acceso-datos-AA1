@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Scott Kennedy",
+    "alias": "Custa",
+    "phone": "699999999",
+    "region": 3,
+    "languages": "english",
+    "hireDate": "2024-10-15"
+  },
+  {
+    "id": 2,
+    "name": "Harry Pollit",
+    "alias": "LEGDAY",
+    "phone": "623145987",
+    "region": 3,
+    "languages": "english, spanish",
+    "hireDate": "2023-06-27"
+  }
+]

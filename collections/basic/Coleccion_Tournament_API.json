@@ -1,0 +1,1224 @@
+{
+  "v": 6,
+  "name": "Tournament API",
+  "folders": [
+    {
+      "v": 6,
+      "name": "Auth",
+      "folders": [],
+      "requests": [
+        {
+          "v": "11",
+          "name": "Register user",
+          "method": "POST",
+          "endpoint": "http://localhost:8089/api/v1/register",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"username\": \"visitor\",\n  \"password\": 1234\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Login user",
+          "method": "POST",
+          "endpoint": "http://localhost:8089/api/v1/login",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "if(pw.response.status && pw.response.body.token){\n   pw.env.set(\"token\", pw.response.body.token);\n}\n\n\n",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"username\": \"visitor\",\n  \"password\": 1234\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        }
+      ],
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "headers": [],
+      "_ref_id": "coll_m6y8uc37_d869d050-34fb-4efc-afbe-a1b12c272fae"
+    },
+    {
+      "v": 6,
+      "name": "DetailsMatch",
+      "folders": [],
+      "requests": [
+        {
+          "v": "11",
+          "name": "Filter details match",
+          "method": "GET",
+          "endpoint": "http://localhost:8089/api/v1/details-match?winner=true&score=3&kills=12",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Get details match by Id",
+          "method": "GET",
+          "endpoint": "http://localhost:8089/api/v1/details-match/1",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Add new  details match",
+          "method": "POST",
+          "endpoint": "http://localhost:8089/api/v1/match/4/team/3/details",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"score\": 3,\n  \"winner\": true,\n  \"kills\": 15,\n  \"deaths\": 2,\n  \"assists\": 7\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Modify details match",
+          "method": "PUT",
+          "endpoint": "http://localhost:8089/api/v1/details-match/1",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"score\": 3,\n  \"winner\": false,\n  \"kills\": 15,\n  \"deaths\": 2,\n  \"assists\": 7\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Update details match",
+          "method": "PATCH",
+          "endpoint": "http://localhost:8089/api/v1/details-match/1",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"kills\": 55,\n  \n  \"assists\": 31\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Delete details match",
+          "method": "DELETE",
+          "endpoint": "http://localhost:8089/api/v1/details-match/7",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "bearer",
+            "token": "<<token>>",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Get all details match",
+          "method": "GET",
+          "endpoint": "http://localhost:8089/api/v1/details-match",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        }
+      ],
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "headers": [],
+      "_ref_id": "coll_m6txceku_eede4f3b-4364-4abc-9326-da86c2157737"
+    },
+    {
+      "v": 6,
+      "name": "Statistic",
+      "folders": [],
+      "requests": [
+        {
+          "v": "11",
+          "name": "Filter statistics",
+          "method": "GET",
+          "endpoint": "http://localhost:8089/api/v1/statistics?mvp=true&kills=10&idPlayer=1",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Get statistic by Id",
+          "method": "GET",
+          "endpoint": "http://localhost:8089/api/v1/statistics/1",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Add new  statistic",
+          "method": "POST",
+          "endpoint": "http://localhost:8089/api/v1/match/1/player/1/statistic",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"mvp\": \"true\",\n  \"kills\": 15,\n  \"deaths\": 2,\n  \"assists\": 7\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Modify statistics",
+          "method": "PUT",
+          "endpoint": "http://localhost:8089/api/v1/statistics/1",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"mvp\": \"true\",\n  \"kills\": 15,\n  \"deaths\": 2,\n  \"assists\": 9\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Update statistics",
+          "method": "PATCH",
+          "endpoint": "http://localhost:8089/api/v1/statistics/1",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"mvp\": \"true\",\n  \"kills\": 19,\n  \"deaths\": 9,\n  \"assists\": 18\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Statistic download",
+          "method": "GET",
+          "endpoint": "http://localhost:8089/api/v1/statistics/1/download",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Delete statistic",
+          "method": "DELETE",
+          "endpoint": "http://localhost:8089/api/v1/statistics/19",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "bearer",
+            "token": "<<token>>",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Get all statistics",
+          "method": "GET",
+          "endpoint": "http://localhost:8089/api/v1/statistics",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        }
+      ],
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "headers": [],
+      "_ref_id": "coll_m6tpmy76_777f6572-ab88-4e57-8713-00074374182c"
+    },
+    {
+      "v": 6,
+      "name": "Match",
+      "folders": [],
+      "requests": [
+        {
+          "v": "11",
+          "name": "Filter matches",
+          "method": "GET",
+          "endpoint": "http://localhost:8089/api/v1/matches?mapName=Dorado&duration=30&hour=18:00",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Get match by Id",
+          "method": "GET",
+          "endpoint": "http://localhost:8089/api/v1/matches/1",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Add new  match",
+          "method": "POST",
+          "endpoint": "http://localhost:8089/api/v1/tournaments/1/matches",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"date\": \"2025-06-12\",\n  \"hour\": \"18:00\",\n  \"mapName\": \"Dorado\",\n  \"type\": \"final\",\n  \"duration\": \"54\",\n  \"day\": 1,\n  \"idCaster\": 1\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Modify match",
+          "method": "PUT",
+          "endpoint": "http://localhost:8089/api/v1/matches/1",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"date\": \"2025-06-12\",\n  \"hour\": \"18:00\",\n  \"mapName\": \"Gibraltar\",\n  \"type\": \"final\",\n  \"duration\": \"54\",\n  \"day\": 1,\n  \"idCaster\": 1\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Update match",
+          "method": "PATCH",
+          "endpoint": "http://localhost:8089/api/v1/matches/1",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"date\": \"2025-06-01\",\n  \"hour\": \"19:00\"\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Delete match",
+          "method": "DELETE",
+          "endpoint": "http://localhost:8089/api/v1/matches/4",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "bearer",
+            "token": "<<token>>",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Get all matches",
+          "method": "GET",
+          "endpoint": "http://localhost:8089/api/v1/matches",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        }
+      ],
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "headers": [],
+      "_ref_id": "coll_m6shmucg_5ae126bf-e617-4002-b6b8-1d0c24a20039"
+    },
+    {
+      "v": 6,
+      "name": "Player",
+      "folders": [],
+      "requests": [
+        {
+          "v": "11",
+          "name": "Filter players",
+          "method": "GET",
+          "endpoint": "http://localhost:8089/api/v1/players?birthDate=1996-01-01&mainRoster=true&position=tank",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Get player by Id",
+          "method": "GET",
+          "endpoint": "http://localhost:8089/api/v1/players/1",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Add new  player",
+          "method": "POST",
+          "endpoint": "http://localhost:8089/api/v1/teams/1/players",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"name\": \"Scott Kennedy\",\n  \"alias\": \"Custa\",\n  \"phone\": \"688794512\",\n  \"position\": \"tank\",\n  \"birthDate\": \"1996-09-15\",\n  \"mainRoster\": true\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Modify player",
+          "method": "PUT",
+          "endpoint": "http://localhost:8089/api/v1/players/1",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"name\": \"Scott Kennedy\",\n  \"alias\": \"Custa\",\n  \"phone\": \"688794512\",\n  \"position\": \"support\",\n  \"birthDate\": \"1996-09-15\",\n  \"mainRoster\": true,\n  \"idTeam\": 1\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Update player",
+          "method": "PATCH",
+          "endpoint": "http://localhost:8089/api/v1/players/1",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"phone\": \"699999999\",\n  \"position\": \"support\",\n  \"mainRoster\": false\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Get player highlights",
+          "method": "GET",
+          "endpoint": "http://localhost:8089/api/v1/players/2/highlights",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Delete player",
+          "method": "DELETE",
+          "endpoint": "http://localhost:8089/api/v1/players/7",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "bearer",
+            "token": "<<token>>",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Get all players",
+          "method": "GET",
+          "endpoint": "http://localhost:8089/api/v1/players",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        }
+      ],
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "headers": [],
+      "_ref_id": "coll_m6seju9p_29a8039b-d4ac-40ad-b9f8-42970558fa36"
+    },
+    {
+      "v": 6,
+      "name": "Team",
+      "folders": [],
+      "requests": [
+        {
+          "v": "11",
+          "name": "Filter teams",
+          "method": "GET",
+          "endpoint": "http://localhost:8089/api/v1/teams?region=3&partner=true&registrationDate=2020-01-01",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Get team by Id",
+          "method": "GET",
+          "endpoint": "http://localhost:8089/api/v1/teams/1",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Add new team",
+          "method": "POST",
+          "endpoint": "http://localhost:8089/api/v1/teams",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"name\": \"G2 esports\",\n  \"representative\": \"Carlos Rodriguez\",\n  \"phone\": \"698532471\",\n  \"partner\": true,\n  \"address\": \"Awrwefwe 11,Berlin,Germany\",\n  \"region\": 3\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Modify team",
+          "method": "PUT",
+          "endpoint": "http://localhost:8089/api/v1/teams/1",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"name\": \"G2 esports\",\n  \"representative\": \"Pepitp Perez\",\n  \"phone\": \"698532471\",\n  \"partner\": true,\n  \"address\": \"Awrwefwe 11,Berlin,Germany\",\n  \"region\": 3\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Update team",
+          "method": "PATCH",
+          "endpoint": "http://localhost:8089/api/v1/teams/1",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"representative\": \"Pepito Perez\",\n  \"phone\": \"699999999\",\n  \"partner\": false,\n  \"address\": \"calle del vado,Cuenca,España\"\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Get all tournament wins ",
+          "method": "GET",
+          "endpoint": "http://localhost:8089/api/v1/teams/1/wins",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Delete team",
+          "method": "DELETE",
+          "endpoint": "http://localhost:8089/api/v1/teams/3",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "bearer",
+            "token": "<<token>>",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Get all teams",
+          "method": "GET",
+          "endpoint": "http://localhost:8089/api/v1/teams",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        }
+      ],
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "headers": [],
+      "_ref_id": "coll_m6rpt609_b8a17812-3436-40a1-9b2c-f2fe94fa8771"
+    },
+    {
+      "v": 6,
+      "name": "Caster",
+      "folders": [],
+      "requests": [
+        {
+          "v": "11",
+          "name": "Filter casters",
+          "method": "GET",
+          "endpoint": "http://localhost:8089/api/v1/casters?region=3&language=english&hireDate=2023-09-15",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Get caster by Id",
+          "method": "GET",
+          "endpoint": "http://localhost:8089/api/v1/casters/1",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Add new caster",
+          "method": "POST",
+          "endpoint": "http://localhost:8089/api/v1/casters",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"name\": \"Scott Kennedy\",\n  \"alias\": \"Custa\",\n  \"phone\": \"688794512\",\n  \"languages\": \"english\",\n  \"hireDate\": \"2023-09-15\",\n  \"region\": 3\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Modify caster",
+          "method": "PUT",
+          "endpoint": "http://localhost:8089/api/v1/casters/1",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"name\": \"Scott Kennedy\",\n  \"alias\": \"Custa\",\n  \"phone\": \"688794512\",\n  \"languages\": \"english\",\n  \"hireDate\": \"2024-10-15\",\n  \"region\": 3\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Update caster",
+          "method": "PATCH",
+          "endpoint": "http://localhost:8089/api/v1/casters/1",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"phone\": \"699999999\",\n  \"region\": 2\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Delete caster",
+          "method": "DELETE",
+          "endpoint": "http://localhost:8089/api/v1/casters/3",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "bearer",
+            "token": "<<token>>",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Get all casters",
+          "method": "GET",
+          "endpoint": "http://localhost:8089/api/v1/casters",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        }
+      ],
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "headers": [],
+      "_ref_id": "coll_m6sa7k99_546fd913-f105-44ef-bbcf-433f6df71bc3"
+    },
+    {
+      "v": 6,
+      "name": "Tournament",
+      "folders": [],
+      "requests": [
+        {
+          "v": "11",
+          "name": "Filter tournament",
+          "method": "GET",
+          "endpoint": "http://localhost:8089/api/v1/tournaments?initDate=2020-01-01&manager=ann&prize=500.50",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Get tournament by Id",
+          "method": "GET",
+          "endpoint": "http://localhost:8089/api/v1/tournaments/1",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Add new tournament",
+          "method": "POST",
+          "endpoint": "http://localhost:8089/api/v1/tournaments",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"name\": \"Spring Recall\",\n  \"initDate\": \"2025-02-13\",\n  \"endDate\": \"2025-02-15\",\n  \"prize\": 1000.00,\n  \"manager\": \"Annita Smith\",\n  \"address\": \"Awrwefwe 11,Berlin,Germany\",\n  \"latitude\": -123.23,\n  \"longitude\": 85.15\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Modify tournament",
+          "method": "PUT",
+          "endpoint": "http://localhost:8089/api/v1/tournaments/1",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"name\": \"Spring Recall Special\", \n  \"initDate\": \"2025-02-13\",\n  \"endDate\": \"2025-02-15\",\n  \"prize\": 5000.00,\n  \"manager\": \"Annita Smith\",\n  \"address\": \"Awrwefwe 11,Berlin,Germany\",\n  \"latitude\": -123.23,\n  \"longitude\": 85.15\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Update tournament",
+          "method": "PATCH",
+          "endpoint": "http://localhost:8089/api/v1/tournaments/1",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"initDate\": \"2025-02-25\",\n  \"endDate\": \"2025-02-28\",\n  \"prize\": 1500.00\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Get all teams  that have won a game",
+          "method": "GET",
+          "endpoint": "http://localhost:8089/api/v1/tournaments/1/match-winners",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Delete tournament",
+          "method": "DELETE",
+          "endpoint": "http://localhost:8089/api/v1/tournaments/3",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "bearer",
+            "token": "<<token>>",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "11",
+          "name": "Get all tournaments",
+          "method": "GET",
+          "endpoint": "http://localhost:8089/api/v1/tournaments",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        }
+      ],
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "headers": [],
+      "_ref_id": "coll_m6s8v11n_796dd367-2010-4bb6-b76e-6125a7aa0452"
+    }
+  ],
+  "requests": [],
+  "auth": {
+    "authType": "none",
+    "authActive": true
+  },
+  "headers": [],
+  "_ref_id": "coll_m6rpsurt_553c5b2d-1777-479b-aa50-1e99cc26094e"
+}

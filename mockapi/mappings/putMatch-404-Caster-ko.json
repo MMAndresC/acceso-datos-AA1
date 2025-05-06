@@ -1,0 +1,22 @@
+{
+  "priority": 2,
+  "request": {
+    "method": "PUT",
+    "url": "/api/v1/matches/1",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": {
+          "expression": "$.idCaster",
+          "equalTo": "79"
+        }
+      }
+    ]
+  },
+  "response": {
+    "status": 404,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "notFoundCaster.json"
+  }
+}

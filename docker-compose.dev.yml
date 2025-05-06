@@ -1,0 +1,19 @@
+name: myesportapi-mariadb-dev
+services:
+  mariadb:
+    image: mariadb:11.2.6
+    container_name: mariadb-dev
+    restart: always
+    env_file: ./.env
+    volumes:
+      - esports_data:/var/lib/mysql
+    ports:                                       
+      - "${MARIADB_PORT}:${MARIADB_DEFAULT_PORT}"
+    healthcheck:
+      test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+
+volumes:
+  esports_data:

@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.svalero</groupId>
-	<artifactId>AA1Tournament</artifactId>
+	<artifactId>tournament</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>AA1Tournament</name>
-	<description>AA1 Acceso datos - API torneos eSports</description>
+	<name>tournament</name>
+	<description>Acceso datos - API torneos eSports</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -44,10 +44,29 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>5.10.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-junit-jupiter</artifactId>
+			<version>5.11.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
+
 
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
