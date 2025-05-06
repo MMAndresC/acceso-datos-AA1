@@ -1,0 +1,58 @@
+name: myesportapi-mariadb
+services:
+  mariadb:
+    image: mariadb:11.2.6
+    container_name: mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+    ports:
+      - "${MARIADB_PORT}:${MARIADB_DEFAULT_PORT}"
+    volumes:
+      - esports_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+    networks:
+      - networks-esportapi
+
+  app:
+    image: esportsapi
+    container_name: myesportsapi
+    env_file: ./.env
+    ports:
+      - ${SPRING_PORT}:${SPRING_PORT}
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_APPLICATION_JSON: '{
+        "spring.datasource.url" : "jdbc:mariadb://${MARIADB_HOST}:${MARIADB_DEFAULT_PORT}/${MARIADB_DATABASE}",
+        "spring.datasource.username" : "${MARIADB_USER}",
+        "spring.datasource.password" : "${MARIADB_PASSWORD}",
+        "spring.datasource.driverClassName" : "org.mariadb.jdbc.Driver",
+        "spring.jpa.properties.hibernate.globally_quoted_identifiers" : true,
+        "spring.jpa.hibernate.ddl-auto" : "update",
+        "server.port" : "${SPRING_PORT}",
+        "jwt.key.private" : "${JWT_PRIVATE_KEY_PATH}",
+        "jwt.key.public": "${JWT_PUBLIC_KEY_PATH}",
+        "jwt.expiration-ms": "${JWT_EXPIRATION_MS}"
+      }'
+    volumes:
+      - ./cert:/app/cert
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    restart: on-failure
+    networks:
+      - networks-esportapi
+
+networks:
+  networks-esportapi:
+    driver: bridge
+
+volumes:
+  esports_data:
