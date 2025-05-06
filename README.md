@@ -111,7 +111,15 @@ En el directorio **/mockapi** está hecha la mock API con **Wiremock** para test
 Para ponerla en marcha ejecutar este comando dentro del directorio /mockapi:  
 ~~~
 java -jar /mockapi/wiremock-standalone-3.13.0.jar --port 8085
-~~~
+~~~  
+  
+## [Apiman](https://www.apiman.io/)
+  
+Manager para crear las organizaciones, planes, usuarios y API:
+http://apiman.local.gd:8080/apimanu  
+  
+Portal para que los clientes consulten API en las que estan registrados y la aoi key para conectarse:  
+http://apiman.local.gd:8080/portal
 
 ## NewMan (Con colección de Postman)  
   
