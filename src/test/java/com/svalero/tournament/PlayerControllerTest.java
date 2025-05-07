@@ -8,9 +8,7 @@ import com.svalero.tournament.domain.dto.player.PlayerPatchDto;
 import com.svalero.tournament.domain.dto.player.PlayerStatisticsDto;
 import com.svalero.tournament.exception.PlayerNotFoundException;
 import com.svalero.tournament.exception.TeamNotFoundException;
-import com.svalero.tournament.security.JwtUtil;
 import com.svalero.tournament.service.PlayerService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -18,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.sql.Date;
@@ -36,6 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 public class PlayerControllerTest {
 
     @Autowired
@@ -44,7 +44,7 @@ public class PlayerControllerTest {
     @MockBean
     private PlayerService playerService;
 
-    private String token;
+    private final String token = "Bearer testtoken";
 
     private final List<Team> mockTeams = List.of(
             new Team(1, "Virtus Pro", "Aapo Vartiainen", "654123987", true, LocalDate.parse("2023-05-14"), "Armenia", 3, null, null),
@@ -61,11 +61,6 @@ public class PlayerControllerTest {
             new Player(6, "Ilari Vestola", "Vestola", "699854123", LocalDate.parse("2000-04-07"), "tank", true, mockTeams.getFirst(), null)
     );
 
-    @BeforeEach
-    void setUp() {
-        JwtUtil jwtUtil = new JwtUtil();
-        this.token = "Bearer " + jwtUtil.generateToken("visitor");
-    }
 
     //Only response HTTP 200
     @Test
@@ -73,7 +68,8 @@ public class PlayerControllerTest {
 
         when(playerService.getAll(null, null, null)).thenReturn(mockPlayers);
 
-        mockMvc.perform(get("/api/v1/players"))
+        mockMvc.perform(get("/api/v1/players")
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(6)))
                 .andExpect(jsonPath("$[0].id", is(1)))
@@ -95,7 +91,8 @@ public class PlayerControllerTest {
 
         when(playerService.getAll(birthDate, null, null)).thenReturn(filteredPlayers);
 
-        mockMvc.perform(get("/api/v1/players?birthDate=" + birthDate))
+        mockMvc.perform(get("/api/v1/players?birthDate=" + birthDate)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(3)))
                 .andExpect(jsonPath("$[0].id", is(1)))
@@ -117,7 +114,8 @@ public class PlayerControllerTest {
 
         when(playerService.getAll(null, mainRoster, null)).thenReturn(filteredPlayers);
 
-        mockMvc.perform(get("/api/v1/players?mainRoster=" + mainRoster))
+        mockMvc.perform(get("/api/v1/players?mainRoster=" + mainRoster)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(6)))
                 .andExpect(jsonPath("$[0].id", is(1)))
@@ -139,7 +137,8 @@ public class PlayerControllerTest {
 
         when(playerService.getAll(null, null, position)).thenReturn(filteredPlayers);
 
-        mockMvc.perform(get("/api/v1/players?position=" + position))
+        mockMvc.perform(get("/api/v1/players?position=" + position)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].id", is(1)))
@@ -165,7 +164,8 @@ public class PlayerControllerTest {
 
         when(playerService.getAll(birthDate, mainRoster, position)).thenReturn(filteredPlayers);
 
-        mockMvc.perform(get("/api/v1/players?birthDate=" + birthDate + "&mainRoster=" + mainRoster + "&position=" + position))
+        mockMvc.perform(get("/api/v1/players?birthDate=" + birthDate + "&mainRoster=" + mainRoster + "&position=" + position)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].id", is(1)))
@@ -181,7 +181,8 @@ public class PlayerControllerTest {
     void getPlayerById_WhenExists_ShouldReturnOK() throws Exception {
         when(playerService.getById(1)).thenReturn(mockPlayers.getFirst());
 
-        mockMvc.perform(get("/api/v1/players/1"))
+        mockMvc.perform(get("/api/v1/players/1")
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.name", is("Christian Ríos")))
@@ -196,7 +197,8 @@ public class PlayerControllerTest {
         long id = 79;
         when(playerService.getById(id)).thenThrow(new PlayerNotFoundException());
 
-        mockMvc.perform(get("/api/v1/players/" + id))
+        mockMvc.perform(get("/api/v1/players/" + id)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code", is(404)))
                 .andExpect(jsonPath("$.message", is("Player not found")));
@@ -228,7 +230,8 @@ public class PlayerControllerTest {
 
         mockMvc.perform(post("/api/v1/teams/" + teamId + "/players")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id", is(7)))
                 .andExpect(jsonPath("$.name", is("Scott Kennedy")))
@@ -257,7 +260,8 @@ public class PlayerControllerTest {
 
         mockMvc.perform(post("/api/v1/teams/" + teamId + "/players")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code", is(404)))
                 .andExpect(jsonPath("$.message", is("Team not found")));
@@ -281,7 +285,8 @@ public class PlayerControllerTest {
 
         mockMvc.perform(post("/api/v1/teams/" + teamId + "/players")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(invalidRequestBody))
+                        .content(invalidRequestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value(400))
                 .andExpect(jsonPath("$.errorMessages").exists())
@@ -350,7 +355,8 @@ public class PlayerControllerTest {
 
         mockMvc.perform(put("/api/v1/players/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(6)))
                 .andExpect(jsonPath("$.name", is("Ilari Vestola")))
@@ -382,7 +388,8 @@ public class PlayerControllerTest {
 
         mockMvc.perform(put("/api/v1/players/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code", is(404)))
                 .andExpect(jsonPath("$.message", is("Player not found")));
@@ -411,7 +418,8 @@ public class PlayerControllerTest {
 
         mockMvc.perform(put("/api/v1/players/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code", is(404)))
                 .andExpect(jsonPath("$.message", is("Team not found")));
@@ -436,7 +444,8 @@ public class PlayerControllerTest {
 
         mockMvc.perform(put("/api/v1/players/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(invalidRequestBody))
+                        .content(invalidRequestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value(400))
                 .andExpect(jsonPath("$.errorMessages").exists())
@@ -468,7 +477,8 @@ public class PlayerControllerTest {
 
         mockMvc.perform(patch("/api/v1/players/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(6)))
                 .andExpect(jsonPath("$.phone", is("699999999")))
@@ -497,7 +507,8 @@ public class PlayerControllerTest {
 
         mockMvc.perform(patch("/api/v1/players/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code", is(404)))
                 .andExpect(jsonPath("$.message", is("Player not found")));
@@ -520,7 +531,8 @@ public class PlayerControllerTest {
         when(playerService.getMvpStatisticsPlayer(eq(id))).thenReturn(playerHighlights);
 
         mockMvc.perform(get("/api/v1/players/" + id + "/highlights")
-                        .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].idTournament", is(2)))
                 .andExpect(jsonPath("$[0].kills", is(30)))
@@ -540,7 +552,8 @@ public class PlayerControllerTest {
                 .thenThrow(new PlayerNotFoundException());
 
         mockMvc.perform(get("/api/v1/players/" + id + "/highlights")
-                        .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code", is(404)))
                 .andExpect(jsonPath("$.message", is("Player not found")));

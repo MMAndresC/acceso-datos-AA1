@@ -8,9 +8,11 @@ import com.svalero.tournament.exception.UserNotFoundException;
 import com.svalero.tournament.repository.UserRepository;
 import com.svalero.tournament.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+@Profile("!test")
 @Service
 public class AuthService {
     @Autowired

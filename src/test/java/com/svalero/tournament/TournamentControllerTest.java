@@ -5,9 +5,7 @@ import com.svalero.tournament.domain.dto.tournament.TournamentInDto;
 import com.svalero.tournament.domain.dto.tournament.TournamentOutDto;
 import com.svalero.tournament.domain.dto.tournament.TournamentPatchDto;
 import com.svalero.tournament.exception.TournamentNotFoundException;
-import com.svalero.tournament.security.JwtUtil;
 import com.svalero.tournament.service.TournamentService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -15,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.sql.Date;
@@ -31,6 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 public class TournamentControllerTest {
 
     @Autowired
@@ -39,7 +39,7 @@ public class TournamentControllerTest {
     @MockBean
     private TournamentService tournamentService;
 
-    private String token;
+    private final String token = "Bearer testtoken";
 
     private final List<Tournament> mockTournaments = List.of(
             new Tournament(1, "Dragons community open tournament #9", LocalDate.parse("2025-03-26"), LocalDate.parse("2025-03-31"), 500.8F, "Paris, France", "Clara Moreau", 48.85661400, 2.35222190, null),
@@ -47,19 +47,14 @@ public class TournamentControllerTest {
             new Tournament(3, "Prove your luck", LocalDate.parse("2024-10-07"), LocalDate.parse("2024-12-15"), 17000, "Berlin, Germany", "Mark Salling", 52.52018660, 13.40495500, null)
     );
 
-    @BeforeEach
-    void setUp() {
-        JwtUtil jwtUtil = new JwtUtil();
-        this.token = "Bearer " + jwtUtil.generateToken("visitor");
-    }
-
     //Only response HTTP 200
     @Test
     void getAllTournaments_ShouldReturnOK() throws Exception {
 
         when(tournamentService.getAll(null, null, null)).thenReturn(mockTournaments);
 
-        mockMvc.perform(get("/api/v1/tournaments"))
+        mockMvc.perform(get("/api/v1/tournaments")
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(3)))
                 .andExpect(jsonPath("$[0].id", is(1)))
@@ -81,7 +76,8 @@ public class TournamentControllerTest {
 
         when(tournamentService.getAll(initDate, null, null)).thenReturn(filteredTournaments);
 
-        mockMvc.perform(get("/api/v1/tournaments?initDate=" + initDate))
+        mockMvc.perform(get("/api/v1/tournaments?initDate=" + initDate)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].id", is(1)))
@@ -103,7 +99,8 @@ public class TournamentControllerTest {
 
         when(tournamentService.getAll(null, manager, null)).thenReturn(filteredTournaments);
 
-        mockMvc.perform(get("/api/v1/tournaments?manager=" + manager))
+        mockMvc.perform(get("/api/v1/tournaments?manager=" + manager)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].id", is(1)))
@@ -124,7 +121,8 @@ public class TournamentControllerTest {
 
         when(tournamentService.getAll(null, null, prize)).thenReturn(filteredTournaments);
 
-        mockMvc.perform(get("/api/v1/tournaments?prize=" + prize))
+        mockMvc.perform(get("/api/v1/tournaments?prize=" + prize)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].id", is(2)))
@@ -149,7 +147,8 @@ public class TournamentControllerTest {
 
         when(tournamentService.getAll(initDate, manager, prize)).thenReturn(filteredTournaments);
 
-        mockMvc.perform(get("/api/v1/tournaments?initDate=" + initDate + "&manager=" + manager + "&prize=" + prize))
+        mockMvc.perform(get("/api/v1/tournaments?initDate=" + initDate + "&manager=" + manager + "&prize=" + prize)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].id", is(1)))
@@ -165,7 +164,8 @@ public class TournamentControllerTest {
     void getTournamentById_WhenExists_ShouldReturnOK() throws Exception {
         when(tournamentService.getById(1)).thenReturn(mockTournaments.getFirst());
 
-        mockMvc.perform(get("/api/v1/tournaments/1"))
+        mockMvc.perform(get("/api/v1/tournaments/1")
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.name", is("Dragons community open tournament #9")))
@@ -180,7 +180,8 @@ public class TournamentControllerTest {
         long id = 79;
         when(tournamentService.getById(id)).thenThrow(new TournamentNotFoundException());
 
-        mockMvc.perform(get("/api/v1/tournaments/" + id))
+        mockMvc.perform(get("/api/v1/tournaments/" + id)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code", is(404)))
                 .andExpect(jsonPath("$.message", is("Tournament not found")));
@@ -216,7 +217,8 @@ public class TournamentControllerTest {
 
         mockMvc.perform(post("/api/v1/tournaments")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id", is(4)))
                 .andExpect(jsonPath("$.name", is("Spring Recall")))
@@ -243,7 +245,8 @@ public class TournamentControllerTest {
 
         mockMvc.perform(post("/api/v1/tournaments")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(invalidRequestBody))
+                        .content(invalidRequestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value(400))
                 .andExpect(jsonPath("$.errorMessages").exists())
@@ -314,7 +317,8 @@ public class TournamentControllerTest {
 
         mockMvc.perform(put("/api/v1/tournaments/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.name", is("Spring Recall")))
@@ -346,7 +350,8 @@ public class TournamentControllerTest {
 
         mockMvc.perform(put("/api/v1/tournaments/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code", is(404)))
                 .andExpect(jsonPath("$.message", is("Tournament not found")));
@@ -373,7 +378,8 @@ public class TournamentControllerTest {
 
         mockMvc.perform(put("/api/v1/tournaments/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(invalidRequestBody))
+                        .content(invalidRequestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value(400))
                 .andExpect(jsonPath("$.errorMessages").exists())
@@ -406,7 +412,8 @@ public class TournamentControllerTest {
 
         mockMvc.perform(patch("/api/v1/tournaments/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.name", is("Spring Recall")))
@@ -434,7 +441,8 @@ public class TournamentControllerTest {
 
         mockMvc.perform(patch("/api/v1/tournaments/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code", is(404)))
                 .andExpect(jsonPath("$.message", is("Tournament not found")));
@@ -457,7 +465,8 @@ public class TournamentControllerTest {
 
         mockMvc.perform(patch("/api/v1/tournaments/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value(400))
                 .andExpect(jsonPath("$.errorMessages").exists())
@@ -477,7 +486,8 @@ public class TournamentControllerTest {
         when(tournamentService.getAllTeamsWinnersMatches(eq(id))).thenReturn(mockTournamentsWinnersMatches);
 
         mockMvc.perform(get("/api/v1/tournaments/" + id + "/match-winners")
-                        .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].nameTournament", is("Dragons community open tournament #9")))
@@ -496,7 +506,8 @@ public class TournamentControllerTest {
                 .thenThrow(new TournamentNotFoundException());
 
         mockMvc.perform(get("/api/v1/tournaments/" + id + "/match-winners")
-                        .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code", is(404)))
                 .andExpect(jsonPath("$.message", is("Tournament not found")));

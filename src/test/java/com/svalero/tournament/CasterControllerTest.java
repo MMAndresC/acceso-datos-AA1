@@ -4,9 +4,7 @@ import com.svalero.tournament.domain.Caster;
 import com.svalero.tournament.domain.dto.caster.CasterInDto;
 import com.svalero.tournament.domain.dto.caster.CasterPatchDto;
 import com.svalero.tournament.exception.CasterNotFoundException;
-import com.svalero.tournament.security.JwtUtil;
 import com.svalero.tournament.service.CasterService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -14,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
@@ -27,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 public class CasterControllerTest {
 
     @Autowired
@@ -35,25 +35,20 @@ public class CasterControllerTest {
     @MockBean
     private CasterService casterService;
 
-    private String token;
+    private final String token = "Bearer testtoken";
 
     private final List<Caster> mockCasters = List.of(
             new Caster(1, "Matt Morello", "Mr X", "623145698", 3, "english", LocalDate.parse("2023-06-02"), null),
             new Caster(2, "Harry Pollit", "LEGDAY", "623145987", 3, "english, spanish", LocalDate.parse("2023-06-27"), null)
     );
 
-    @BeforeEach
-    void setUp() {
-        JwtUtil jwtUtil = new JwtUtil();
-        this.token = "Bearer " + jwtUtil.generateToken("visitor");
-    }
-
     //Only response HTTP 200
     @Test
     void getAllCasters_ShouldReturnOK() throws Exception {
         when(casterService.getAll(null, null, null)).thenReturn(mockCasters);
 
-        mockMvc.perform(get("/api/v1/casters"))
+        mockMvc.perform(get("/api/v1/casters")
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].id", is(1)))
@@ -73,7 +68,8 @@ public class CasterControllerTest {
                 .toList();
         when(casterService.getAll(null, region, null)).thenReturn(filteredCasters);
 
-        mockMvc.perform(get("/api/v1/casters?region=" + region))
+        mockMvc.perform(get("/api/v1/casters?region=" + region)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)));
 
@@ -90,7 +86,8 @@ public class CasterControllerTest {
 
         when(casterService.getAll(language, null, null)).thenReturn(filteredCasters);
 
-        mockMvc.perform(get("/api/v1/casters?language=" + language))
+        mockMvc.perform(get("/api/v1/casters?language=" + language)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].id", is(2)))
@@ -109,7 +106,8 @@ public class CasterControllerTest {
 
         when(casterService.getAll(null, null, hireDate)).thenReturn(filteredCasters);
 
-        mockMvc.perform(get("/api/v1/casters?hireDate=" + hireDate))
+        mockMvc.perform(get("/api/v1/casters?hireDate=" + hireDate)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].id", is(2)))
@@ -132,7 +130,8 @@ public class CasterControllerTest {
 
         when(casterService.getAll(language, region, hireDate)).thenReturn(filteredCasters);
 
-        mockMvc.perform(get("/api/v1/casters?region=" + region + "&language=" + language + "&hireDate=" + hireDate))
+        mockMvc.perform(get("/api/v1/casters?region=" + region + "&language=" + language + "&hireDate=" + hireDate)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].id", is(2)))
@@ -146,7 +145,8 @@ public class CasterControllerTest {
     void getCasterById_WhenExists_ShouldReturnOK() throws Exception {
         when(casterService.getById(1)).thenReturn(mockCasters.getFirst());
 
-        mockMvc.perform(get("/api/v1/casters/1"))
+        mockMvc.perform(get("/api/v1/casters/1")
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.name", is("Matt Morello")))
@@ -161,7 +161,8 @@ public class CasterControllerTest {
         long id = 79;
         when(casterService.getById(id)).thenThrow(new CasterNotFoundException());
 
-        mockMvc.perform(get("/api/v1/casters/" + id))
+        mockMvc.perform(get("/api/v1/casters/" + id)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code", is(404)))
                 .andExpect(jsonPath("$.message", is("Caster not found")));
@@ -191,7 +192,8 @@ public class CasterControllerTest {
 
         mockMvc.perform(post("/api/v1/casters")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id", is(3)))
                 .andExpect(jsonPath("$.name", is("Jennifer Pichette")))
@@ -215,7 +217,8 @@ public class CasterControllerTest {
 
         mockMvc.perform(post("/api/v1/casters")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(invalidRequestBody))
+                        .content(invalidRequestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value(400))
                 .andExpect(jsonPath("$.errorMessages").exists())
@@ -281,7 +284,8 @@ public class CasterControllerTest {
 
         mockMvc.perform(put("/api/v1/casters/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.name", is("Pepito")))
@@ -311,7 +315,8 @@ public class CasterControllerTest {
 
         mockMvc.perform(put("/api/v1/casters/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(jsonPath("$.code", is(404)))
                 .andExpect(status().isNotFound());
 
@@ -335,7 +340,8 @@ public class CasterControllerTest {
 
         mockMvc.perform(put("/api/v1/casters/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(invalidRequestBody))
+                        .content(invalidRequestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value(400))
                 .andExpect(jsonPath("$.errorMessages").exists())
@@ -364,7 +370,8 @@ public class CasterControllerTest {
 
         mockMvc.perform(patch("/api/v1/casters/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.alias", is("Mr XXX")))
@@ -392,7 +399,8 @@ public class CasterControllerTest {
 
         mockMvc.perform(patch("/api/v1/casters/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isNotFound());
 
         verify(casterService).update(eq(id), any(CasterPatchDto.class));
@@ -413,7 +421,8 @@ public class CasterControllerTest {
 
         mockMvc.perform(patch("/api/v1/casters/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(invalidRequestBody))
+                        .content(invalidRequestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value(400))
                 .andExpect(jsonPath("$.errorMessages").exists())
