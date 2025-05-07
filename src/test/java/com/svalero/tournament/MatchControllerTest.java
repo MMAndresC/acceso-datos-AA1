@@ -8,9 +8,7 @@ import com.svalero.tournament.domain.dto.match.MatchPatchDto;
 import com.svalero.tournament.exception.CasterNotFoundException;
 import com.svalero.tournament.exception.MatchNotFoundException;
 import com.svalero.tournament.exception.TournamentNotFoundException;
-import com.svalero.tournament.security.JwtUtil;
 import com.svalero.tournament.service.MatchService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -18,11 +16,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Objects;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -36,6 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 public class MatchControllerTest {
 
     @Autowired
@@ -61,20 +62,16 @@ public class MatchControllerTest {
             new Match(3, LocalDate.parse("2025-01-30"), LocalTime.parse("17:00"), "quarter-finals", "Suravasa", 19, 5, mockCasters.getLast(), mockTournaments.getFirst(), null, null)
     );
 
-    private String token;
+    private final String token = "Bearer testtoken";
 
-    @BeforeEach
-    void setUp() {
-        JwtUtil jwtUtil = new JwtUtil();
-        this.token = "Bearer " + jwtUtil.generateToken("visitor");
-    }
 
     //Only response HTTP 200
     @Test
     void getAllMatches_ShouldReturnOK() throws Exception {
         when(matchService.getAll(null, null, null)).thenReturn(mockMatches);
 
-        mockMvc.perform(get("/api/v1/matches"))
+        mockMvc.perform(get("/api/v1/matches")
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(3)))
                 .andExpect(jsonPath("$[0].id", is(1)))
@@ -90,11 +87,12 @@ public class MatchControllerTest {
     void getAllMatchesByMapName_ShouldReturnOK() throws Exception {
         String mapName = "Samoa";
         List<Match> filteredMatches = mockMatches.stream()
-                .filter(match -> match.getMapName() == mapName)
+                .filter(match -> Objects.equals(match.getMapName(), mapName))
                 .toList();
         when(matchService.getAll(mapName, null, null)).thenReturn(filteredMatches);
 
-        mockMvc.perform(get("/api/v1/matches?mapName=" + mapName))
+        mockMvc.perform(get("/api/v1/matches?mapName=" + mapName)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].type", is("group stage")));
@@ -112,7 +110,8 @@ public class MatchControllerTest {
 
         when(matchService.getAll(null, duration, null)).thenReturn(filteredMatches);
 
-        mockMvc.perform(get("/api/v1/matches?duration=" + duration))
+        mockMvc.perform(get("/api/v1/matches?duration=" + duration)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].id", is(1)))
@@ -131,7 +130,8 @@ public class MatchControllerTest {
 
         when(matchService.getAll(null, null, hour)).thenReturn(filteredMatches);
 
-        mockMvc.perform(get("/api/v1/matches?hour=" + hour))
+        mockMvc.perform(get("/api/v1/matches?hour=" + hour)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].id", is(1)))
@@ -156,7 +156,8 @@ public class MatchControllerTest {
 
         when(matchService.getAll(mapName, duration, hour)).thenReturn(filteredMatches);
 
-        mockMvc.perform(get("/api/v1/matches?mapName=" + mapName + "&duration=" + duration + "&hour=" + hour))
+        mockMvc.perform(get("/api/v1/matches?mapName=" + mapName + "&duration=" + duration + "&hour=" + hour)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].id", is(1)))
@@ -171,7 +172,8 @@ public class MatchControllerTest {
         long id = 1;
         when(matchService.getById(id)).thenReturn(mockMatches.getFirst());
 
-        mockMvc.perform(get("/api/v1/matches/" + id))
+        mockMvc.perform(get("/api/v1/matches/" + id)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.mapName", is("Samoa")))
@@ -186,7 +188,8 @@ public class MatchControllerTest {
         long id = 79;
         when(matchService.getById(id)).thenThrow(new MatchNotFoundException());
 
-        mockMvc.perform(get("/api/v1/matches/" + id))
+        mockMvc.perform(get("/api/v1/matches/" + id)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code", is(404)))
                 .andExpect(jsonPath("$.message", is("Match not found")));
@@ -218,7 +221,8 @@ public class MatchControllerTest {
 
         mockMvc.perform(post("/api/v1/tournaments/" + tournamentId + "/matches")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id", is(4)))
                 .andExpect(jsonPath("$.mapName", is("Oasis")))
@@ -249,7 +253,8 @@ public class MatchControllerTest {
 
         mockMvc.perform(post("/api/v1/tournaments/" + tournamentId + "/matches")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(jsonPath("$.code", is(404)))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.message", is("Tournament not found")));
@@ -279,7 +284,8 @@ public class MatchControllerTest {
 
         mockMvc.perform(post("/api/v1/tournaments/" + tournamentId + "/matches")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(jsonPath("$.code", is(404)))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.message", is("Caster not found")));
@@ -303,7 +309,8 @@ public class MatchControllerTest {
 
         mockMvc.perform(post("/api/v1/tournaments/" + tournamentId + "/matches")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(invalidRequestBody))
+                        .content(invalidRequestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value(400))
                 .andExpect(jsonPath("$.errorMessages").exists())
@@ -374,7 +381,8 @@ public class MatchControllerTest {
 
         mockMvc.perform(put("/api/v1/matches/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(4)))
                 .andExpect(jsonPath("$.type", is("quarter-finals")))
@@ -405,7 +413,8 @@ public class MatchControllerTest {
 
         mockMvc.perform(put("/api/v1/matches/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code", is(404)));
 
@@ -434,7 +443,8 @@ public class MatchControllerTest {
 
         mockMvc.perform(put("/api/v1/matches/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code", is(404)));
 
@@ -458,7 +468,8 @@ public class MatchControllerTest {
 
         mockMvc.perform(put("/api/v1/matches/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(invalidRequestBody))
+                        .content(invalidRequestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value(400))
                 .andExpect(jsonPath("$.errorMessages").exists())
@@ -489,7 +500,8 @@ public class MatchControllerTest {
 
         mockMvc.perform(patch("/api/v1/matches/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.mapName", is("Samoa")))
@@ -516,7 +528,8 @@ public class MatchControllerTest {
 
         mockMvc.perform(patch("/api/v1/matches/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isNotFound());
 
         verify(matchService).update(eq(id), any(MatchPatchDto.class));
@@ -538,7 +551,8 @@ public class MatchControllerTest {
 
         mockMvc.perform(patch("/api/v1/matches/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(invalidRequestBody))
+                        .content(invalidRequestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value(400))
                 .andExpect(jsonPath("$.errorMessages").exists())

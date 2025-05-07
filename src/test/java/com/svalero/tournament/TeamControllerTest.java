@@ -5,9 +5,7 @@ import com.svalero.tournament.domain.dto.team.TeamConsultWinsDto;
 import com.svalero.tournament.domain.dto.team.TeamInDto;
 import com.svalero.tournament.domain.dto.team.TeamPatchDto;
 import com.svalero.tournament.exception.TeamNotFoundException;
-import com.svalero.tournament.security.JwtUtil;
 import com.svalero.tournament.service.TeamService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -15,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.sql.Date;
@@ -33,6 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 public class TeamControllerTest {
 
     @Autowired
@@ -41,7 +41,7 @@ public class TeamControllerTest {
     @MockBean
     private TeamService teamService;
 
-    private String token;
+    private final String token = "Bearer testtoken";
 
     private final List<Team> mockTeams = List.of(
             new Team(1, "Virtus Pro", "Aapo Vartiainen", "654123987", true, LocalDate.parse("2023-05-14"), "Armenia", 3, null, null),
@@ -49,19 +49,14 @@ public class TeamControllerTest {
             new Team(3, "Sakura", "Kent Wakeford", "678456123", false, LocalDate.parse("2023-05-05"), "France", 3, null, null)
     );
 
-    @BeforeEach
-    void setUp() {
-        JwtUtil jwtUtil = new JwtUtil();
-        this.token = "Bearer " + jwtUtil.generateToken("visitor");
-    }
-
     //Only response HTTP 200
     @Test
     void getAllTeams_ShouldReturnOK() throws Exception {
 
         when(teamService.getAll(null, null, null)).thenReturn(mockTeams);
 
-        mockMvc.perform(get("/api/v1/teams"))
+        mockMvc.perform(get("/api/v1/teams")
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(3)))
                 .andExpect(jsonPath("$[0].id", is(1)))
@@ -83,7 +78,8 @@ public class TeamControllerTest {
 
         when(teamService.getAll(region, null, null)).thenReturn(filteredTeams);
 
-        mockMvc.perform(get("/api/v1/teams?region=" + region))
+        mockMvc.perform(get("/api/v1/teams?region=" + region)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(3)))
                 .andExpect(jsonPath("$[0].id", is(1)))
@@ -105,7 +101,8 @@ public class TeamControllerTest {
 
         when(teamService.getAll(null, partner, null)).thenReturn(filteredTeams);
 
-        mockMvc.perform(get("/api/v1/teams?partner=" + partner))
+        mockMvc.perform(get("/api/v1/teams?partner=" + partner)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].id", is(1)))
@@ -127,7 +124,8 @@ public class TeamControllerTest {
 
         when(teamService.getAll(null, null, registrationDate)).thenReturn(filteredTeams);
 
-        mockMvc.perform(get("/api/v1/teams?registrationDate=" + registrationDate))
+        mockMvc.perform(get("/api/v1/teams?registrationDate=" + registrationDate)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].id", is(1)))
@@ -151,7 +149,8 @@ public class TeamControllerTest {
 
         when(teamService.getAll(region, partner, registrationDate)).thenReturn(filteredTeams);
 
-        mockMvc.perform(get("/api/v1/teams?registrationDate=" + registrationDate + "&partner=" + partner + "&region=" + region))
+        mockMvc.perform(get("/api/v1/teams?registrationDate=" + registrationDate + "&partner=" + partner + "&region=" + region)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].id", is(1)))
@@ -167,7 +166,8 @@ public class TeamControllerTest {
     void getTeamById_WhenExists_ShouldReturnOK() throws Exception {
         when(teamService.getById(1)).thenReturn(mockTeams.getFirst());
 
-        mockMvc.perform(get("/api/v1/teams/1"))
+        mockMvc.perform(get("/api/v1/teams/1")
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.name", is("Virtus Pro")))
@@ -182,7 +182,8 @@ public class TeamControllerTest {
         long id = 79;
         when(teamService.getById(id)).thenThrow(new TeamNotFoundException());
 
-        mockMvc.perform(get("/api/v1/teams/" + id))
+        mockMvc.perform(get("/api/v1/teams/" + id)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code", is(404)))
                 .andExpect(jsonPath("$.message", is("Team not found")));
@@ -215,7 +216,8 @@ public class TeamControllerTest {
 
         mockMvc.perform(post("/api/v1/teams")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id", is(4)))
                 .andExpect(jsonPath("$.name", is("G2 esports")))
@@ -240,7 +242,8 @@ public class TeamControllerTest {
 
         mockMvc.perform(post("/api/v1/teams")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(invalidRequestBody))
+                        .content(invalidRequestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value(400))
                 .andExpect(jsonPath("$.errorMessages").exists())
@@ -307,7 +310,8 @@ public class TeamControllerTest {
 
         mockMvc.perform(put("/api/v1/teams/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.name", is("Virtus Pro")))
@@ -337,7 +341,8 @@ public class TeamControllerTest {
 
         mockMvc.perform(put("/api/v1/teams/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code", is(404)))
                 .andExpect(jsonPath("$.message", is("Team not found")));
@@ -362,7 +367,8 @@ public class TeamControllerTest {
 
         mockMvc.perform(put("/api/v1/teams/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(invalidRequestBody))
+                        .content(invalidRequestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value(400))
                 .andExpect(jsonPath("$.errorMessages").exists())
@@ -395,7 +401,8 @@ public class TeamControllerTest {
 
         mockMvc.perform(patch("/api/v1/teams/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.name", is("Virtus Pro")))
@@ -425,7 +432,8 @@ public class TeamControllerTest {
 
         mockMvc.perform(patch("/api/v1/teams/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
+                        .content(requestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code", is(404)))
                 .andExpect(jsonPath("$.message", is("Team not found")));
@@ -450,7 +458,8 @@ public class TeamControllerTest {
 
         mockMvc.perform(patch("/api/v1/teams/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(invalidRequestBody))
+                        .content(invalidRequestBody)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value(400))
                 .andExpect(jsonPath("$.errorMessages").exists())
@@ -475,7 +484,8 @@ public class TeamControllerTest {
         when(teamService.getAllTournamentWins(eq(idTeam))).thenReturn(mockListWins);
 
         mockMvc.perform(get("/api/v1/teams/" + idTeam + "/wins")
-                        .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].idTournament", is(2)))
                 .andExpect(jsonPath("$[0].score", is(1)))
@@ -494,7 +504,8 @@ public class TeamControllerTest {
                 .thenThrow(new TeamNotFoundException());
 
         mockMvc.perform(get("/api/v1/teams/" + idTeam + "/wins")
-                        .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header(HttpHeaders.AUTHORIZATION, token))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code", is(404)))
                 .andExpect(jsonPath("$.message", is("Team not found")));

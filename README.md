@@ -3,6 +3,19 @@
 8889 - Tournament app  
 8885 - Mock api  
 8080 - Apiman
+  
+## Testing  
+
+Para lanzar todos los test
+~~~  
+mvn test 
+~~~   
+  
+Lanzar determinados tests
+
+~~~  
+mvn test -Dtest="archivo_test.java"
+~~~ 
 
 ## Docker   
 
